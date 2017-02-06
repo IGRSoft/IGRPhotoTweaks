@@ -19,6 +19,7 @@
 		A5DFB1E21E4826FE009ACD31 /* IGRPhotoScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5DFB1E11E4826FE009ACD31 /* IGRPhotoScrollView.swift */; };
 		A5DFB1E41E482801009ACD31 /* IGRPhotoTweakConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5DFB1E31E482801009ACD31 /* IGRPhotoTweakConstants.swift */; };
 		A5DFB1E61E4828C2009ACD31 /* IGRCropCornerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5DFB1E51E4828C2009ACD31 /* IGRCropCornerView.swift */; };
+		A5DFB1E81E483D35009ACD31 /* IGRPhotoTweakViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5DFB1E71E483D35009ACD31 /* IGRPhotoTweakViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		A5DFB1E11E4826FE009ACD31 /* IGRPhotoScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGRPhotoScrollView.swift; sourceTree = "<group>"; };
 		A5DFB1E31E482801009ACD31 /* IGRPhotoTweakConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGRPhotoTweakConstants.swift; sourceTree = "<group>"; };
 		A5DFB1E51E4828C2009ACD31 /* IGRCropCornerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGRCropCornerView.swift; sourceTree = "<group>"; };
+		A5DFB1E71E483D35009ACD31 /* IGRPhotoTweakViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGRPhotoTweakViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +82,7 @@
 		A5DFB1CA1E481FE4009ACD31 /* IGRPhotoTweaks */ = {
 			isa = PBXGroup;
 			children = (
+				A5DFB1E71E483D35009ACD31 /* IGRPhotoTweakViewController.swift */,
 				A5DFB1DB1E4822B7009ACD31 /* IGRPhotoTweakView.swift */,
 				A5DFB1DF1E48263E009ACD31 /* IGRCropView.swift */,
 				A5DFB1DD1E482617009ACD31 /* IGRPhotoContentView.swift */,
@@ -185,6 +188,7 @@
 				A5DFB1DE1E482617009ACD31 /* IGRPhotoContentView.swift in Sources */,
 				A5DFB1D41E481FE4009ACD31 /* ViewController.swift in Sources */,
 				A5DFB1DC1E4822B7009ACD31 /* IGRPhotoTweakView.swift in Sources */,
+				A5DFB1E81E483D35009ACD31 /* IGRPhotoTweakViewController.swift in Sources */,
 				A5DFB1E01E48263E009ACD31 /* IGRCropView.swift in Sources */,
 				A5DFB1E41E482801009ACD31 /* IGRPhotoTweakConstants.swift in Sources */,
 				A5DFB1DA1E482216009ACD31 /* UIColor+Tweak.swift in Sources */,
