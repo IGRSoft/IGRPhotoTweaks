@@ -25,7 +25,7 @@ class IGRPhotoTweakViewController: UIViewController {
     /**
      Image to process.
      */
-    private(set) var image: UIImage!
+    open var image: UIImage!
     /**
      Flag indicating whether the image cropped will be saved to photo library automatically. Defaults to YES.
      */
