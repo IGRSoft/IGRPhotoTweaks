@@ -12,6 +12,13 @@
 		A5DFB1D51E481FE4009ACD31 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A5DFB1CC1E481FE4009ACD31 /* Assets.xcassets */; };
 		A5DFB1D61E481FE4009ACD31 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5DFB1CD1E481FE4009ACD31 /* LaunchScreen.storyboard */; };
 		A5DFB1D71E481FE4009ACD31 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5DFB1CF1E481FE4009ACD31 /* Main.storyboard */; };
+		A5DFB1DA1E482216009ACD31 /* UIColor+Tweak.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5DFB1D91E482216009ACD31 /* UIColor+Tweak.swift */; };
+		A5DFB1DC1E4822B7009ACD31 /* IGRPhotoTweakView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5DFB1DB1E4822B7009ACD31 /* IGRPhotoTweakView.swift */; };
+		A5DFB1DE1E482617009ACD31 /* IGRPhotoContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5DFB1DD1E482617009ACD31 /* IGRPhotoContentView.swift */; };
+		A5DFB1E01E48263E009ACD31 /* IGRCropView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5DFB1DF1E48263E009ACD31 /* IGRCropView.swift */; };
+		A5DFB1E21E4826FE009ACD31 /* IGRPhotoScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5DFB1E11E4826FE009ACD31 /* IGRPhotoScrollView.swift */; };
+		A5DFB1E41E482801009ACD31 /* IGRPhotoTweakConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5DFB1E31E482801009ACD31 /* IGRPhotoTweakConstants.swift */; };
+		A5DFB1E61E4828C2009ACD31 /* IGRCropCornerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5DFB1E51E4828C2009ACD31 /* IGRCropCornerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +29,13 @@
 		A5DFB1CE1E481FE4009ACD31 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A5DFB1D01E481FE4009ACD31 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A5DFB1D21E481FE4009ACD31 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A5DFB1D91E482216009ACD31 /* UIColor+Tweak.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Tweak.swift"; sourceTree = "<group>"; };
+		A5DFB1DB1E4822B7009ACD31 /* IGRPhotoTweakView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGRPhotoTweakView.swift; sourceTree = "<group>"; };
+		A5DFB1DD1E482617009ACD31 /* IGRPhotoContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGRPhotoContentView.swift; sourceTree = "<group>"; };
+		A5DFB1DF1E48263E009ACD31 /* IGRCropView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGRCropView.swift; sourceTree = "<group>"; };
+		A5DFB1E11E4826FE009ACD31 /* IGRPhotoScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGRPhotoScrollView.swift; sourceTree = "<group>"; };
+		A5DFB1E31E482801009ACD31 /* IGRPhotoTweakConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGRPhotoTweakConstants.swift; sourceTree = "<group>"; };
+		A5DFB1E51E4828C2009ACD31 /* IGRCropCornerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGRCropCornerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +80,13 @@
 		A5DFB1CA1E481FE4009ACD31 /* IGRPhotoTweaks */ = {
 			isa = PBXGroup;
 			children = (
+				A5DFB1DB1E4822B7009ACD31 /* IGRPhotoTweakView.swift */,
+				A5DFB1DF1E48263E009ACD31 /* IGRCropView.swift */,
+				A5DFB1DD1E482617009ACD31 /* IGRPhotoContentView.swift */,
+				A5DFB1E51E4828C2009ACD31 /* IGRCropCornerView.swift */,
+				A5DFB1E11E4826FE009ACD31 /* IGRPhotoScrollView.swift */,
+				A5DFB1E31E482801009ACD31 /* IGRPhotoTweakConstants.swift */,
+				A5DFB1D91E482216009ACD31 /* UIColor+Tweak.swift */,
 			);
 			path = IGRPhotoTweaks;
 			sourceTree = "<group>";
@@ -161,8 +182,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A5DFB1DE1E482617009ACD31 /* IGRPhotoContentView.swift in Sources */,
 				A5DFB1D41E481FE4009ACD31 /* ViewController.swift in Sources */,
+				A5DFB1DC1E4822B7009ACD31 /* IGRPhotoTweakView.swift in Sources */,
+				A5DFB1E01E48263E009ACD31 /* IGRCropView.swift in Sources */,
+				A5DFB1E41E482801009ACD31 /* IGRPhotoTweakConstants.swift in Sources */,
+				A5DFB1DA1E482216009ACD31 /* UIColor+Tweak.swift in Sources */,
 				A5DFB1D31E481FE4009ACD31 /* AppDelegate.swift in Sources */,
+				A5DFB1E21E4826FE009ACD31 /* IGRPhotoScrollView.swift in Sources */,
+				A5DFB1E61E4828C2009ACD31 /* IGRCropCornerView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
