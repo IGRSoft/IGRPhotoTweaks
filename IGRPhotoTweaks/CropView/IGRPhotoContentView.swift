@@ -9,6 +9,11 @@
 import UIKit
 
 class IGRPhotoContentView: UIView {
+    
+    override class func initialize () {
+        self.appearance().backgroundColor = UIColor.clear
+    }
+    
     var imageView: UIImageView!
     var image: UIImage! {
         didSet {

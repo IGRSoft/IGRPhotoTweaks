@@ -10,6 +10,7 @@ import UIKit
 import Photos
 
 protocol IGRPhotoTweakViewControllerDelegate: NSObjectProtocol {
+    
     /**
      Called on image cropped.
      */
@@ -22,11 +23,15 @@ protocol IGRPhotoTweakViewControllerDelegate: NSObjectProtocol {
 }
 
 class IGRPhotoTweakViewController: UIViewController {
-
+    
     /**
      Image to process.
      */
     open var image: UIImage!
+    /**
+     Slider to change angel.
+     */
+    @IBOutlet weak fileprivate var angelSlider: UISlider?
     /**
      Flag indicating whether the image cropped will be saved to photo library automatically. Defaults to YES.
      */
@@ -39,39 +44,8 @@ class IGRPhotoTweakViewController: UIViewController {
      The optional photo tweaks controller delegate.
      */
     open weak var delegate: IGRPhotoTweakViewControllerDelegate?
-    /**
-     Save action button's default title color
-     */
-    var saveButtonTitleColor: UIColor!
-    /**
-     Save action button's highlight title color
-     */
-    var saveButtonHighlightTitleColor: UIColor!
-    /**
-     Cancel action button's default title color
-     */
-    var cancelButtonTitleColor: UIColor!
-    /**
-     Cancel action button's highlight title color
-     */
-    var cancelButtonHighlightTitleColor: UIColor!
-    /**
-     Reset action button's default title color
-     */
-    var resetButtonTitleColor: UIColor!
-    /**
-     Reset action button's highlight title color
-     */
-    var resetButtonHighlightTitleColor: UIColor!
-    /**
-     Slider tint color
-     */
-    var sliderTintColor: UIColor!
-    /**
-     Creates a photo tweaks view controller with the image to process.
-     */
     
-    fileprivate var photoView: IGRPhotoTweakView!;
+    internal var photoView: IGRPhotoTweakView!;
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -79,8 +53,8 @@ class IGRPhotoTweakViewController: UIViewController {
         self.navigationController?.isNavigationBarHidden = true
         self.automaticallyAdjustsScrollViewInsets = false
         self.view.clipsToBounds = true
-        self.view.backgroundColor = UIColor.photoTweakCanvasBackground()
         self.setupSubviews()
+        self.setupSlider()
     }
 
     override func didReceiveMemoryWarning() {
@@ -89,12 +63,22 @@ class IGRPhotoTweakViewController: UIViewController {
     }
     
     fileprivate func setupSubviews() {
-        self.photoView = IGRPhotoTweakView(frame: self.view.bounds, image: self.image, maxRotationAngle: self.maxRotationAngle)
+        self.photoView = IGRPhotoTweakView(frame: self.view.bounds,
+                                           image: self.image,
+                                           customizationDelegate: self)
         self.photoView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         self.view.addSubview(self.photoView)
         self.view.sendSubview(toBack: self.photoView)
     }
+    
+    fileprivate func setupSlider() {
+        self.angelSlider?.minimumValue = -(Float)(self.maxRotationAngle)
+        self.angelSlider?.maximumValue = Float(self.maxRotationAngle)
+        self.angelSlider?.value = 0.0
+    }
 
+    // MARK: - Button Actions
+    
     @IBAction func onTouchCancelButton(_ sender: UIButton) {
         self.delegate?.photoTweaksControllerDidCancel(self)
     }
@@ -139,6 +123,16 @@ class IGRPhotoTweakViewController: UIViewController {
         }
         self.delegate?.photoTweaksController(self, didFinishWithCroppedImage: image)
     }
+    
+    @IBAction func onTouchResetButton(_ sender: UIButton) {
+        self.photoView.resetView()
+    }
+    
+    @IBAction func onChandeAngelSliderValue(_ sender: UISlider) {
+        self.photoView.changedAngel(value: CGFloat(sender.value))
+    }
+    
+    // MARK: - Image Processor
     
     fileprivate func newScaledImage(_ source: CGImage, with orientation: UIImageOrientation, to size: CGSize, with quality: CGInterpolationQuality) -> CGImage {
         var srcSize: CGSize = size
@@ -221,5 +215,23 @@ class IGRPhotoTweakViewController: UIViewController {
             ac.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
             present(ac, animated: true, completion: nil)
         }
+    }
+}
+
+extension IGRPhotoTweakViewController : IGRPhotoTweakViewCustomizationDelegate {
+    func borderColor() -> UIColor {
+        return UIColor.cropLine()
+    }
+    
+    func borderWidth() -> CGFloat {
+        return 1.0
+    }
+    
+    func cornerBorderWidth() -> CGFloat {
+        return kCropViewCornerWidth
+    }
+    
+    func cornerBorderLength() -> CGFloat {
+        return kCropViewCornerLength
     }
 }

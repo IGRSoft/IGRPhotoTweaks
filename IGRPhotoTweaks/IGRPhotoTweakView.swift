@@ -8,13 +8,27 @@
 
 import UIKit
 
+protocol IGRPhotoTweakViewCustomizationDelegate: NSObjectProtocol {
+    func borderColor() -> UIColor
+    
+    func borderWidth() -> CGFloat
+    
+    func cornerBorderWidth() -> CGFloat
+    
+    func cornerBorderLength() -> CGFloat
+}
+
 class IGRPhotoTweakView: UIView {
+    override class func initialize () {
+        self.appearance().backgroundColor = UIColor.photoTweakCanvasBackground()
+    }
+    
+    open weak var customizationDelegate: IGRPhotoTweakViewCustomizationDelegate?
+    
     private(set) var angle:                 CGFloat = 0.0
     private(set) var photoContentOffset =   CGPoint.zero
     private(set) var cropView:              IGRCropView!
     private(set) var photoContentView:      IGRPhotoContentView!
-    private(set) var slider:                UISlider!
-    private(set) var resetBtn:              UIButton!
     
     var photoTranslation: CGPoint {
         get {
@@ -44,13 +58,13 @@ class IGRPhotoTweakView: UIView {
     fileprivate var maximumCanvasSize: CGSize!
     fileprivate var centerY: CGFloat!
     fileprivate var originalPoint: CGPoint!
-    fileprivate var maxRotationAngle = kMaxRotationAngle
     
-    init(frame: CGRect, image: UIImage, maxRotationAngle: CGFloat) {
+    init(frame: CGRect, image: UIImage, customizationDelegate: IGRPhotoTweakViewCustomizationDelegate!) {
         super.init(frame: frame)
     
         self.image = image
-        self.maxRotationAngle = maxRotationAngle
+        self.customizationDelegate = customizationDelegate
+        
         // scale the image
         self.maximumCanvasSize = CGSize(width: (kMaximumCanvasWidthRatio * self.frame.size.width),
                                         height: (kMaximumCanvasHeightRatio * self.frame.size.height - kCanvasHeaderHeigth))
@@ -79,67 +93,53 @@ class IGRPhotoTweakView: UIView {
         self.scrollView.contentSize = CGSize(width: self.scrollView.bounds.size.width,
                                              height: self.scrollView.bounds.size.height)
         self.addSubview(self.scrollView)
-        
-#if kInstruction
-        self.scrollView.layer.borderColor = UIColor.red.cgColor
-        self.scrollView.layer.borderWidth = 1
-        self.scrollView.showsVerticalScrollIndicator = true
-        self.scrollView.showsHorizontalScrollIndicator = true
-#endif
+
         self.photoContentView = IGRPhotoContentView(frame: self.scrollView.bounds)
         self.photoContentView.image = image
-        self.photoContentView.backgroundColor = UIColor.clear
         self.photoContentView.isUserInteractionEnabled = true
         
         self.scrollView.photoContentView = self.photoContentView
         self.scrollView.addSubview(self.photoContentView)
         
-        self.cropView = IGRCropView(frame: self.scrollView.frame)
+        self.cropView = IGRCropView(frame: self.scrollView.frame,
+                                    cornerBorderWidth:self.cornerBorderWidth(),
+                                    cornerBorderLength:self.cornerBorderLength())
         self.cropView.center = self.scrollView.center
         self.cropView.delegate = self
+        self.cropView.layer.borderColor = self.borderColor().cgColor
+        self.cropView.layer.borderWidth = self.borderWidth()
         self.addSubview(self.cropView)
         
-        let maskColor = UIColor.mask()
-        self.topMask = UIView()
-        self.topMask.backgroundColor = maskColor
+        self.topMask = IGRCropMaskView()
         self.addSubview(self.topMask)
         
-        self.leftMask = UIView()
-        self.leftMask.backgroundColor = maskColor
+        self.leftMask = IGRCropMaskView()
         self.addSubview(self.leftMask)
         
-        self.bottomMask = UIView()
-        self.bottomMask.backgroundColor = maskColor
+        self.bottomMask = IGRCropMaskView()
         self.addSubview(self.bottomMask)
         
-        self.rightMask = UIView()
-        self.rightMask.backgroundColor = maskColor
+        self.rightMask = IGRCropMaskView()
         self.addSubview(self.rightMask)
         self.updateMasks(false)
-        
-        self.slider = UISlider(frame: CGRect(x: 0.0, y: 0.0, width: 260.0, height: 20.0))
-        self.slider.center = CGPoint(x: (self.bounds.width / 2.0), y: (self.bounds.height - 135.0))
-        self.slider.minimumValue = -(Float)(self.maxRotationAngle)
-        self.slider.maximumValue = Float(self.maxRotationAngle)
-        self.slider.addTarget(self, action: #selector(self.sliderValueChanged), for: .valueChanged)
-        self.slider.addTarget(self, action: #selector(self.sliderTouchEnded), for: .touchUpInside)
-        self.addSubview(self.slider)
-        
-        self.resetBtn = UIButton(type: .custom)
-        self.resetBtn.frame = CGRect(x: 0.0, y: 0.0, width: 60.0, height: 20.0)
-        self.resetBtn.center = CGPoint(x: (self.bounds.width / 2.0), y: (self.bounds.height - 95.0))
-        self.resetBtn.titleLabel?.font = UIFont.systemFont(ofSize: 14.0)
-        self.resetBtn.setTitleColor(UIColor.resetButton(), for: .normal)
-        self.resetBtn.setTitleColor(UIColor.resetButtonHighlighted(), for: .highlighted)
-        self.resetBtn.setTitle("RESET", for: .normal)
-        self.resetBtn.addTarget(self, action: #selector(self.resetBtnTapped), for: .touchUpInside)
-        self.addSubview(self.resetBtn)
         
         self.originalPoint = self.convert(self.scrollView.center, to: self)
     }
     
-    convenience init(frame: CGRect, image: UIImage) {
-        self.init(frame: frame, image: image, maxRotationAngle: kMaxRotationAngle)
+    func borderColor() -> UIColor {
+        return (self.customizationDelegate?.borderColor())!
+    }
+    
+    func borderWidth() -> CGFloat {
+        return (self.customizationDelegate?.borderWidth())!
+    }
+    
+    func cornerBorderWidth() -> CGFloat {
+        return (self.customizationDelegate?.cornerBorderWidth())!
+    }
+    
+    func cornerBorderLength() -> CGFloat {
+        return (self.customizationDelegate?.cornerBorderLength())!
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -147,15 +147,7 @@ class IGRPhotoTweakView: UIView {
     }
     
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
-        if self.slider.frame.contains(point) {
-            
-            return self.slider
-        }
-        else if self.resetBtn.frame.contains(point) {
-            
-            return self.resetBtn
-        }
-        else if self.cropView.frame.insetBy(dx: -kCropViewHotArea, dy: -kCropViewHotArea).contains(point) &&
+        if self.cropView.frame.insetBy(dx: -kCropViewHotArea, dy: -kCropViewHotArea).contains(point) &&
             !self.cropView.frame.insetBy(dx: kCropViewHotArea, dy: kCropViewHotArea).contains(point) {
             
             return self.cropView
@@ -164,7 +156,7 @@ class IGRPhotoTweakView: UIView {
         return self.scrollView
     }
     
-    func updateMasks(_ animate: Bool) {
+    fileprivate func updateMasks(_ animate: Bool) {
         let animationBlock: ((_: Void) -> Void)? = {(_: Void) -> Void in
             self.topMask.frame = CGRect(x: 0.0,
                                         y: 0.0,
@@ -191,7 +183,7 @@ class IGRPhotoTweakView: UIView {
         }
     }
     
-    func checkScrollViewContentOffset() {
+    fileprivate func checkScrollViewContentOffset() {
         self.scrollView.setContentOffsetX(max(self.scrollView.contentOffset.x, 0))
         self.scrollView.setContentOffsetY(max(self.scrollView.contentOffset.y, 0))
         
@@ -204,7 +196,7 @@ class IGRPhotoTweakView: UIView {
         }
     }
     
-    func sliderValueChanged(_ sender: Any) {
+    open func changedAngel(value: CGFloat) {
         // update masks
         self.updateMasks(false)
         
@@ -212,7 +204,7 @@ class IGRPhotoTweakView: UIView {
         self.cropView.updateGridLines(false)
         
         // rotate scroll view
-        self.angle = CGFloat(self.slider.value)
+        self.angle = value
         self.scrollView.transform = CGAffineTransform(rotationAngle: self.angle)
         
         // position scroll view
@@ -240,11 +232,7 @@ class IGRPhotoTweakView: UIView {
         self.checkScrollViewContentOffset()
     }
     
-    func sliderTouchEnded(_ sender: Any) {
-        self.cropView.dismissGridLines()
-    }
-    
-    func resetBtnTapped(_ sender: Any) {
+    open func resetView() {
         UIView.animate(withDuration: 0.25, animations: {() -> Void in
             self.angle = 0
             self.scrollView.transform = CGAffineTransform.identity
@@ -259,7 +247,7 @@ class IGRPhotoTweakView: UIView {
             self.cropView.frame = self.scrollView.frame
             self.cropView.center = self.scrollView.center
             self.updateMasks(false)
-            self.slider.setValue(0, animated: true)
+            //self.slider.setValue(0, animated: true)
         })
     }
 }

@@ -9,11 +9,18 @@
 import UIKit
 
 class ExampleCropViewController: IGRPhotoTweakViewController {
-    
-    @IBOutlet weak fileprivate var toolbar: UIToolbar?
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //FIXME: Themes Preview
+        //IGRCropLine.appearance().backgroundColor = UIColor.green
+        //IGRCropGridLine.appearance().backgroundColor = UIColor.yellow
+        //IGRCropCornerView.appearance().backgroundColor = UIColor.purple
+        //IGRCropCornerLine.appearance().backgroundColor = UIColor.orange
+        //IGRCropMaskView.appearance().backgroundColor = UIColor.blue
+        //IGRPhotoContentView.appearance().backgroundColor = UIColor.gray
+        //IGRPhotoTweakView.appearance().backgroundColor = UIColor.brown
     }
 
     override func didReceiveMemoryWarning() {
@@ -21,15 +28,20 @@ class ExampleCropViewController: IGRPhotoTweakViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+    //FIXME: Themes Preview
+//    override func borderColor() -> UIColor {
+//        return UIColor.red
+//    }
+//    
+//    override func borderWidth() -> CGFloat {
+//        return 2.0
+//    }
+//    
+//    override func cornerBorderWidth() -> CGFloat {
+//        return 4.0
+//    }
+//    
+//    override func cornerBorderLength() -> CGFloat {
+//        return 30.0
+//    }
 }

@@ -16,6 +16,10 @@ protocol IGRCropViewDelegate: NSObjectProtocol {
 
 class IGRCropView: UIView {
     
+    override class func initialize () {
+        self.appearance().backgroundColor = UIColor.clear
+    }
+    
     var upperLeft:  IGRCropCornerView!
     var upperRight: IGRCropCornerView!
     var lowerRight: IGRCropCornerView!
@@ -27,6 +31,9 @@ class IGRCropView: UIView {
     var horizontalGridLines     = [UIView]()
     var verticalGridLines       = [UIView]()
     
+    var cornerBorderLength     = kCropViewCornerLength
+    var cornerBorderWidth      = kCropViewCornerWidth
+    
     weak var delegate: IGRCropViewDelegate?
     
     var isCropLinesDismissed: Bool  = false
@@ -36,8 +43,11 @@ class IGRCropView: UIView {
         return sqrt(pow(point1.x - point0.x, 2) + pow(point1.y - point0.y, 2))
     }
     
-    override init(frame: CGRect) {
+    init(frame: CGRect, cornerBorderWidth: CGFloat, cornerBorderLength:CGFloat) {
         super.init(frame: frame)
+        
+        self.cornerBorderLength = cornerBorderLength
+        self.cornerBorderWidth = cornerBorderWidth
         
         setup()
     }
@@ -49,29 +59,23 @@ class IGRCropView: UIView {
     }
     
     fileprivate func setup() {
-        self.layer.borderColor = UIColor.cropLine().cgColor
-        self.layer.borderWidth = 1
         for _ in 0..<kCropLines {
-            let line = UIView()
-            line.backgroundColor = UIColor.cropLine()
+            let line = IGRCropLine()
             self.horizontalCropLines.append(line)
             self.addSubview(line)
         }
         for _ in 0..<kCropLines {
-            let line = UIView()
-            line.backgroundColor = UIColor.cropLine()
+            let line = IGRCropLine()
             self.verticalCropLines.append(line)
             self.addSubview(line)
         }
         for _ in 0..<kGridLines {
-            let line = UIView()
-            line.backgroundColor = UIColor.gridLine()
+            let line = IGRCropGridLine()
             self.horizontalGridLines.append(line)
             self.addSubview(line)
         }
         for _ in 0..<kGridLines {
-            let line = UIView()
-            line.backgroundColor = UIColor.gridLine()
+            let line = IGRCropGridLine()
             self.verticalGridLines.append(line)
             self.addSubview(line)
         }
@@ -79,27 +83,27 @@ class IGRCropView: UIView {
         self.isCropLinesDismissed = true
         self.isGridLinesDismissed = true
         
-        self.upperLeft = IGRCropCornerView(cornerType: .upperLeft)
-        self.upperLeft.center = CGPoint(x: (kCropViewCornerLength / 2.0),
-                                        y: (kCropViewCornerLength / 2.0))
+        self.upperLeft = IGRCropCornerView(cornerType: .upperLeft, lineWidth: cornerBorderWidth, lineLenght:cornerBorderLength)
+        self.upperLeft.center = CGPoint(x: (cornerBorderLength / 2.0),
+                                        y: (cornerBorderLength / 2.0))
         self.upperLeft.autoresizingMask = []
         self.addSubview(self.upperLeft)
         
-        self.upperRight = IGRCropCornerView(cornerType: .upperRight)
-        self.upperRight.center = CGPoint(x: (self.frame.size.width - kCropViewCornerLength / 2.0),
-                                         y: (kCropViewCornerLength / 2.0))
+        self.upperRight = IGRCropCornerView(cornerType: .upperRight, lineWidth: cornerBorderWidth, lineLenght:cornerBorderLength)
+        self.upperRight.center = CGPoint(x: (self.frame.size.width - cornerBorderLength / 2.0),
+                                         y: (cornerBorderLength / 2.0))
         self.upperRight.autoresizingMask = .flexibleLeftMargin
         self.addSubview(self.upperRight)
         
-        self.lowerRight = IGRCropCornerView(cornerType: .lowerRight)
-        self.lowerRight.center = CGPoint(x: (self.frame.size.width - kCropViewCornerLength / 2.0),
-                                         y: (self.frame.size.height - kCropViewCornerLength / 2.0))
+        self.lowerRight = IGRCropCornerView(cornerType: .lowerRight, lineWidth: cornerBorderWidth, lineLenght:cornerBorderLength)
+        self.lowerRight.center = CGPoint(x: (self.frame.size.width - cornerBorderLength / 2.0),
+                                         y: (self.frame.size.height - cornerBorderLength / 2.0))
         self.lowerRight.autoresizingMask = [.flexibleTopMargin, .flexibleLeftMargin]
         self.addSubview(self.lowerRight)
         
-        self.lowerLeft = IGRCropCornerView(cornerType: .lowerLeft)
-        self.lowerLeft.center = CGPoint(x: (kCropViewCornerLength / 2.0),
-                                        y: (self.frame.size.height - kCropViewCornerLength / 2.0))
+        self.lowerLeft = IGRCropCornerView(cornerType: .lowerLeft, lineWidth: cornerBorderWidth, lineLenght:cornerBorderLength)
+        self.lowerLeft.center = CGPoint(x: (cornerBorderLength / 2.0),
+                                        y: (self.frame.size.height - cornerBorderLength / 2.0))
         self.lowerLeft.autoresizingMask = .flexibleTopMargin
         self.addSubview(self.lowerLeft)
     }
@@ -194,7 +198,7 @@ class IGRCropView: UIView {
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
     }
     
-    func updateCropLines(_ animate: Bool) {
+    fileprivate func updateCropLines(_ animate: Bool) {
         // show crop lines
         if self.isCropLinesDismissed {
             self.showCropLines()

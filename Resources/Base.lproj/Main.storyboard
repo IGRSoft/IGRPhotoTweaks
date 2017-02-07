@@ -62,6 +62,11 @@
                                             <action selector="onTouchCancelButton:" destination="see-Yh-xp4" id="xDe-pB-GEs"/>
                                         </connections>
                                     </barButtonItem>
+                                    <barButtonItem title="Reset" id="3GT-aa-ka7">
+                                        <connections>
+                                            <action selector="onTouchResetButton:" destination="see-Yh-xp4" id="Ws5-9e-UMZ"/>
+                                        </connections>
+                                    </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="cdp-Xf-JeJ"/>
                                     <barButtonItem title="Crop" id="Ly7-tz-9Ph">
                                         <color key="tintColor" red="1" green="0.59999999999999998" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -71,16 +76,25 @@
                                     </barButtonItem>
                                 </items>
                             </toolbar>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="XeR-6H-PO5">
+                                <rect key="frame" x="14" y="64" width="347" height="31"/>
+                                <connections>
+                                    <action selector="onChandeAngelSliderValue:" destination="see-Yh-xp4" eventType="valueChanged" id="Dtf-nD-XQd"/>
+                                </connections>
+                            </slider>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="bdR-wz-ayX" firstAttribute="top" secondItem="e2f-wR-VPn" secondAttribute="bottom" id="1aR-jh-6gb"/>
                             <constraint firstItem="e2f-wR-VPn" firstAttribute="leading" secondItem="GJu-Ct-elw" secondAttribute="leading" id="ElF-98-SAp"/>
+                            <constraint firstItem="XeR-6H-PO5" firstAttribute="top" secondItem="onE-Ll-fgh" secondAttribute="bottom" id="OgS-DL-2kM"/>
                             <constraint firstAttribute="trailing" secondItem="e2f-wR-VPn" secondAttribute="trailing" id="XJ4-7e-wkc"/>
+                            <constraint firstItem="XeR-6H-PO5" firstAttribute="leading" secondItem="GJu-Ct-elw" secondAttribute="leading" constant="16" id="ewC-Is-R1Q"/>
+                            <constraint firstAttribute="trailing" secondItem="XeR-6H-PO5" secondAttribute="trailing" constant="16" id="v0h-jA-L2D"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="toolbar" destination="e2f-wR-VPn" id="W1e-gd-SzB"/>
+                        <outlet property="angelSlider" destination="XeR-6H-PO5" id="7Pw-5n-1Ke"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0K1-jI-cBi" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -27,4 +27,7 @@ let kMaximumCanvasWidthRatio: CGFloat  = 0.9
 let kMaximumCanvasHeightRatio: CGFloat = 0.7
 let kCanvasHeaderHeigth: CGFloat       = 60
 
+let kCropViewLineWidth: CGFloat  = 1
+
+let kCropViewCornerWidth: CGFloat  = 2
 let kCropViewCornerLength: CGFloat = 22
