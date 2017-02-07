@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Photos
 
 protocol IGRPhotoTweakViewControllerDelegate: NSObjectProtocol {
     /**
@@ -87,42 +88,18 @@ class IGRPhotoTweakViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
-    func setupSubviews() {
+    fileprivate func setupSubviews() {
         self.photoView = IGRPhotoTweakView(frame: self.view.bounds, image: self.image, maxRotationAngle: self.maxRotationAngle)
         self.photoView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         self.view.addSubview(self.photoView)
-        let cancelBtn = UIButton(type: .custom)
-        cancelBtn.frame = CGRect(x: 8.0, y: (self.view.frame.height - 40.0), width: 60.0, height: 40.0)
-        cancelBtn.titleLabel?.textAlignment = .left
-        cancelBtn.setTitle("Cancel", for: .normal)
-        let cancelTitleColor = !(self.cancelButtonTitleColor != nil) ? UIColor.cancelButton() : self.cancelButtonTitleColor
-        cancelBtn.setTitleColor(cancelTitleColor, for: .normal)
-        let cancelHighlightTitleColor = !(self.cancelButtonHighlightTitleColor != nil) ? UIColor.cancelButtonHighlighted() : self.cancelButtonHighlightTitleColor
-        cancelBtn.setTitleColor(cancelHighlightTitleColor, for: .highlighted)
-        cancelBtn.titleLabel?.font = UIFont.systemFont(ofSize: 17.0)
-        cancelBtn.addTarget(self, action: #selector(self.cancelBtnTapped), for: .touchUpInside)
-        self.view.addSubview(cancelBtn)
-        let cropBtn = UIButton(type: .custom)
-        cropBtn.titleLabel?.textAlignment = .right
-        cropBtn.frame = CGRect(x: (self.view.frame.width - 60.0),
-                               y: (self.view.frame.height - 40.0),
-                               width: 60.0, height: 40.0)
-        cropBtn.setTitle("Done", for: .normal)
-        let saveButtonTitleColor = !(self.saveButtonTitleColor != nil) ? UIColor.saveButton() : self.saveButtonTitleColor
-        cropBtn.setTitleColor(saveButtonTitleColor, for: .normal)
-        let saveButtonHighlightTitleColor = !(self.saveButtonHighlightTitleColor != nil) ? UIColor.saveButtonHighlighted() : self.saveButtonHighlightTitleColor
-        cropBtn.setTitleColor(saveButtonHighlightTitleColor, for: .normal)
-        cropBtn.titleLabel?.font = UIFont.systemFont(ofSize: 17.0)
-        cropBtn.addTarget(self, action: #selector(self.saveBtnTapped), for: .touchUpInside)
-        self.view.addSubview(cropBtn)
+        self.view.sendSubview(toBack: self.photoView)
     }
 
-    func cancelBtnTapped() {
+    @IBAction func onTouchCancelButton(_ sender: UIButton) {
         self.delegate?.photoTweaksControllerDidCancel(self)
     }
     
-    func saveBtnTapped() {
+    @IBAction func onTouchCropButton(_ sender: UIButton) {
         var transform = CGAffineTransform.identity
         // translate
         let translation: CGPoint = self.photoView.photoTranslation
@@ -137,17 +114,33 @@ class IGRPhotoTweakViewController: UIViewController {
         let imageRef: CGImage = self.newTransformedImage(transform, sourceImage: self.image.cgImage!, sourceSize: self.image.size, sourceOrientation: self.image.imageOrientation, outputWidth: self.image.size.width, cropSize: self.photoView.cropView.frame.size, imageViewSize: self.photoView.photoContentView.bounds.size)
         let image = UIImage(cgImage: imageRef)
         if self.isAutoSaveToLibray {
-//            var library = ALAssetsLibrary()
-//            library.writeImage(toSavedPhotosAlbum: image.cgImage, metadata: nil, completionBlock: {(_ assetURL: URL, _ error: Error) -> Void in
-//                if error == nil {
-//                    
-//                }
-//            })
+            
+            func writePhotoToLibrary() {
+                UIImageWriteToSavedPhotosAlbum(image, self, #selector(self.image(image:didFinishSavingWithError:contextInfo:)), nil)
+            }
+            
+            if PHPhotoLibrary.authorizationStatus() == PHAuthorizationStatus.authorized {
+                writePhotoToLibrary()
+            }
+            else {
+                PHPhotoLibrary.requestAuthorization({ (status: PHAuthorizationStatus) in
+                    if status == PHAuthorizationStatus.authorized {
+                        DispatchQueue.main.async{
+                            writePhotoToLibrary()
+                        }
+                    }
+                    else {
+                        DispatchQueue.main.async{
+                            //Add Alert
+                        }
+                    }
+                })
+            }
         }
         self.delegate?.photoTweaksController(self, didFinishWithCroppedImage: image)
     }
     
-    func newScaledImage(_ source: CGImage, with orientation: UIImageOrientation, to size: CGSize, with quality: CGInterpolationQuality) -> CGImage {
+    fileprivate func newScaledImage(_ source: CGImage, with orientation: UIImageOrientation, to size: CGSize, with quality: CGInterpolationQuality) -> CGImage {
         var srcSize: CGSize = size
         var rotation: CGFloat = 0.0
         switch orientation {
@@ -166,7 +159,12 @@ class IGRPhotoTweakViewController: UIViewController {
         }
         
         let rgbColorSpace: CGColorSpace? = CGColorSpaceCreateDeviceRGB()
-        let bitmapInfo = CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedLast.rawValue | CGImageByteOrderInfo.order32Big.rawValue)
+        var bitmapInfo: CGBitmapInfo!
+        if #available(iOS 10.0, *) {
+            bitmapInfo = CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedLast.rawValue | CGImageByteOrderInfo.order32Big.rawValue)
+        } else {
+            bitmapInfo = CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedLast.rawValue | 4)
+        }
         
         let context = CGContext(data: nil,
                                 width: Int(size.width),
@@ -188,7 +186,7 @@ class IGRPhotoTweakViewController: UIViewController {
         return resultRef
     }
     
-    func newTransformedImage(_ transform: CGAffineTransform, sourceImage: CGImage, sourceSize: CGSize, sourceOrientation: UIImageOrientation, outputWidth: CGFloat, cropSize: CGSize, imageViewSize: CGSize) -> CGImage {
+    fileprivate func newTransformedImage(_ transform: CGAffineTransform, sourceImage: CGImage, sourceSize: CGSize, sourceOrientation: UIImageOrientation, outputWidth: CGFloat, cropSize: CGSize, imageViewSize: CGSize) -> CGImage {
         let source: CGImage = self.newScaledImage(sourceImage, with: sourceOrientation, to: sourceSize, with: .none)
         let aspect: CGFloat = cropSize.height / cropSize.width
         let outputSize = CGSize(width: outputWidth, height: (outputWidth * aspect))
@@ -215,5 +213,13 @@ class IGRPhotoTweakViewController: UIViewController {
         let resultRef: CGImage = context!.makeImage()!
         
         return resultRef
+    }
+    
+    @objc fileprivate func image(image: UIImage, didFinishSavingWithError error: NSError?, contextInfo:UnsafeRawPointer) {
+        if error == nil {
+            let ac = UIAlertController(title: "Save error", message: error?.localizedDescription, preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            present(ac, animated: true, completion: nil)
+        }
     }
 }

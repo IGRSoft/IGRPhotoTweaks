@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A58EC9D01E49C8FE0002AD70 /* ExampleCropViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58EC9CF1E49C8FE0002AD70 /* ExampleCropViewController.swift */; };
 		A5DFB1D31E481FE4009ACD31 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5DFB1C81E481FE4009ACD31 /* AppDelegate.swift */; };
 		A5DFB1D41E481FE4009ACD31 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5DFB1C91E481FE4009ACD31 /* ViewController.swift */; };
 		A5DFB1D51E481FE4009ACD31 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A5DFB1CC1E481FE4009ACD31 /* Assets.xcassets */; };
@@ -23,6 +24,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A58EC9CF1E49C8FE0002AD70 /* ExampleCropViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleCropViewController.swift; sourceTree = "<group>"; };
 		A5DFB1B21E481F48009ACD31 /* IGRPhotoTweaks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IGRPhotoTweaks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5DFB1C81E481FE4009ACD31 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A5DFB1C91E481FE4009ACD31 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -75,6 +77,7 @@
 			children = (
 				A5DFB1C81E481FE4009ACD31 /* AppDelegate.swift */,
 				A5DFB1C91E481FE4009ACD31 /* ViewController.swift */,
+				A58EC9CF1E49C8FE0002AD70 /* ExampleCropViewController.swift */,
 			);
 			path = Example;
 			sourceTree = "<group>";
@@ -192,6 +195,7 @@
 				A5DFB1E01E48263E009ACD31 /* IGRCropView.swift in Sources */,
 				A5DFB1E41E482801009ACD31 /* IGRPhotoTweakConstants.swift in Sources */,
 				A5DFB1DA1E482216009ACD31 /* UIColor+Tweak.swift in Sources */,
+				A58EC9D01E49C8FE0002AD70 /* ExampleCropViewController.swift in Sources */,
 				A5DFB1D31E481FE4009ACD31 /* AppDelegate.swift in Sources */,
 				A5DFB1E21E4826FE009ACD31 /* IGRPhotoScrollView.swift in Sources */,
 				A5DFB1E61E4828C2009ACD31 /* IGRCropCornerView.swift in Sources */,
@@ -260,7 +264,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -304,7 +308,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";

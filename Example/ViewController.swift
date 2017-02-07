@@ -43,6 +43,21 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    // MARK: - Navigation
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showCrop" {
+            
+            let exampleCropViewController = segue.destination as! ExampleCropViewController
+            exampleCropViewController.image = sender as! UIImage
+            exampleCropViewController.delegate = self;
+            exampleCropViewController.isAutoSaveToLibray = false;
+            exampleCropViewController.maxRotationAngle = CGFloat(M_PI_4);
+        }
+    }
+    
+    // MARK: - Funcs
+    
     func openLibrary() {
         let pickerView = UIImagePickerController.init()
         pickerView.delegate = self
@@ -55,13 +70,7 @@ class ViewController: UIViewController {
     }
     
     func edit(image: UIImage) {
-        let photoTweaksViewController = IGRPhotoTweakViewController()
-        photoTweaksViewController.image = image
-        photoTweaksViewController.delegate = self;
-        photoTweaksViewController.isAutoSaveToLibray = false;
-        photoTweaksViewController.maxRotationAngle = CGFloat(M_PI_4);
-        
-        self.present(photoTweaksViewController, animated: true, completion: nil)
+        self.performSegue(withIdentifier: "showCrop", sender: image)
     }
 }
 
@@ -80,10 +89,10 @@ extension ViewController: UIImagePickerControllerDelegate, UINavigationControlle
 extension ViewController: IGRPhotoTweakViewControllerDelegate {
     func photoTweaksController(_ controller: IGRPhotoTweakViewController, didFinishWithCroppedImage croppedImage: UIImage) {
         self.imageView?.image = croppedImage
-        controller.dismiss(animated: true)
+        _ = controller.navigationController?.popViewController(animated: true)
     }
     
     func photoTweaksControllerDidCancel(_ controller: IGRPhotoTweakViewController) {
-        controller.dismiss(animated: true)
+        _ = controller.navigationController?.popViewController(animated: true)
     }
 }

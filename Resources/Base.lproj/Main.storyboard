@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -36,11 +35,57 @@
                     <navigationItem key="navigationItem" id="UKd-3v-2Fg"/>
                     <connections>
                         <outlet property="imageView" destination="Xqa-nB-OFq" id="8jL-e9-LXN"/>
+                        <segue destination="see-Yh-xp4" kind="show" identifier="showCrop" id="zyN-XH-9w9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1076" y="127.28635682158921"/>
+        </scene>
+        <!--Example Crop View Controller-->
+        <scene sceneID="TwL-Sv-Nh0">
+            <objects>
+                <viewController id="see-Yh-xp4" customClass="ExampleCropViewController" customModule="IGRPhotoTweaks" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="onE-Ll-fgh"/>
+                        <viewControllerLayoutGuide type="bottom" id="bdR-wz-ayX"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="GJu-Ct-elw">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e2f-wR-VPn">
+                                <rect key="frame" x="0.0" y="623" width="375" height="44"/>
+                                <items>
+                                    <barButtonItem title="Cancel" id="d20-TX-gj3">
+                                        <connections>
+                                            <action selector="onTouchCancelButton:" destination="see-Yh-xp4" id="xDe-pB-GEs"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="cdp-Xf-JeJ"/>
+                                    <barButtonItem title="Crop" id="Ly7-tz-9Ph">
+                                        <color key="tintColor" red="1" green="0.59999999999999998" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <connections>
+                                            <action selector="onTouchCropButton:" destination="see-Yh-xp4" id="J1e-2T-M6W"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="bdR-wz-ayX" firstAttribute="top" secondItem="e2f-wR-VPn" secondAttribute="bottom" id="1aR-jh-6gb"/>
+                            <constraint firstItem="e2f-wR-VPn" firstAttribute="leading" secondItem="GJu-Ct-elw" secondAttribute="leading" id="ElF-98-SAp"/>
+                            <constraint firstAttribute="trailing" secondItem="e2f-wR-VPn" secondAttribute="trailing" id="XJ4-7e-wkc"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="toolbar" destination="e2f-wR-VPn" id="W1e-gd-SzB"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0K1-jI-cBi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2087.1999999999998" y="127.28635682158921"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Pql-yM-51i">
