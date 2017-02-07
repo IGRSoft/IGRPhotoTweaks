@@ -12,8 +12,6 @@ class IGRPhotoContentView: UIView {
     var imageView: UIImageView!
     var image: UIImage! {
         didSet {
-            self.frame = CGRect(x: CGFloat(0), y: CGFloat(0), width: CGFloat(image.size.width), height: CGFloat(image.size.height))
-            
             let imageViewExist = self.imageView != nil
             if !imageViewExist {
                 self.imageView = UIImageView(frame: self.bounds)

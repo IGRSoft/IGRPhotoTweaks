@@ -93,25 +93,27 @@ class IGRPhotoTweakViewController: UIViewController {
         self.photoView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         self.view.addSubview(self.photoView)
         let cancelBtn = UIButton(type: .custom)
-        cancelBtn.frame = CGRect(x: CGFloat(8), y: CGFloat(self.view.frame.height - 40), width: CGFloat(60), height: CGFloat(40))
+        cancelBtn.frame = CGRect(x: 8.0, y: (self.view.frame.height - 40.0), width: 60.0, height: 40.0)
         cancelBtn.titleLabel?.textAlignment = .left
         cancelBtn.setTitle("Cancel", for: .normal)
         let cancelTitleColor = !(self.cancelButtonTitleColor != nil) ? UIColor.cancelButton() : self.cancelButtonTitleColor
         cancelBtn.setTitleColor(cancelTitleColor, for: .normal)
         let cancelHighlightTitleColor = !(self.cancelButtonHighlightTitleColor != nil) ? UIColor.cancelButtonHighlighted() : self.cancelButtonHighlightTitleColor
         cancelBtn.setTitleColor(cancelHighlightTitleColor, for: .highlighted)
-        cancelBtn.titleLabel?.font = UIFont.systemFont(ofSize: CGFloat(17))
+        cancelBtn.titleLabel?.font = UIFont.systemFont(ofSize: 17.0)
         cancelBtn.addTarget(self, action: #selector(self.cancelBtnTapped), for: .touchUpInside)
         self.view.addSubview(cancelBtn)
         let cropBtn = UIButton(type: .custom)
         cropBtn.titleLabel?.textAlignment = .right
-        cropBtn.frame = CGRect(x: CGFloat(self.view.frame.width - 60), y: CGFloat(self.view.frame.height - 40), width: CGFloat(60), height: CGFloat(40))
+        cropBtn.frame = CGRect(x: (self.view.frame.width - 60.0),
+                               y: (self.view.frame.height - 40.0),
+                               width: 60.0, height: 40.0)
         cropBtn.setTitle("Done", for: .normal)
         let saveButtonTitleColor = !(self.saveButtonTitleColor != nil) ? UIColor.saveButton() : self.saveButtonTitleColor
         cropBtn.setTitleColor(saveButtonTitleColor, for: .normal)
         let saveButtonHighlightTitleColor = !(self.saveButtonHighlightTitleColor != nil) ? UIColor.saveButtonHighlighted() : self.saveButtonHighlightTitleColor
         cropBtn.setTitleColor(saveButtonHighlightTitleColor, for: .normal)
-        cropBtn.titleLabel?.font = UIFont.systemFont(ofSize: CGFloat(17))
+        cropBtn.titleLabel?.font = UIFont.systemFont(ofSize: 17.0)
         cropBtn.addTarget(self, action: #selector(self.saveBtnTapped), for: .touchUpInside)
         self.view.addSubview(cropBtn)
     }
@@ -155,10 +157,10 @@ class IGRPhotoTweakViewController: UIViewController {
             rotation = .pi
         case .left:
             rotation = CGFloat(M_PI_2)
-            srcSize = CGSize(width: CGFloat(size.height), height: CGFloat(size.width))
+            srcSize = CGSize(width: size.height, height: size.width)
         case .right:
             rotation = -(CGFloat)(M_PI_2)
-            srcSize = CGSize(width: CGFloat(size.height), height: CGFloat(size.width))
+            srcSize = CGSize(width: size.height, height: size.width)
         default:
             break
         }
@@ -173,7 +175,7 @@ class IGRPhotoTweakViewController: UIViewController {
                                 bytesPerRow: 0, //CGImageGetBitsPerComponent(source),
                                 space: rgbColorSpace!,
                                 bitmapInfo: bitmapInfo.rawValue //CGImageGetColorSpace(source),
-            )
+        )
         context!.interpolationQuality = quality
         context?.translateBy(x: size.width / 2, y: size.height / 2)
         context?.rotate(by: rotation)
@@ -189,7 +191,7 @@ class IGRPhotoTweakViewController: UIViewController {
     func newTransformedImage(_ transform: CGAffineTransform, sourceImage: CGImage, sourceSize: CGSize, sourceOrientation: UIImageOrientation, outputWidth: CGFloat, cropSize: CGSize, imageViewSize: CGSize) -> CGImage {
         let source: CGImage = self.newScaledImage(sourceImage, with: sourceOrientation, to: sourceSize, with: .none)
         let aspect: CGFloat = cropSize.height / cropSize.width
-        let outputSize = CGSize(width: outputWidth, height: CGFloat(outputWidth * aspect))
+        let outputSize = CGSize(width: outputWidth, height: (outputWidth * aspect))
         let context = CGContext(data: nil,
                                 width: Int(outputSize.width),
                                 height: Int(outputSize.height),
@@ -198,7 +200,7 @@ class IGRPhotoTweakViewController: UIViewController {
                                 space: source.colorSpace!,
                                 bitmapInfo: source.bitmapInfo.rawValue)
         context?.setFillColor(UIColor.clear.cgColor)
-        context?.fill(CGRect(x: CGFloat(0), y: CGFloat(0), width: CGFloat(outputSize.width), height: CGFloat(outputSize.height)))
+        context?.fill(CGRect(x: 0.0, y: 0.0, width: (outputSize.width), height: (outputSize.height)))
         var uiCoords = CGAffineTransform(scaleX: outputSize.width / cropSize.width, y: outputSize.height / cropSize.height)
         uiCoords = uiCoords.translatedBy(x: cropSize.width / 2.0, y: cropSize.height / 2.0)
         uiCoords = uiCoords.scaledBy(x: 1.0, y: -1.0)

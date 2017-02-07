@@ -80,22 +80,26 @@ class IGRCropView: UIView {
         self.isGridLinesDismissed = true
         
         self.upperLeft = IGRCropCornerView(cornerType: .upperLeft)
-        self.upperLeft.center = CGPoint(x: CGFloat(kCropViewCornerLength / 2), y: CGFloat(kCropViewCornerLength / 2))
+        self.upperLeft.center = CGPoint(x: (kCropViewCornerLength / 2.0),
+                                        y: (kCropViewCornerLength / 2.0))
         self.upperLeft.autoresizingMask = []
         self.addSubview(self.upperLeft)
         
         self.upperRight = IGRCropCornerView(cornerType: .upperRight)
-        self.upperRight.center = CGPoint(x: CGFloat(self.frame.size.width - kCropViewCornerLength / 2), y: CGFloat(kCropViewCornerLength / 2))
+        self.upperRight.center = CGPoint(x: (self.frame.size.width - kCropViewCornerLength / 2.0),
+                                         y: (kCropViewCornerLength / 2.0))
         self.upperRight.autoresizingMask = .flexibleLeftMargin
         self.addSubview(self.upperRight)
         
         self.lowerRight = IGRCropCornerView(cornerType: .lowerRight)
-        self.lowerRight.center = CGPoint(x: CGFloat(self.frame.size.width - kCropViewCornerLength / 2), y: CGFloat(self.frame.size.height - kCropViewCornerLength / 2))
+        self.lowerRight.center = CGPoint(x: (self.frame.size.width - kCropViewCornerLength / 2.0),
+                                         y: (self.frame.size.height - kCropViewCornerLength / 2.0))
         self.lowerRight.autoresizingMask = [.flexibleTopMargin, .flexibleLeftMargin]
         self.addSubview(self.lowerRight)
         
         self.lowerLeft = IGRCropCornerView(cornerType: .lowerLeft)
-        self.lowerLeft.center = CGPoint(x: CGFloat(kCropViewCornerLength / 2), y: CGFloat(self.frame.size.height - kCropViewCornerLength / 2))
+        self.lowerLeft.center = CGPoint(x: (kCropViewCornerLength / 2.0),
+                                        y: (self.frame.size.height - kCropViewCornerLength / 2.0))
         self.lowerLeft.autoresizingMask = .flexibleTopMargin
         self.addSubview(self.lowerLeft)
     }
@@ -110,10 +114,10 @@ class IGRCropView: UIView {
         if touches.count == 1 {
             let location: CGPoint = (touches.first?.location(in: self))!
             var frame: CGRect = self.frame
-            let p0 = CGPoint(x: CGFloat(0), y: CGFloat(0))
-            let p1 = CGPoint(x: CGFloat(self.frame.size.width), y: CGFloat(0))
-            let p2 = CGPoint(x: CGFloat(0), y: CGFloat(self.frame.size.height))
-            let p3 = CGPoint(x: CGFloat(self.frame.size.width), y: CGFloat(self.frame.size.height))
+            let p0 = CGPoint(x: 0.0, y: 0.0)
+            let p1 = CGPoint(x: self.frame.size.width, y: 0.0)
+            let p2 = CGPoint(x: 0.0, y: self.frame.size.height)
+            let p3 = CGPoint(x: self.frame.size.width, y: self.frame.size.height)
             let canChangeWidth: Bool = frame.size.width > kMinimumCropArea
             let canChangeHeight: Bool = frame.size.height > kMinimumCropArea
             if IGRCropView.distanceBetweenPoints(point0: location, point1: p0) < kCropViewHotArea {
@@ -231,7 +235,7 @@ class IGRCropView: UIView {
                 line.frame = CGRect(x: 0.0,
                                     y: (self.frame.size.height / CGFloat(count + 1)) * CGFloat(idx + 1),
                                     width: self.frame.size.width,
-                                    height: CGFloat(1.0 / UIScreen.main.scale))
+                                    height: (1.0 / UIScreen.main.scale))
             }
             else {
                 line.frame = CGRect(x: (self.frame.size.width / CGFloat(count + 1)) * CGFloat(idx + 1),
