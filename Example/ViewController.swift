@@ -51,8 +51,6 @@ class ViewController: UIViewController {
             let exampleCropViewController = segue.destination as! ExampleCropViewController
             exampleCropViewController.image = sender as! UIImage
             exampleCropViewController.delegate = self;
-            exampleCropViewController.isAutoSaveToLibray = false;
-            exampleCropViewController.maxRotationAngle = CGFloat(M_PI_4);
         }
     }
     

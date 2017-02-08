@@ -25,6 +25,9 @@ class IGRPhotoTweakView: UIView {
     
     open weak var customizationDelegate: IGRPhotoTweakViewCustomizationDelegate?
     
+    var isHighlightMask: Bool = false
+    var highlightMaskAlphaValue: CGFloat = 0.5
+    
     private(set) var angle:                 CGFloat = 0.0
     private(set) var photoContentOffset =   CGPoint.zero
     private(set) var cropView:              IGRCropView!
@@ -79,6 +82,7 @@ class IGRPhotoTweakView: UIView {
         self.centerY = self.maximumCanvasSize.height / 2.0 + kCanvasHeaderHeigth
         
         self.scrollView = IGRPhotoScrollView(frame: bounds)
+        self.scrollView.updateDelegate = self
         self.scrollView.center = CGPoint(x: (self.frame.width / 2.0), y: self.centerY)
         self.scrollView.bounces = true
         self.scrollView.layer.anchorPoint = CGPoint(x: 0.5, y: 0.5)
@@ -183,6 +187,26 @@ class IGRPhotoTweakView: UIView {
         }
     }
     
+    fileprivate func highlightMask(_ highlight:Bool, animate: Bool) {
+        if isHighlightMask {
+            let newAlphaValue: CGFloat = highlight ? highlightMaskAlphaValue : 1.0
+            
+            let animationBlock: ((_: Void) -> Void)? = {(_: Void) -> Void in
+                self.topMask.alpha = newAlphaValue
+                self.leftMask.alpha = newAlphaValue
+                self.bottomMask.alpha = newAlphaValue
+                self.rightMask.alpha = newAlphaValue
+            }
+            
+            if animate {
+                UIView.animate(withDuration: 0.25, animations: animationBlock!)
+            }
+            else {
+                animationBlock!()
+            }
+        }
+    }
+    
     fileprivate func checkScrollViewContentOffset() {
         self.scrollView.setContentOffsetX(max(self.scrollView.contentOffset.x, 0))
         self.scrollView.setContentOffsetY(max(self.scrollView.contentOffset.y, 0))
@@ -232,6 +256,10 @@ class IGRPhotoTweakView: UIView {
         self.checkScrollViewContentOffset()
     }
     
+    open func stopChangeAngel() {
+        self.cropView.dismissGridLines()
+    }
+    
     open func resetView() {
         UIView.animate(withDuration: 0.25, animations: {() -> Void in
             self.angle = 0
@@ -247,7 +275,6 @@ class IGRPhotoTweakView: UIView {
             self.cropView.frame = self.scrollView.frame
             self.cropView.center = self.scrollView.center
             self.updateMasks(false)
-            //self.slider.setValue(0, animated: true)
         })
     }
 }
@@ -257,14 +284,37 @@ extension IGRPhotoTweakView : UIScrollViewDelegate {
         return self.photoContentView
     }
     
+    func scrollViewWillBeginZooming(_ scrollView: UIScrollView, with view: UIView?) {
+        self.cropView.updateCropLines(true)
+    }
+    
     func scrollViewDidEndZooming(_ scrollView: UIScrollView, with view: UIView?, atScale scale: CGFloat) {
         self.manualZoomed = true
+        self.cropView.dismissCropLines()
+    }
+}
+
+extension IGRPhotoTweakView : IGRPhotoScrollViewDelegate {
+    func scrollViewDidStartUpdateScrollContentOffset(_ scrollView: UIScrollView) {
+        self.highlightMask(true, animate: true)
+    }
+    
+    func scrollViewDidStopScrollUpdateContentOffset(_ scrollView: UIScrollView) {
+        self.highlightMask(false, animate: true)
     }
 }
 
 extension IGRPhotoTweakView : IGRCropViewDelegate {
     
-    func cropEnded(_ cropView: IGRCropView) {
+    func cropViewDidStartCrop(_ cropView: IGRCropView) {
+        self.highlightMask(true, animate: true)
+    }
+    
+    func cropViewDidMove(_ cropView: IGRCropView) {
+        self.updateMasks(false)
+    }
+    
+    func cropViewDidStopCrop(_ cropView: IGRCropView) {
         let scaleX: CGFloat = self.originalSize.width / cropView.bounds.size.width
         let scaleY: CGFloat = self.originalSize.height / cropView.bounds.size.height
         let scale: CGFloat = min(scaleX, scaleY)
@@ -313,6 +363,7 @@ extension IGRPhotoTweakView : IGRCropViewDelegate {
         // update masks
         self.updateMasks(true)
         self.cropView.dismissCropLines()
+        self.cropView.dismissGridLines()
         let scaleH: CGFloat = self.scrollView.bounds.size.height / self.scrollView.contentSize.height
         let scaleW: CGFloat = self.scrollView.bounds.size.width / self.scrollView.contentSize.width
         var scaleM: CGFloat = max(scaleH, scaleW)
@@ -326,9 +377,7 @@ extension IGRPhotoTweakView : IGRCropViewDelegate {
                 self.checkScrollViewContentOffset()
             })
         })
-    }
-    
-    func cropMoved(_ cropView: IGRCropView) {
-        self.updateMasks(false)
+        
+        self.highlightMask(false, animate: true)
     }
 }

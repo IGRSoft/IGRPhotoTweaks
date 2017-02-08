@@ -15,6 +15,7 @@
 		A51E64F11E4A2EA700CD5872 /* IGRCropGridLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51E64F01E4A2EA700CD5872 /* IGRCropGridLine.swift */; };
 		A51E64F31E4A308D00CD5872 /* IGRCropCornerLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51E64F21E4A308D00CD5872 /* IGRCropCornerLine.swift */; };
 		A51E64F51E4A316A00CD5872 /* IGRCropMaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51E64F41E4A316A00CD5872 /* IGRCropMaskView.swift */; };
+		A51E64FA1E4AD94E00CD5872 /* IGRRadianAngle.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51E64F91E4AD94E00CD5872 /* IGRRadianAngle.swift */; };
 		A58EC9D01E49C8FE0002AD70 /* ExampleCropViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58EC9CF1E49C8FE0002AD70 /* ExampleCropViewController.swift */; };
 		A5DFB1D31E481FE4009ACD31 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5DFB1C81E481FE4009ACD31 /* AppDelegate.swift */; };
 		A5DFB1D41E481FE4009ACD31 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5DFB1C91E481FE4009ACD31 /* ViewController.swift */; };
@@ -36,6 +37,7 @@
 		A51E64F01E4A2EA700CD5872 /* IGRCropGridLine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGRCropGridLine.swift; sourceTree = "<group>"; };
 		A51E64F21E4A308D00CD5872 /* IGRCropCornerLine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGRCropCornerLine.swift; sourceTree = "<group>"; };
 		A51E64F41E4A316A00CD5872 /* IGRCropMaskView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGRCropMaskView.swift; sourceTree = "<group>"; };
+		A51E64F91E4AD94E00CD5872 /* IGRRadianAngle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGRRadianAngle.swift; sourceTree = "<group>"; };
 		A58EC9CF1E49C8FE0002AD70 /* ExampleCropViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleCropViewController.swift; sourceTree = "<group>"; };
 		A5DFB1B21E481F48009ACD31 /* IGRPhotoTweaks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IGRPhotoTweaks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5DFB1C81E481FE4009ACD31 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -121,6 +123,7 @@
 				A5DFB1DB1E4822B7009ACD31 /* IGRPhotoTweakView.swift */,
 				A5DFB1E31E482801009ACD31 /* IGRPhotoTweakConstants.swift */,
 				A5DFB1D91E482216009ACD31 /* UIColor+Tweak.swift */,
+				A51E64F91E4AD94E00CD5872 /* IGRRadianAngle.swift */,
 			);
 			path = IGRPhotoTweaks;
 			sourceTree = "<group>";
@@ -239,6 +242,7 @@
 				A5DFB1DC1E4822B7009ACD31 /* IGRPhotoTweakView.swift in Sources */,
 				A5DFB1E81E483D35009ACD31 /* IGRPhotoTweakViewController.swift in Sources */,
 				A51E64ED1E4A2DFF00CD5872 /* IGRPhotoScrollView.swift in Sources */,
+				A51E64FA1E4AD94E00CD5872 /* IGRRadianAngle.swift in Sources */,
 				A5DFB1E41E482801009ACD31 /* IGRPhotoTweakConstants.swift in Sources */,
 				A5DFB1DA1E482216009ACD31 /* UIColor+Tweak.swift in Sources */,
 				A58EC9D01E49C8FE0002AD70 /* ExampleCropViewController.swift in Sources */,

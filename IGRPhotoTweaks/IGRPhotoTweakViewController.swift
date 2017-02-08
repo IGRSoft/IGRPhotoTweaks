@@ -29,23 +29,24 @@ class IGRPhotoTweakViewController: UIViewController {
      */
     open var image: UIImage!
     /**
-     Slider to change angel.
-     */
-    @IBOutlet weak fileprivate var angelSlider: UISlider?
-    /**
      Flag indicating whether the image cropped will be saved to photo library automatically. Defaults to YES.
      */
-    var isAutoSaveToLibray: Bool = false
+    internal var isAutoSaveToLibray: Bool = false
     /**
      Max rotation angle
      */
-    var maxRotationAngle: CGFloat = kMaxRotationAngle
+    internal var maxRotationAngle: CGFloat = kMaxRotationAngle
     /**
      The optional photo tweaks controller delegate.
      */
     open weak var delegate: IGRPhotoTweakViewControllerDelegate?
     
-    internal var photoView: IGRPhotoTweakView!;
+    fileprivate var photoView: IGRPhotoTweakView!;
+    
+    fileprivate let kBitsPerComponent = 8
+    fileprivate let kBitmapBytesPerRow = 0
+    
+    // MARK: - Life Cicle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,8 +54,8 @@ class IGRPhotoTweakViewController: UIViewController {
         self.navigationController?.isNavigationBarHidden = true
         self.automaticallyAdjustsScrollViewInsets = false
         self.view.clipsToBounds = true
+        
         self.setupSubviews()
-        self.setupSlider()
     }
 
     override func didReceiveMemoryWarning() {
@@ -71,19 +72,25 @@ class IGRPhotoTweakViewController: UIViewController {
         self.view.sendSubview(toBack: self.photoView)
     }
     
-    fileprivate func setupSlider() {
-        self.angelSlider?.minimumValue = -(Float)(self.maxRotationAngle)
-        self.angelSlider?.maximumValue = Float(self.maxRotationAngle)
-        self.angelSlider?.value = 0.0
-    }
-
-    // MARK: - Button Actions
+    // MARK: - Public
     
-    @IBAction func onTouchCancelButton(_ sender: UIButton) {
+    open func changedAngel(value: CGFloat) {
+        self.photoView.changedAngel(value: value)
+    }
+    
+    open func stopChangeAngel() {
+        self.photoView.stopChangeAngel()
+    }
+    
+    open func resetView() {
+        self.photoView.resetView()
+    }
+    
+    open func dismissAction() {
         self.delegate?.photoTweaksControllerDidCancel(self)
     }
     
-    @IBAction func onTouchCropButton(_ sender: UIButton) {
+    open func cropAction() {
         var transform = CGAffineTransform.identity
         // translate
         let translation: CGPoint = self.photoView.photoTranslation
@@ -99,37 +106,44 @@ class IGRPhotoTweakViewController: UIViewController {
         let image = UIImage(cgImage: imageRef)
         if self.isAutoSaveToLibray {
             
-            func writePhotoToLibrary() {
+            let writePhotoToLibraryBlock: ((_: Void) -> Void)? = {(_: Void) -> Void in
                 UIImageWriteToSavedPhotosAlbum(image, self, #selector(self.image(image:didFinishSavingWithError:contextInfo:)), nil)
             }
             
             if PHPhotoLibrary.authorizationStatus() == PHAuthorizationStatus.authorized {
-                writePhotoToLibrary()
+                writePhotoToLibraryBlock!()
             }
             else {
                 PHPhotoLibrary.requestAuthorization({ (status: PHAuthorizationStatus) in
                     if status == PHAuthorizationStatus.authorized {
                         DispatchQueue.main.async{
-                            writePhotoToLibrary()
+                            writePhotoToLibraryBlock!()
                         }
                     }
                     else {
                         DispatchQueue.main.async{
-                            //Add Alert
+                            let ac = UIAlertController(title: "Authorization error", message: "App don't granted to access to Photo Library", preferredStyle: .alert)
+                            ac.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                            ac.addAction(UIAlertAction(title: "Settings", style: .default, handler: { (action) in
+                                guard let settingsUrl = URL(string: UIApplicationOpenSettingsURLString) else {
+                                    return
+                                }
+                                
+                                if UIApplication.shared.canOpenURL(settingsUrl) {
+                                    if #available(iOS 10.0, *) {
+                                        UIApplication.shared.open(settingsUrl)
+                                    } else {
+                                        UIApplication.shared.openURL(settingsUrl)
+                                    }
+                                }
+                            }))
+                            self.present(ac, animated: true, completion: nil)
                         }
                     }
                 })
             }
         }
         self.delegate?.photoTweaksController(self, didFinishWithCroppedImage: image)
-    }
-    
-    @IBAction func onTouchResetButton(_ sender: UIButton) {
-        self.photoView.resetView()
-    }
-    
-    @IBAction func onChandeAngelSliderValue(_ sender: UISlider) {
-        self.photoView.changedAngel(value: CGFloat(sender.value))
     }
     
     // MARK: - Image Processor
@@ -157,16 +171,16 @@ class IGRPhotoTweakViewController: UIViewController {
         if #available(iOS 10.0, *) {
             bitmapInfo = CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedLast.rawValue | CGImageByteOrderInfo.order32Big.rawValue)
         } else {
-            bitmapInfo = CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedLast.rawValue | 4)
+            bitmapInfo = CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedLast.rawValue | (4 << 12))
         }
         
         let context = CGContext(data: nil,
                                 width: Int(size.width),
                                 height: Int(size.height),
-                                bitsPerComponent: 8,
-                                bytesPerRow: 0, //CGImageGetBitsPerComponent(source),
+                                bitsPerComponent: kBitsPerComponent,
+                                bytesPerRow: kBitmapBytesPerRow,
                                 space: rgbColorSpace!,
-                                bitmapInfo: bitmapInfo.rawValue //CGImageGetColorSpace(source),
+                                bitmapInfo: bitmapInfo.rawValue
         )
         context!.interpolationQuality = quality
         context?.translateBy(x: size.width / 2, y: size.height / 2)
@@ -188,7 +202,7 @@ class IGRPhotoTweakViewController: UIViewController {
                                 width: Int(outputSize.width),
                                 height: Int(outputSize.height),
                                 bitsPerComponent: source.bitsPerComponent,
-                                bytesPerRow: 0,
+                                bytesPerRow: kBitmapBytesPerRow,
                                 space: source.colorSpace!,
                                 bitmapInfo: source.bitmapInfo.rawValue)
         context?.setFillColor(UIColor.clear.cgColor)
@@ -209,7 +223,7 @@ class IGRPhotoTweakViewController: UIViewController {
         return resultRef
     }
     
-    @objc fileprivate func image(image: UIImage, didFinishSavingWithError error: NSError?, contextInfo:UnsafeRawPointer) {
+    internal func image(image: UIImage, didFinishSavingWithError error: NSError?, contextInfo:UnsafeRawPointer) {
         if error == nil {
             let ac = UIAlertController(title: "Save error", message: error?.localizedDescription, preferredStyle: .alert)
             ac.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))

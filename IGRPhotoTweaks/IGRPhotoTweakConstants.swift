@@ -15,7 +15,7 @@ enum CropCornerType : Int {
     case lowerLeft
 }
 
-let kMaxRotationAngle: CGFloat = 0.5
+let kMaxRotationAngle: CGFloat = CGFloat(M_PI_4)
 
 let kCropLines: Int = 2
 let kGridLines: Int = 9

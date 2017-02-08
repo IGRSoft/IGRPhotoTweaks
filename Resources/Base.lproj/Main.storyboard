@@ -5,6 +5,7 @@
     </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -77,11 +78,22 @@
                                 </items>
                             </toolbar>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="XeR-6H-PO5">
-                                <rect key="frame" x="14" y="64" width="347" height="31"/>
+                                <rect key="frame" x="14" y="64" width="278" height="31"/>
                                 <connections>
                                     <action selector="onChandeAngelSliderValue:" destination="see-Yh-xp4" eventType="valueChanged" id="Dtf-nD-XQd"/>
+                                    <action selector="onEndTouchAngelControl:" destination="see-Yh-xp4" eventType="touchUpInside" id="kdm-DL-JSP"/>
                                 </connections>
                             </slider>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="igC-xc-RTc">
+                                <rect key="frame" x="298" y="73" width="61" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="3rm-dW-ywc"/>
+                                    <constraint firstAttribute="width" constant="61" id="nel-D8-EVZ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -89,11 +101,14 @@
                             <constraint firstItem="e2f-wR-VPn" firstAttribute="leading" secondItem="GJu-Ct-elw" secondAttribute="leading" id="ElF-98-SAp"/>
                             <constraint firstItem="XeR-6H-PO5" firstAttribute="top" secondItem="onE-Ll-fgh" secondAttribute="bottom" id="OgS-DL-2kM"/>
                             <constraint firstAttribute="trailing" secondItem="e2f-wR-VPn" secondAttribute="trailing" id="XJ4-7e-wkc"/>
+                            <constraint firstItem="igC-xc-RTc" firstAttribute="trailing" secondItem="GJu-Ct-elw" secondAttribute="trailingMargin" id="YVK-rw-10K"/>
                             <constraint firstItem="XeR-6H-PO5" firstAttribute="leading" secondItem="GJu-Ct-elw" secondAttribute="leading" constant="16" id="ewC-Is-R1Q"/>
-                            <constraint firstAttribute="trailing" secondItem="XeR-6H-PO5" secondAttribute="trailing" constant="16" id="v0h-jA-L2D"/>
+                            <constraint firstItem="igC-xc-RTc" firstAttribute="leading" secondItem="XeR-6H-PO5" secondAttribute="trailing" constant="8" id="qTF-UG-5Ba"/>
+                            <constraint firstItem="igC-xc-RTc" firstAttribute="top" secondItem="onE-Ll-fgh" secondAttribute="bottom" constant="9" id="tdp-BQ-Y9H"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="angelLabel" destination="igC-xc-RTc" id="8vB-2O-5yT"/>
                         <outlet property="angelSlider" destination="XeR-6H-PO5" id="7Pw-5n-1Ke"/>
                     </connections>
                 </viewController>

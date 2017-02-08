@@ -9,9 +9,12 @@
 import UIKit
 
 protocol IGRCropViewDelegate: NSObjectProtocol {
-    func cropEnded(_ cropView: IGRCropView)
     
-    func cropMoved(_ cropView: IGRCropView)
+    func cropViewDidStartCrop(_ cropView: IGRCropView)
+    
+    func cropViewDidMove(_ cropView: IGRCropView)
+    
+    func cropViewDidStopCrop(_ cropView: IGRCropView)
 }
 
 class IGRCropView: UIView {
@@ -112,6 +115,8 @@ class IGRCropView: UIView {
         if touches.count == 1 {
             self.updateCropLines(false)
         }
+        
+        self.delegate?.cropViewDidStartCrop(self)
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -187,18 +192,19 @@ class IGRCropView: UIView {
             // update crop lines
             self.updateCropLines(false)
             
-            self.delegate?.cropMoved(self)
+            self.delegate?.cropViewDidMove(self)
         }
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.delegate?.cropEnded(self)
+        self.delegate?.cropViewDidStopCrop(self)
     }
     
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.delegate?.cropViewDidStopCrop(self)
     }
     
-    fileprivate func updateCropLines(_ animate: Bool) {
+    func updateCropLines(_ animate: Bool) {
         // show crop lines
         if self.isCropLinesDismissed {
             self.showCropLines()
@@ -232,7 +238,7 @@ class IGRCropView: UIView {
         }
     }
     
-    func update(_ lines: [UIView], horizontal: Bool) {
+    fileprivate func update(_ lines: [UIView], horizontal: Bool) {
         let count = lines.count
         for (idx, line) in lines.enumerated() {
             if horizontal {
@@ -268,13 +274,13 @@ class IGRCropView: UIView {
         })
     }
     
-    func dismiss(_ lines: [UIView]) {
+    fileprivate func dismiss(_ lines: [UIView]) {
         for (_, line) in lines.enumerated() {
             line.alpha = 0.0
         }
     }
     
-    func showCropLines() {
+    fileprivate func showCropLines() {
         self.isCropLinesDismissed = false
         UIView.animate(withDuration: 0.2, animations: {() -> Void in
             self.show(self.horizontalCropLines)
@@ -282,7 +288,7 @@ class IGRCropView: UIView {
         })
     }
     
-    func showGridLines() {
+    fileprivate func showGridLines() {
         self.isGridLinesDismissed = false
         UIView.animate(withDuration: 0.2, animations: {() -> Void in
             self.show(self.horizontalGridLines)
@@ -290,7 +296,7 @@ class IGRCropView: UIView {
         })
     }
     
-    func show(_ lines: [UIView]) {
+    fileprivate func show(_ lines: [UIView]) {
         for (_, line) in lines.enumerated() {
             line.alpha = 1.0
         }
