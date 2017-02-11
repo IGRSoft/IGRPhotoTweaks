@@ -1,12 +1,10 @@
-language: swift
+language: objective-c
 osx_image: xcode8
 sudo: false
 env:
   global:
   - LANG=en_US.UTF-8
   - LANGUAGE=en_US.UTF-8
-before_install:
-  - pod install
 script: 
   - set -o pipefail
   - xcodebuild -project IGRPhotoTweaks.xcodeproj -target IGRPhotoTweaks -sdk iphonesimulator
