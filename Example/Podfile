@@ -8,3 +8,6 @@ pod 'IGRPhotoTweaks', :path => '../'
 
 target 'Example' do
 end
+
+target 'ExampleObjC' do
+end

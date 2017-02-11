@@ -22,7 +22,7 @@ import Photos
     func photoTweaksControllerDidCancel(_ controller: IGRPhotoTweakViewController)
 }
 
-@objc open class IGRPhotoTweakViewController: UIViewController {
+@objc(IGRPhotoTweakViewController) open class IGRPhotoTweakViewController: UIViewController {
     
     /**
      Image to process.

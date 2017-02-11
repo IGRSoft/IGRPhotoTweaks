@@ -51,7 +51,7 @@ class ExampleCropViewController: IGRPhotoTweakViewController {
         self.angelSlider?.maximumValue = Float(IGRRadianAngle.toRadians(45))
         self.angelSlider?.value = 0.0
         
-        setupAngelLabelValue(radians: 0.0)
+        setupAngelLabelValue(radians: CGFloat((self.angelSlider?.value)!))
     }
     
     fileprivate func setupAngelLabelValue(radians: CGFloat) {
