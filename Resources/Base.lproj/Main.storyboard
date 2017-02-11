@@ -69,6 +69,11 @@
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="cdp-Xf-JeJ"/>
+                                    <barButtonItem title="Aspect" id="Quq-4i-OXN">
+                                        <connections>
+                                            <action selector="onTouchAspectButton:" destination="see-Yh-xp4" id="Zkv-uz-xAm"/>
+                                        </connections>
+                                    </barButtonItem>
                                     <barButtonItem title="Crop" id="Ly7-tz-9Ph">
                                         <color key="tintColor" red="1" green="0.59999999999999998" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>

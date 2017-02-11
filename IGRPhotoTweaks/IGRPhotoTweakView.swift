@@ -277,6 +277,27 @@ class IGRPhotoTweakView: UIView {
             self.updateMasks(false)
         })
     }
+    
+    open func resetAspectRect() {
+        self.cropView.frame = CGRect(x: 0.0,
+                                     y: 0.0,
+                                     width: self.originalSize.width,
+                                     height: self.originalSize.height)
+        self.cropView.center = self.scrollView.center
+        
+        self.cropViewDidStopCrop(self.cropView)
+        
+        self.updateMasks(false)
+    }
+    
+    open func setCropAspectRect(aspect: String) {
+        self.cropView.setCropAspectRect(aspect: aspect, maxSize:self.originalSize)
+        self.cropView.center = self.scrollView.center
+        
+        self.cropViewDidStopCrop(self.cropView)
+        
+        self.updateMasks(false)
+    }
 }
 
 extension IGRPhotoTweakView : UIScrollViewDelegate {

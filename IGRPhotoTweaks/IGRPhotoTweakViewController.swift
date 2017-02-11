@@ -32,10 +32,7 @@ class IGRPhotoTweakViewController: UIViewController {
      Flag indicating whether the image cropped will be saved to photo library automatically. Defaults to YES.
      */
     internal var isAutoSaveToLibray: Bool = false
-    /**
-     Max rotation angle
-     */
-    internal var maxRotationAngle: CGFloat = kMaxRotationAngle
+
     /**
      The optional photo tweaks controller delegate.
      */
@@ -144,6 +141,14 @@ class IGRPhotoTweakViewController: UIViewController {
             }
         }
         self.delegate?.photoTweaksController(self, didFinishWithCroppedImage: image)
+    }
+    
+    open func resetAspectRect() {
+        self.photoView.resetAspectRect()
+    }
+    
+    open func setCropAspectRect(aspect: String) {
+        self.photoView.setCropAspectRect(aspect: aspect)
     }
     
     // MARK: - Image Processor

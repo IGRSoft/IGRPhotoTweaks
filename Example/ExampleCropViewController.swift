@@ -45,16 +45,16 @@ class ExampleCropViewController: IGRPhotoTweakViewController {
     }
     
     fileprivate func setupSlider() {
-        self.angelSlider?.minimumValue = -(Float)(self.maxRotationAngle)
-        self.angelSlider?.maximumValue = Float(self.maxRotationAngle)
+        self.angelSlider?.minimumValue = -Float(IGRRadianAngle.toRadians(45))
+        self.angelSlider?.maximumValue = Float(IGRRadianAngle.toRadians(45))
         self.angelSlider?.value = 0.0
         
         setupAngelLabelValue(radians: 0.0)
     }
     
     fileprivate func setupAngelLabelValue(radians: CGFloat) {
-        let intRadians: Int = Int(IGRRadianAngle.toDegrees(radians))
-        self.angelLabel?.text = "\(intRadians)°"
+        let intDegrees: Int = Int(IGRRadianAngle.toDegrees(radians))
+        self.angelLabel?.text = "\(intDegrees)°"
     }
     
     // MARK: - Actions
@@ -91,6 +91,45 @@ class ExampleCropViewController: IGRPhotoTweakViewController {
         cropAction()
     }
     
+    
+    @IBAction func onTouchAspectButton(_ sender: UIButton) {
+        let actionSheet = UIAlertController(title: nil,
+                                            message: nil,
+                                            preferredStyle: .actionSheet)
+        
+        
+        actionSheet.addAction(UIAlertAction(title: "Original", style: .default) { (action) in
+            self.resetAspectRect()
+        })
+        
+        actionSheet.addAction(UIAlertAction(title: "Squere", style: .default) { (action) in
+            self.setCropAspectRect(aspect: "1:1")
+        })
+        
+        actionSheet.addAction(UIAlertAction(title: "2:3", style: .default) { (action) in
+            self.setCropAspectRect(aspect: "2:3")
+        })
+        
+        actionSheet.addAction(UIAlertAction(title: "3:5", style: .default) { (action) in
+            self.setCropAspectRect(aspect: "3:5")
+        })
+        
+        actionSheet.addAction(UIAlertAction(title: "3:4", style: .default) { (action) in
+            self.setCropAspectRect(aspect: "3:4")
+        })
+        
+        actionSheet.addAction(UIAlertAction(title: "5:7", style: .default) { (action) in
+            self.setCropAspectRect(aspect: "5:7")
+        })
+        
+        actionSheet.addAction(UIAlertAction(title: "9:16", style: .default) { (action) in
+            self.setCropAspectRect(aspect: "9:16")
+        })
+        
+        actionSheet.addAction(UIAlertAction(title: "9:16", style: .cancel))
+        
+        present(actionSheet, animated: true, completion: nil)
+    }
     
     //FIXME: Themes Preview
 //    override func borderColor() -> UIColor {

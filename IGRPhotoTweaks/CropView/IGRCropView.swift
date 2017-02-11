@@ -238,6 +238,27 @@ class IGRCropView: UIView {
         }
     }
     
+    open func setCropAspectRect(aspect: String, maxSize: CGSize) {
+        let elements = aspect.components(separatedBy: ":");
+        let width: CGFloat = CGFloat(Float(elements.first!)!)
+        let height: CGFloat = CGFloat(Float(elements.last!)!)
+        
+        var size = maxSize
+        let mW = size.width / width
+        let mH = size.height / height
+        if (mH < mW) {
+            size.width = size.height / height * width
+        }
+        else if(mW < mH) {
+            size.height = size.width / width * height
+        }
+        
+        let x = (self.frame.size.width - size.width) / 2.0
+        let y = (self.frame.size.height - size.height) / 2.0
+        
+        self.frame = CGRect(x:x, y:y, width: size.width, height: size.height)
+    }
+    
     fileprivate func update(_ lines: [UIView], horizontal: Bool) {
         let count = lines.count
         for (idx, line) in lines.enumerated() {
