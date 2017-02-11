@@ -2,7 +2,7 @@
 
 IGRPhotoTweaks is an interface to crop photos, based on PhotoTweaks. It can let user drag, rotate, scale the image, and crop it. You will find it mimics the interaction of Photos.app on iOS 9. :]
 
-[![Build Status](https://travis-ci.org/IGRSoft/PhotoTweaks.svg)](https://travis-ci.org/IGRSoft/IGRPhotoTweaks)
+[![Build Status](https://travis-ci.org/IGRSoft/IGRPhotoTweaks.svg)](https://travis-ci.org/IGRSoft/IGRPhotoTweaks)
 [![Pod Version](http://img.shields.io/cocoapods/v/IGRPhotoTweaks.svg?style=flat)](http://cocoapods.org/?q=IGRPhotoTweaks)
 [![Platform](http://img.shields.io/cocoapods/p/IGRPhotoTweaks.svg?style=flat)](http://cocoapods.org/?q=IGRPhotoTweaks)
 [![License](http://img.shields.io/cocoapods/l/IGRPhotoTweaks.svg?style=flat)](https://github.com/IGRSoft/IGRPhotoTweaks/blob/master/LICENSE)
