@@ -19,8 +19,8 @@ override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if segue.identifier == "showCrop" {
 
         let yourCropViewController = segue.destination as! YourPhotoTweaksViewController
-        yourCropViewController = sender as! UIImage
-        yourCropViewController = self;
+        yourCropViewController.image = sender as! UIImage
+        yourCropViewController.delegate = self;
     }
 }
 ```
@@ -87,6 +87,10 @@ override func cornerBorderLength() -> CGFloat {
 }
 
 ```
+
+## Example
+IGRPhotoTweaks.xcodeproj -> IGRPhotoTweaks target
+/Example
 
 ## Installation
 IGRPhotoTweaks is available on [CocoaPods](http://cocoapods.org). Add the follwing to your Podfile:
