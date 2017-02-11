@@ -9,7 +9,7 @@
 import UIKit
 import Photos
 
-protocol IGRPhotoTweakViewControllerDelegate: NSObjectProtocol {
+@objc public protocol IGRPhotoTweakViewControllerDelegate: NSObjectProtocol {
     
     /**
      Called on image cropped.
@@ -22,7 +22,7 @@ protocol IGRPhotoTweakViewControllerDelegate: NSObjectProtocol {
     func photoTweaksControllerDidCancel(_ controller: IGRPhotoTweakViewController)
 }
 
-class IGRPhotoTweakViewController: UIViewController {
+@objc open class IGRPhotoTweakViewController: UIViewController {
     
     /**
      Image to process.
@@ -45,7 +45,7 @@ class IGRPhotoTweakViewController: UIViewController {
     
     // MARK: - Life Cicle
     
-    override func viewDidLoad() {
+    override open func viewDidLoad() {
         super.viewDidLoad()
 
         self.navigationController?.isNavigationBarHidden = true
@@ -55,7 +55,7 @@ class IGRPhotoTweakViewController: UIViewController {
         self.setupSubviews()
     }
 
-    override func didReceiveMemoryWarning() {
+    override open func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }

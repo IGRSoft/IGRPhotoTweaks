@@ -6,6 +6,8 @@
 //  Copyright © 2017 IGR Software. All rights reserved.
 //
 
+import IGRPhotoTweaks
+
 import UIKit
 
 class ExampleCropViewController: IGRPhotoTweakViewController {

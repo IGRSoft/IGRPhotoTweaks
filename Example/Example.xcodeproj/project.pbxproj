@@ -7,51 +7,27 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A51E64EA1E4A2DFF00CD5872 /* IGRCropCornerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51E64E51E4A2DFF00CD5872 /* IGRCropCornerView.swift */; };
-		A51E64EB1E4A2DFF00CD5872 /* IGRCropView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51E64E61E4A2DFF00CD5872 /* IGRCropView.swift */; };
-		A51E64EC1E4A2DFF00CD5872 /* IGRPhotoContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51E64E71E4A2DFF00CD5872 /* IGRPhotoContentView.swift */; };
-		A51E64ED1E4A2DFF00CD5872 /* IGRPhotoScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51E64E91E4A2DFF00CD5872 /* IGRPhotoScrollView.swift */; };
-		A51E64EF1E4A2E3900CD5872 /* IGRCropLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51E64EE1E4A2E3900CD5872 /* IGRCropLine.swift */; };
-		A51E64F11E4A2EA700CD5872 /* IGRCropGridLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51E64F01E4A2EA700CD5872 /* IGRCropGridLine.swift */; };
-		A51E64F31E4A308D00CD5872 /* IGRCropCornerLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51E64F21E4A308D00CD5872 /* IGRCropCornerLine.swift */; };
-		A51E64F51E4A316A00CD5872 /* IGRCropMaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51E64F41E4A316A00CD5872 /* IGRCropMaskView.swift */; };
-		A51E64FA1E4AD94E00CD5872 /* IGRRadianAngle.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51E64F91E4AD94E00CD5872 /* IGRRadianAngle.swift */; };
-		A51E64FF1E4AEE3100CD5872 /* IGRAngelScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51E64FE1E4AEE3100CD5872 /* IGRAngelScrollView.swift */; };
-		A58EC9D01E49C8FE0002AD70 /* ExampleCropViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58EC9CF1E49C8FE0002AD70 /* ExampleCropViewController.swift */; };
-		A5DFB1D31E481FE4009ACD31 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5DFB1C81E481FE4009ACD31 /* AppDelegate.swift */; };
-		A5DFB1D41E481FE4009ACD31 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5DFB1C91E481FE4009ACD31 /* ViewController.swift */; };
+		6A03DD029BD90EC24F105670 /* Pods_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5E4CDA77E8F904599EAFE3C /* Pods_Example.framework */; };
 		A5DFB1D51E481FE4009ACD31 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A5DFB1CC1E481FE4009ACD31 /* Assets.xcassets */; };
 		A5DFB1D61E481FE4009ACD31 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5DFB1CD1E481FE4009ACD31 /* LaunchScreen.storyboard */; };
 		A5DFB1D71E481FE4009ACD31 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5DFB1CF1E481FE4009ACD31 /* Main.storyboard */; };
-		A5DFB1DA1E482216009ACD31 /* UIColor+Tweak.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5DFB1D91E482216009ACD31 /* UIColor+Tweak.swift */; };
-		A5DFB1DC1E4822B7009ACD31 /* IGRPhotoTweakView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5DFB1DB1E4822B7009ACD31 /* IGRPhotoTweakView.swift */; };
-		A5DFB1E41E482801009ACD31 /* IGRPhotoTweakConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5DFB1E31E482801009ACD31 /* IGRPhotoTweakConstants.swift */; };
-		A5DFB1E81E483D35009ACD31 /* IGRPhotoTweakViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5DFB1E71E483D35009ACD31 /* IGRPhotoTweakViewController.swift */; };
+		A5FE19461E4F553600EA6F73 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5FE19431E4F553600EA6F73 /* AppDelegate.swift */; };
+		A5FE19471E4F553600EA6F73 /* ExampleCropViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5FE19441E4F553600EA6F73 /* ExampleCropViewController.swift */; };
+		A5FE19481E4F553600EA6F73 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5FE19451E4F553600EA6F73 /* ViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		A51E64E51E4A2DFF00CD5872 /* IGRCropCornerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGRCropCornerView.swift; sourceTree = "<group>"; };
-		A51E64E61E4A2DFF00CD5872 /* IGRCropView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGRCropView.swift; sourceTree = "<group>"; };
-		A51E64E71E4A2DFF00CD5872 /* IGRPhotoContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGRPhotoContentView.swift; sourceTree = "<group>"; };
-		A51E64E91E4A2DFF00CD5872 /* IGRPhotoScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGRPhotoScrollView.swift; sourceTree = "<group>"; };
-		A51E64EE1E4A2E3900CD5872 /* IGRCropLine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGRCropLine.swift; sourceTree = "<group>"; };
-		A51E64F01E4A2EA700CD5872 /* IGRCropGridLine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGRCropGridLine.swift; sourceTree = "<group>"; };
-		A51E64F21E4A308D00CD5872 /* IGRCropCornerLine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGRCropCornerLine.swift; sourceTree = "<group>"; };
-		A51E64F41E4A316A00CD5872 /* IGRCropMaskView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGRCropMaskView.swift; sourceTree = "<group>"; };
-		A51E64F91E4AD94E00CD5872 /* IGRRadianAngle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGRRadianAngle.swift; sourceTree = "<group>"; };
-		A51E64FE1E4AEE3100CD5872 /* IGRAngelScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGRAngelScrollView.swift; sourceTree = "<group>"; };
-		A58EC9CF1E49C8FE0002AD70 /* ExampleCropViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleCropViewController.swift; sourceTree = "<group>"; };
-		A5DFB1B21E481F48009ACD31 /* IGRPhotoTweaks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IGRPhotoTweaks.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		A5DFB1C81E481FE4009ACD31 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		A5DFB1C91E481FE4009ACD31 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		121412D32CF6E0C3CB550F24 /* Pods-Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Example/Pods-Example.debug.xcconfig"; sourceTree = "<group>"; };
+		A53EC9031959F0E34DCF01F9 /* Pods-Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-Example/Pods-Example.release.xcconfig"; sourceTree = "<group>"; };
+		A5DFB1B21E481F48009ACD31 /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5DFB1CC1E481FE4009ACD31 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A5DFB1CE1E481FE4009ACD31 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A5DFB1D01E481FE4009ACD31 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A5DFB1D21E481FE4009ACD31 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A5DFB1D91E482216009ACD31 /* UIColor+Tweak.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Tweak.swift"; sourceTree = "<group>"; };
-		A5DFB1DB1E4822B7009ACD31 /* IGRPhotoTweakView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGRPhotoTweakView.swift; sourceTree = "<group>"; };
-		A5DFB1E31E482801009ACD31 /* IGRPhotoTweakConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGRPhotoTweakConstants.swift; sourceTree = "<group>"; };
-		A5DFB1E71E483D35009ACD31 /* IGRPhotoTweakViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGRPhotoTweakViewController.swift; sourceTree = "<group>"; };
+		A5FE19431E4F553600EA6F73 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = SOURCE_ROOT; };
+		A5FE19441E4F553600EA6F73 /* ExampleCropViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleCropViewController.swift; sourceTree = SOURCE_ROOT; };
+		A5FE19451E4F553600EA6F73 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = SOURCE_ROOT; };
+		B5E4CDA77E8F904599EAFE3C /* Pods_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,50 +35,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6A03DD029BD90EC24F105670 /* Pods_Example.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		A51E64E41E4A2DFF00CD5872 /* CropView */ = {
+		96FE7E3400B5F5BB0B3D33D3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				A51E64E51E4A2DFF00CD5872 /* IGRCropCornerView.swift */,
-				A51E64E61E4A2DFF00CD5872 /* IGRCropView.swift */,
-				A51E64E71E4A2DFF00CD5872 /* IGRPhotoContentView.swift */,
-				A51E64EE1E4A2E3900CD5872 /* IGRCropLine.swift */,
-				A51E64F01E4A2EA700CD5872 /* IGRCropGridLine.swift */,
-				A51E64F21E4A308D00CD5872 /* IGRCropCornerLine.swift */,
-				A51E64F41E4A316A00CD5872 /* IGRCropMaskView.swift */,
+				B5E4CDA77E8F904599EAFE3C /* Pods_Example.framework */,
 			);
-			path = CropView;
-			sourceTree = "<group>";
-		};
-		A51E64E81E4A2DFF00CD5872 /* CustomViews */ = {
-			isa = PBXGroup;
-			children = (
-				A51E64E91E4A2DFF00CD5872 /* IGRPhotoScrollView.swift */,
-				A51E64FE1E4AEE3100CD5872 /* IGRAngelScrollView.swift */,
-			);
-			path = CustomViews;
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		A5DFB1A91E481F48009ACD31 = {
 			isa = PBXGroup;
 			children = (
 				A5DFB1C71E481FE4009ACD31 /* Example */,
-				A5DFB1CA1E481FE4009ACD31 /* IGRPhotoTweaks */,
 				A5DFB1CB1E481FE4009ACD31 /* Resources */,
 				A5DFB1D11E481FE4009ACD31 /* Settings */,
 				A5DFB1B31E481F48009ACD31 /* Products */,
+				D0C927687C190AB5C9A48AE6 /* Pods */,
+				96FE7E3400B5F5BB0B3D33D3 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
 		A5DFB1B31E481F48009ACD31 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				A5DFB1B21E481F48009ACD31 /* IGRPhotoTweaks.app */,
+				A5DFB1B21E481F48009ACD31 /* Example.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -110,25 +73,11 @@
 		A5DFB1C71E481FE4009ACD31 /* Example */ = {
 			isa = PBXGroup;
 			children = (
-				A5DFB1C81E481FE4009ACD31 /* AppDelegate.swift */,
-				A5DFB1C91E481FE4009ACD31 /* ViewController.swift */,
-				A58EC9CF1E49C8FE0002AD70 /* ExampleCropViewController.swift */,
+				A5FE19431E4F553600EA6F73 /* AppDelegate.swift */,
+				A5FE19441E4F553600EA6F73 /* ExampleCropViewController.swift */,
+				A5FE19451E4F553600EA6F73 /* ViewController.swift */,
 			);
 			path = Example;
-			sourceTree = "<group>";
-		};
-		A5DFB1CA1E481FE4009ACD31 /* IGRPhotoTweaks */ = {
-			isa = PBXGroup;
-			children = (
-				A51E64E41E4A2DFF00CD5872 /* CropView */,
-				A51E64E81E4A2DFF00CD5872 /* CustomViews */,
-				A5DFB1E71E483D35009ACD31 /* IGRPhotoTweakViewController.swift */,
-				A5DFB1DB1E4822B7009ACD31 /* IGRPhotoTweakView.swift */,
-				A5DFB1E31E482801009ACD31 /* IGRPhotoTweakConstants.swift */,
-				A5DFB1D91E482216009ACD31 /* UIColor+Tweak.swift */,
-				A51E64F91E4AD94E00CD5872 /* IGRRadianAngle.swift */,
-			);
-			path = IGRPhotoTweaks;
 			sourceTree = "<group>";
 		};
 		A5DFB1CB1E481FE4009ACD31 /* Resources */ = {
@@ -149,25 +98,37 @@
 			path = Settings;
 			sourceTree = "<group>";
 		};
+		D0C927687C190AB5C9A48AE6 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				121412D32CF6E0C3CB550F24 /* Pods-Example.debug.xcconfig */,
+				A53EC9031959F0E34DCF01F9 /* Pods-Example.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		A5DFB1B11E481F48009ACD31 /* IGRPhotoTweaks */ = {
+		A5DFB1B11E481F48009ACD31 /* Example */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A5DFB1C41E481F48009ACD31 /* Build configuration list for PBXNativeTarget "IGRPhotoTweaks" */;
+			buildConfigurationList = A5DFB1C41E481F48009ACD31 /* Build configuration list for PBXNativeTarget "Example" */;
 			buildPhases = (
+				AE18E60BDA35B043587C4F45 /* [CP] Check Pods Manifest.lock */,
 				A51E64F81E4A428A00CD5872 /* ShellScript */,
 				A5DFB1AE1E481F48009ACD31 /* Sources */,
 				A5DFB1AF1E481F48009ACD31 /* Frameworks */,
 				A5DFB1B01E481F48009ACD31 /* Resources */,
+				DD24609E454B4037F6F9D18F /* [CP] Embed Pods Frameworks */,
+				6BA3F18ACAAC3D1FB6C89E3C /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = IGRPhotoTweaks;
+			name = Example;
 			productName = IGRPhotoTweaks;
-			productReference = A5DFB1B21E481F48009ACD31 /* IGRPhotoTweaks.app */;
+			productReference = A5DFB1B21E481F48009ACD31 /* Example.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -184,11 +145,12 @@
 					A5DFB1B11E481F48009ACD31 = {
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = DMP42GVPJ3;
+						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 					};
 				};
 			};
-			buildConfigurationList = A5DFB1AD1E481F48009ACD31 /* Build configuration list for PBXProject "IGRPhotoTweaks" */;
+			buildConfigurationList = A5DFB1AD1E481F48009ACD31 /* Build configuration list for PBXProject "Example" */;
 			compatibilityVersion = "Xcode 6.3";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -201,7 +163,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				A5DFB1B11E481F48009ACD31 /* IGRPhotoTweaks */,
+				A5DFB1B11E481F48009ACD31 /* Example */,
 			);
 		};
 /* End PBXProject section */
@@ -220,6 +182,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		6BA3F18ACAAC3D1FB6C89E3C /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Example/Pods-Example-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		A51E64F81E4A428A00CD5872 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -231,7 +208,37 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "TAGS=\"TODO:|FIXME:\"\nERRORTAG=\"ERROR:\"\nfind \"${SRCROOT}\" \\( -name \"*.h\" -or -name \"*.m\" -or -name \"*.swift\" \\) -print0 | xargs -0 egrep --with-filename --line-number --only-matching \"($TAGS).*\\$|($ERRORTAG).*\\$\" | perl -p -e \"s/($TAGS)/ warning: \\$1/\" | perl -p -e \"s/($ERRORTAG)/ error: \\$1/\"";
+			shellScript = "TAGS=\"TODO:|FIXME:\"\nERRORTAG=\"ERROR:\"\nfind \"${SRCROOT}\" \\( -name \"*.swift\" \\) -print0 | xargs -0 egrep --with-filename --line-number --only-matching \"($TAGS).*\\$|($ERRORTAG).*\\$\" | perl -p -e \"s/($TAGS)/ warning: \\$1/\" | perl -p -e \"s/($ERRORTAG)/ error: \\$1/\"";
+		};
+		AE18E60BDA35B043587C4F45 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		DD24609E454B4037F6F9D18F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Example/Pods-Example-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -240,23 +247,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A51E64F51E4A316A00CD5872 /* IGRCropMaskView.swift in Sources */,
-				A5DFB1D41E481FE4009ACD31 /* ViewController.swift in Sources */,
-				A5DFB1DC1E4822B7009ACD31 /* IGRPhotoTweakView.swift in Sources */,
-				A5DFB1E81E483D35009ACD31 /* IGRPhotoTweakViewController.swift in Sources */,
-				A51E64ED1E4A2DFF00CD5872 /* IGRPhotoScrollView.swift in Sources */,
-				A51E64FA1E4AD94E00CD5872 /* IGRRadianAngle.swift in Sources */,
-				A5DFB1E41E482801009ACD31 /* IGRPhotoTweakConstants.swift in Sources */,
-				A5DFB1DA1E482216009ACD31 /* UIColor+Tweak.swift in Sources */,
-				A58EC9D01E49C8FE0002AD70 /* ExampleCropViewController.swift in Sources */,
-				A51E64EC1E4A2DFF00CD5872 /* IGRPhotoContentView.swift in Sources */,
-				A51E64EA1E4A2DFF00CD5872 /* IGRCropCornerView.swift in Sources */,
-				A51E64FF1E4AEE3100CD5872 /* IGRAngelScrollView.swift in Sources */,
-				A51E64F11E4A2EA700CD5872 /* IGRCropGridLine.swift in Sources */,
-				A5DFB1D31E481FE4009ACD31 /* AppDelegate.swift in Sources */,
-				A51E64F31E4A308D00CD5872 /* IGRCropCornerLine.swift in Sources */,
-				A51E64EF1E4A2E3900CD5872 /* IGRCropLine.swift in Sources */,
-				A51E64EB1E4A2DFF00CD5872 /* IGRCropView.swift in Sources */,
+				A5FE19481E4F553600EA6F73 /* ViewController.swift in Sources */,
+				A5FE19461E4F553600EA6F73 /* AppDelegate.swift in Sources */,
+				A5FE19471E4F553600EA6F73 /* ExampleCropViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -377,21 +370,26 @@
 		};
 		A5DFB1C51E481F48009ACD31 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 121412D32CF6E0C3CB550F24 /* Pods-Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = DMP42GVPJ3;
 				INFOPLIST_FILE = "$(SRCROOT)/Settings/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.igrsoft.IGRPhotoTweaks;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
 		A5DFB1C61E481F48009ACD31 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A53EC9031959F0E34DCF01F9 /* Pods-Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = DMP42GVPJ3;
 				INFOPLIST_FILE = "$(SRCROOT)/Settings/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -404,7 +402,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		A5DFB1AD1E481F48009ACD31 /* Build configuration list for PBXProject "IGRPhotoTweaks" */ = {
+		A5DFB1AD1E481F48009ACD31 /* Build configuration list for PBXProject "Example" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A5DFB1C21E481F48009ACD31 /* Debug */,
@@ -413,7 +411,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A5DFB1C41E481F48009ACD31 /* Build configuration list for PBXNativeTarget "IGRPhotoTweaks" */ = {
+		A5DFB1C41E481F48009ACD31 /* Build configuration list for PBXNativeTarget "Example" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A5DFB1C51E481F48009ACD31 /* Debug */,

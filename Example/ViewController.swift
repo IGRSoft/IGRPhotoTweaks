@@ -8,6 +8,8 @@
 
 import UIKit
 
+import IGRPhotoTweaks
+
 class ViewController: UIViewController {
 
     @IBOutlet weak fileprivate var imageView: UIImageView?
