@@ -9,6 +9,7 @@
 import IGRPhotoTweaks
 
 import UIKit
+import KCHorizontalDial
 
 class ExampleCropViewController: IGRPhotoTweakViewController {
 
@@ -17,6 +18,11 @@ class ExampleCropViewController: IGRPhotoTweakViewController {
      */
     @IBOutlet weak fileprivate var angelSlider: UISlider?
     @IBOutlet weak fileprivate var angelLabel: UILabel?
+    @IBOutlet weak fileprivate var horizontalDial: KCHorizontalDial? {
+        didSet {
+            self.horizontalDial?.migneticOption = .none
+        }
+    }
     
     // MARK: - Life Cicle
     
@@ -72,14 +78,9 @@ class ExampleCropViewController: IGRPhotoTweakViewController {
         self.stopChangeAngel()
     }
     
-    @IBAction func onChandeAngelPickerViewValue(_ sender: UIPickerView) {
-        let radians: CGFloat = 0.0
-        setupAngelLabelValue(radians: radians)
-        self.changedAngel(value: radians)
-    }
-    
     @IBAction func onTouchResetButton(_ sender: UIButton) {
         self.angelSlider?.value = 0.0
+        self.horizontalDial?.value = 0.0
         setupAngelLabelValue(radians: 0.0)
         
         self.resetView()
@@ -149,4 +150,18 @@ class ExampleCropViewController: IGRPhotoTweakViewController {
 //    override func cornerBorderLength() -> CGFloat {
 //        return 30.0
 //    }
+}
+
+extension ExampleCropViewController: KCHorizontalDialDelegate {
+    func horizontalDialDidValueChanged(_ horizontalDial: KCHorizontalDial) {
+        let degrees = horizontalDial.value
+        let radians = IGRRadianAngle.toRadians(CGFloat(degrees))
+        
+        self.setupAngelLabelValue(radians: radians)
+        self.changedAngel(value: radians)
+    }
+    
+    func horizontalDialDidEndScroll(_ horizontalDial: KCHorizontalDial) {
+        self.stopChangeAngel()
+    }
 }
