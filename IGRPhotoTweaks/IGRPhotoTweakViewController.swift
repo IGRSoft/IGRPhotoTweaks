@@ -48,7 +48,6 @@ import Photos
     override open func viewDidLoad() {
         super.viewDidLoad()
 
-        self.navigationController?.isNavigationBarHidden = true
         self.automaticallyAdjustsScrollViewInsets = false
         self.view.clipsToBounds = true
         
@@ -69,6 +68,12 @@ import Photos
         self.view.sendSubview(toBack: self.photoView)
     }
     
+    override open func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        
+        photoView.layoutSubviews()
+    }
+    
     // MARK: - Public
     
     open func changedAngel(value: CGFloat) {
@@ -81,6 +86,7 @@ import Photos
     
     open func resetView() {
         self.photoView.resetView()
+        self.stopChangeAngel()
     }
     
     open func dismissAction() {
@@ -259,6 +265,10 @@ import Photos
     open func customHighlightMaskAlphaValue() -> CGFloat {
         return 0.3
     }
+    
+    open func customCanvasHeaderHeigth() -> CGFloat {
+        return kCanvasHeaderHeigth
+    }
 }
 
 extension IGRPhotoTweakViewController : IGRPhotoTweakViewCustomizationDelegate {
@@ -284,5 +294,9 @@ extension IGRPhotoTweakViewController : IGRPhotoTweakViewCustomizationDelegate {
     
     public func highlightMaskAlphaValue() -> CGFloat {
         return self.customHighlightMaskAlphaValue()
+    }
+    
+    public func canvasHeaderHeigth() -> CGFloat {
+        return self.customCanvasHeaderHeigth()
     }
 }

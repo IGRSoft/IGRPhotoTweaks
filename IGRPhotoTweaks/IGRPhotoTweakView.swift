@@ -19,6 +19,8 @@ import UIKit
     
     func isHighlightMask() -> Bool
     func highlightMaskAlphaValue() -> CGFloat
+    
+    func canvasHeaderHeigth() -> CGFloat
 }
 
 @objc public class IGRPhotoTweakView: UIView {
@@ -50,7 +52,7 @@ import UIKit
     fileprivate var originalSize = CGSize.zero
     
     fileprivate var manualZoomed = false
-
+    
     // masks
     fileprivate var topMask: UIView!
     fileprivate var leftMask: UIView!
@@ -64,23 +66,13 @@ import UIKit
     
     init(frame: CGRect, image: UIImage, customizationDelegate: IGRPhotoTweakViewCustomizationDelegate!) {
         super.init(frame: frame)
-    
+        
         self.image = image
         
         self.customizationDelegate = customizationDelegate
         
-        // scale the image
-        self.maximumCanvasSize = CGSize(width: (kMaximumCanvasWidthRatio * self.frame.size.width),
-                                        height: (kMaximumCanvasHeightRatio * self.frame.size.height - kCanvasHeaderHeigth))
-        let scaleX: CGFloat = image.size.width / self.maximumCanvasSize.width
-        let scaleY: CGFloat = image.size.height / self.maximumCanvasSize.height
-        let scale: CGFloat = max(scaleX, scaleY)
-        let bounds = CGRect(x: 0.0,
-                            y: 0.0,
-                            width: (image.size.width / scale),
-                            height: (image.size.height / scale))
+        let bounds = self.maxBounds()
         self.originalSize = bounds.size
-        self.centerY = self.maximumCanvasSize.height / 2.0 + kCanvasHeaderHeigth
         
         self.scrollView = IGRPhotoScrollView(frame: bounds)
         self.scrollView.center = CGPoint(x: (self.frame.width / 2.0), y: self.centerY)
@@ -98,7 +90,7 @@ import UIKit
                                              height: self.scrollView.bounds.size.height)
         self.scrollView.updateDelegate = self
         self.addSubview(self.scrollView)
-
+        
         self.photoContentView = IGRPhotoContentView(frame: self.scrollView.bounds)
         self.photoContentView.image = image
         self.photoContentView.isUserInteractionEnabled = true
@@ -131,6 +123,37 @@ import UIKit
         self.originalPoint = self.convert(self.scrollView.center, to: self)
     }
     
+    public override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        self.originalSize = self.maxBounds().size
+        self.scrollView.center = CGPoint(x: (self.frame.width / 2.0), y: self.centerY)
+        
+        self.cropView.center = self.scrollView.center
+        self.checkScrollViewContentOffset();
+        
+        self.cropViewDidStopCrop(self.cropView)
+    }
+    
+    func maxBounds() -> CGRect {
+        // scale the image
+        self.maximumCanvasSize = CGSize(width: (kMaximumCanvasWidthRatio * self.frame.size.width),
+                                        height: (kMaximumCanvasHeightRatio * self.frame.size.height - self.canvasHeaderHeigth()))
+        
+        self.centerY = self.maximumCanvasSize.height / 2.0 + self.canvasHeaderHeigth()
+        
+        let scaleX: CGFloat = self.image.size.width / self.maximumCanvasSize.width
+        let scaleY: CGFloat = self.image.size.height / self.maximumCanvasSize.height
+        let scale: CGFloat = max(scaleX, scaleY)
+        
+        let bounds = CGRect(x: 0.0,
+                            y: 0.0,
+                            width: (self.image.size.width / scale),
+                            height: (self.image.size.height / scale))
+        
+        return bounds
+    }
+    
     func borderColor() -> UIColor {
         return (self.customizationDelegate?.borderColor())!
     }
@@ -153,6 +176,10 @@ import UIKit
     
     func highlightMaskAlphaValue() -> CGFloat {
         return (self.customizationDelegate?.highlightMaskAlphaValue())!
+    }
+    
+    func canvasHeaderHeigth() -> CGFloat {
+        return (self.customizationDelegate?.canvasHeaderHeigth())!
     }
     
     required public init?(coder aDecoder: NSCoder) {
@@ -240,6 +267,10 @@ import UIKit
         self.angle = value
         self.scrollView.transform = CGAffineTransform(rotationAngle: self.angle)
         
+        self.updatePosition()
+    }
+    
+    fileprivate func updatePosition() {
         // position scroll view
         let width: CGFloat = fabs(cos(self.angle)) * self.cropView.frame.size.width + fabs(sin(self.angle)) * self.cropView.frame.size.height
         let height: CGFloat = fabs(sin(self.angle)) * self.cropView.frame.size.width + fabs(cos(self.angle)) * self.cropView.frame.size.height
