@@ -8,9 +8,9 @@
 
 import UIKit
 
-class IGRCropCornerView: UIView {
+@objc public class IGRCropCornerView: UIView {
 
-    override class func initialize () {
+    override public class func initialize () {
         self.appearance().backgroundColor = UIColor.clear
     }
     
@@ -20,7 +20,7 @@ class IGRCropCornerView: UIView {
         setup(cornerType: type, lineWidth: lineWidth, lineLenght:lineLenght)
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
         setup(cornerType: .upperRight, lineWidth: 2.0, lineLenght:kCropViewCornerLength)

@@ -8,9 +8,9 @@
 
 import UIKit
 
-class IGRCropGridLine: UIView {
+@objc public class IGRCropGridLine: UIView {
 
-    override class func initialize () {
+    override public class func initialize () {
         self.appearance().backgroundColor = UIColor.gridLine()
     }
 

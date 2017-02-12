@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol IGRPhotoTweakViewCustomizationDelegate: NSObjectProtocol {
+@objc public protocol IGRPhotoTweakViewCustomizationDelegate: NSObjectProtocol {
     func borderColor() -> UIColor
     
     func borderWidth() -> CGFloat
@@ -16,17 +16,17 @@ protocol IGRPhotoTweakViewCustomizationDelegate: NSObjectProtocol {
     func cornerBorderWidth() -> CGFloat
     
     func cornerBorderLength() -> CGFloat
+    
+    func isHighlightMask() -> Bool
+    func highlightMaskAlphaValue() -> CGFloat
 }
 
-class IGRPhotoTweakView: UIView {
-    override class func initialize () {
+@objc public class IGRPhotoTweakView: UIView {
+    override public class func initialize () {
         self.appearance().backgroundColor = UIColor.photoTweakCanvasBackground()
     }
     
     open weak var customizationDelegate: IGRPhotoTweakViewCustomizationDelegate?
-    
-    var isHighlightMask: Bool = false
-    var highlightMaskAlphaValue: CGFloat = 0.5
     
     private(set) var angle:                 CGFloat = 0.0
     private(set) var photoContentOffset =   CGPoint.zero
@@ -66,6 +66,7 @@ class IGRPhotoTweakView: UIView {
         super.init(frame: frame)
     
         self.image = image
+        
         self.customizationDelegate = customizationDelegate
         
         // scale the image
@@ -82,7 +83,6 @@ class IGRPhotoTweakView: UIView {
         self.centerY = self.maximumCanvasSize.height / 2.0 + kCanvasHeaderHeigth
         
         self.scrollView = IGRPhotoScrollView(frame: bounds)
-        self.scrollView.updateDelegate = self
         self.scrollView.center = CGPoint(x: (self.frame.width / 2.0), y: self.centerY)
         self.scrollView.bounces = true
         self.scrollView.layer.anchorPoint = CGPoint(x: 0.5, y: 0.5)
@@ -96,6 +96,7 @@ class IGRPhotoTweakView: UIView {
         self.scrollView.clipsToBounds = false
         self.scrollView.contentSize = CGSize(width: self.scrollView.bounds.size.width,
                                              height: self.scrollView.bounds.size.height)
+        self.scrollView.updateDelegate = self
         self.addSubview(self.scrollView)
 
         self.photoContentView = IGRPhotoContentView(frame: self.scrollView.bounds)
@@ -146,11 +147,19 @@ class IGRPhotoTweakView: UIView {
         return (self.customizationDelegate?.cornerBorderLength())!
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    func isHighlightMask() -> Bool {
+        return (self.customizationDelegate?.isHighlightMask())!
+    }
+    
+    func highlightMaskAlphaValue() -> CGFloat {
+        return (self.customizationDelegate?.highlightMaskAlphaValue())!
+    }
+    
+    required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+    override public func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
         if self.cropView.frame.insetBy(dx: -kCropViewHotArea, dy: -kCropViewHotArea).contains(point) &&
             !self.cropView.frame.insetBy(dx: kCropViewHotArea, dy: kCropViewHotArea).contains(point) {
             
@@ -188,8 +197,8 @@ class IGRPhotoTweakView: UIView {
     }
     
     fileprivate func highlightMask(_ highlight:Bool, animate: Bool) {
-        if isHighlightMask {
-            let newAlphaValue: CGFloat = highlight ? highlightMaskAlphaValue : 1.0
+        if (self.isHighlightMask()) {
+            let newAlphaValue: CGFloat = highlight ? self.highlightMaskAlphaValue() : 1.0
             
             let animationBlock: ((_: Void) -> Void)? = {(_: Void) -> Void in
                 self.topMask.alpha = newAlphaValue
@@ -301,15 +310,15 @@ class IGRPhotoTweakView: UIView {
 }
 
 extension IGRPhotoTweakView : UIScrollViewDelegate {
-    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+    public func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         return self.photoContentView
     }
     
-    func scrollViewWillBeginZooming(_ scrollView: UIScrollView, with view: UIView?) {
+    public func scrollViewWillBeginZooming(_ scrollView: UIScrollView, with view: UIView?) {
         self.cropView.updateCropLines(true)
     }
     
-    func scrollViewDidEndZooming(_ scrollView: UIScrollView, with view: UIView?, atScale scale: CGFloat) {
+    public func scrollViewDidEndZooming(_ scrollView: UIScrollView, with view: UIView?, atScale scale: CGFloat) {
         self.manualZoomed = true
         self.cropView.dismissCropLines()
     }

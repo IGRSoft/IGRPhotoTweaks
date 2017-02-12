@@ -8,9 +8,9 @@
 
 import UIKit
 
-class IGRCropCornerLine: UIView {
+@objc public class IGRCropCornerLine: UIView {
 
-    override class func initialize () {
+    override public class func initialize () {
         self.appearance().backgroundColor = UIColor.cropLine()
     }
 

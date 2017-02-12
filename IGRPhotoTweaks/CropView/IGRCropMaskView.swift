@@ -8,9 +8,9 @@
 
 import UIKit
 
-class IGRCropMaskView: UIView {
+@objc public class IGRCropMaskView: UIView {
 
-    override class func initialize () {
+    override public class func initialize () {
         self.appearance().backgroundColor = UIColor.mask()
     }
 

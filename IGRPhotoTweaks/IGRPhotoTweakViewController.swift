@@ -235,22 +235,54 @@ import Photos
             present(ac, animated: true, completion: nil)
         }
     }
-}
-
-extension IGRPhotoTweakViewController : IGRPhotoTweakViewCustomizationDelegate {
-    func borderColor() -> UIColor {
+    
+    open func customBorderColor() -> UIColor {
         return UIColor.cropLine()
     }
     
-    func borderWidth() -> CGFloat {
+    open func customBorderWidth() -> CGFloat {
         return 1.0
     }
     
-    func cornerBorderWidth() -> CGFloat {
+    open func customCornerBorderWidth() -> CGFloat {
         return kCropViewCornerWidth
     }
     
-    func cornerBorderLength() -> CGFloat {
+    open func customCornerBorderLength() -> CGFloat {
         return kCropViewCornerLength
+    }
+    
+    open func customIsHighlightMask() -> Bool {
+        return true
+    }
+    
+    open func customHighlightMaskAlphaValue() -> CGFloat {
+        return 0.3
+    }
+}
+
+extension IGRPhotoTweakViewController : IGRPhotoTweakViewCustomizationDelegate {
+    public func borderColor() -> UIColor {
+        return self.customBorderColor()
+    }
+    
+    public func borderWidth() -> CGFloat {
+        return self.customBorderWidth()
+    }
+    
+    public func cornerBorderWidth() -> CGFloat {
+        return self.customCornerBorderWidth()
+    }
+    
+    public func cornerBorderLength() -> CGFloat {
+        return self.customCornerBorderLength()
+    }
+    
+    public func isHighlightMask() -> Bool {
+        return self.customIsHighlightMask()
+    }
+    
+    public func highlightMaskAlphaValue() -> CGFloat {
+        return self.customHighlightMaskAlphaValue()
     }
 }

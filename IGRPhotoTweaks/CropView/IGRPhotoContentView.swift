@@ -8,9 +8,9 @@
 
 import UIKit
 
-class IGRPhotoContentView: UIView {
+@objc public class IGRPhotoContentView: UIView {
     
-    override class func initialize () {
+    override public class func initialize () {
         self.appearance().backgroundColor = UIColor.clear
     }
     
@@ -31,7 +31,7 @@ class IGRPhotoContentView: UIView {
         }
     }
     
-    override func layoutSubviews() {
+    override public func layoutSubviews() {
         super.layoutSubviews()
         self.imageView?.frame = self.bounds
     }

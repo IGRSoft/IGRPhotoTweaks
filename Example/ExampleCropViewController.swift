@@ -30,19 +30,13 @@ class ExampleCropViewController: IGRPhotoTweakViewController {
         super.viewDidLoad()
         
         //FIXME: Themes Preview
-        //IGRCropLine.appearance().backgroundColor = UIColor.green
-        //IGRCropGridLine.appearance().backgroundColor = UIColor.yellow
-        //IGRCropCornerView.appearance().backgroundColor = UIColor.purple
-        //IGRCropCornerLine.appearance().backgroundColor = UIColor.orange
-        //IGRCropMaskView.appearance().backgroundColor = UIColor.blue
-        //IGRPhotoContentView.appearance().backgroundColor = UIColor.gray
-        //IGRPhotoTweakView.appearance().backgroundColor = UIColor.brown
-        
-        //FIXME: Customization
-        //self.photoView.isHighlightMask = true
-        //self.photoView.highlightMaskAlphaValue = 0.2
-        //self.maxRotationAngle = CGFloat(M_PI)
-        //self.isAutoSaveToLibray = true
+//        IGRCropLine.appearance().backgroundColor = UIColor.green
+//        IGRCropGridLine.appearance().backgroundColor = UIColor.yellow
+//        IGRCropCornerView.appearance().backgroundColor = UIColor.purple
+//        IGRCropCornerLine.appearance().backgroundColor = UIColor.orange
+//        IGRCropMaskView.appearance().backgroundColor = UIColor.blue
+//        IGRPhotoContentView.appearance().backgroundColor = UIColor.gray
+//        IGRPhotoTweakView.appearance().backgroundColor = UIColor.brown
         
         self.setupSlider()
     }
@@ -135,20 +129,28 @@ class ExampleCropViewController: IGRPhotoTweakViewController {
     }
     
     //FIXME: Themes Preview
-//    override func borderColor() -> UIColor {
+//    override open func customBorderColor() -> UIColor {
 //        return UIColor.red
 //    }
 //    
-//    override func borderWidth() -> CGFloat {
+//    override open func customBorderWidth() -> CGFloat {
 //        return 2.0
 //    }
 //    
-//    override func cornerBorderWidth() -> CGFloat {
+//    override open func customCornerBorderWidth() -> CGFloat {
 //        return 4.0
 //    }
 //    
-//    override func cornerBorderLength() -> CGFloat {
+//    override open func customCornerBorderLength() -> CGFloat {
 //        return 30.0
+//    }
+//    
+//    override open func customIsHighlightMask() -> Bool {
+//        return true
+//    }
+//    
+//    override open func customHighlightMaskAlphaValue() -> CGFloat {
+//        return 0.3
 //    }
 }
 
