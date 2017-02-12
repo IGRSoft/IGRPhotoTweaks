@@ -52,6 +52,7 @@ import UIKit
     fileprivate var originalSize = CGSize.zero
     
     fileprivate var manualZoomed = false
+    fileprivate var manualMove = false
     
     // masks
     fileprivate var topMask: UIView!
@@ -126,13 +127,15 @@ import UIKit
     public override func layoutSubviews() {
         super.layoutSubviews()
         
-        self.originalSize = self.maxBounds().size
-        self.scrollView.center = CGPoint(x: (self.frame.width / 2.0), y: self.centerY)
-        
-        self.cropView.center = self.scrollView.center
-        self.checkScrollViewContentOffset();
-        
-        self.cropViewDidStopCrop(self.cropView)
+        if !manualMove {
+            self.originalSize = self.maxBounds().size
+            self.scrollView.center = CGPoint(x: (self.frame.width / 2.0), y: self.centerY)
+            
+            self.cropView.center = self.scrollView.center
+            self.checkScrollViewContentOffset();
+            
+            self.cropViewDidStopCrop(self.cropView)
+        }
     }
     
     func maxBounds() -> CGRect {
@@ -286,7 +289,7 @@ import UIKit
         
         // scale scroll view
         let shouldScale: Bool = self.scrollView.contentSize.width / self.scrollView.bounds.size.width <= 1.0 ||
-                                self.scrollView.contentSize.height / self.scrollView.bounds.size.height <= 1.0
+            self.scrollView.contentSize.height / self.scrollView.bounds.size.height <= 1.0
         if !self.manualZoomed || shouldScale {
             let zoom = self.scrollView.zoomScaleToBound()
             self.scrollView.setZoomScale(zoom, animated: false)
@@ -369,6 +372,7 @@ extension IGRPhotoTweakView : IGRCropViewDelegate {
     
     func cropViewDidStartCrop(_ cropView: IGRCropView) {
         self.highlightMask(true, animate: true)
+        self.manualMove = true;
     }
     
     func cropViewDidMove(_ cropView: IGRCropView) {
@@ -440,5 +444,6 @@ extension IGRPhotoTweakView : IGRCropViewDelegate {
         })
         
         self.highlightMask(false, animate: true)
+        self.manualMove = false;
     }
 }

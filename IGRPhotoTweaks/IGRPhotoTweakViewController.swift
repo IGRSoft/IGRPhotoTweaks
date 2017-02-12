@@ -68,12 +68,6 @@ import Photos
         self.view.sendSubview(toBack: self.photoView)
     }
     
-    override open func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        
-        photoView.layoutSubviews()
-    }
-    
     // MARK: - Public
     
     open func changedAngel(value: CGFloat) {
