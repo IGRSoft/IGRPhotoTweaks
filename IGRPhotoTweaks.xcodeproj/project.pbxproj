@@ -16,7 +16,6 @@
 		A5FE19831E4F8DC600EA6F73 /* IGRCropCornerLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51E64F21E4A308D00CD5872 /* IGRCropCornerLine.swift */; };
 		A5FE19841E4F8DC600EA6F73 /* IGRCropMaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51E64F41E4A316A00CD5872 /* IGRCropMaskView.swift */; };
 		A5FE19851E4F8DC600EA6F73 /* IGRPhotoScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51E64E91E4A2DFF00CD5872 /* IGRPhotoScrollView.swift */; };
-		A5FE19861E4F8DC600EA6F73 /* IGRAngelScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51E64FE1E4AEE3100CD5872 /* IGRAngelScrollView.swift */; };
 		A5FE19871E4F8DC600EA6F73 /* IGRPhotoTweakViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5DFB1E71E483D35009ACD31 /* IGRPhotoTweakViewController.swift */; };
 		A5FE19881E4F8DC600EA6F73 /* IGRPhotoTweakView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5DFB1DB1E4822B7009ACD31 /* IGRPhotoTweakView.swift */; };
 		A5FE19891E4F8DC600EA6F73 /* IGRPhotoTweakConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5DFB1E31E482801009ACD31 /* IGRPhotoTweakConstants.swift */; };
@@ -34,7 +33,6 @@
 		A51E64F21E4A308D00CD5872 /* IGRCropCornerLine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGRCropCornerLine.swift; sourceTree = "<group>"; };
 		A51E64F41E4A316A00CD5872 /* IGRCropMaskView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGRCropMaskView.swift; sourceTree = "<group>"; };
 		A51E64F91E4AD94E00CD5872 /* IGRRadianAngle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGRRadianAngle.swift; sourceTree = "<group>"; };
-		A51E64FE1E4AEE3100CD5872 /* IGRAngelScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGRAngelScrollView.swift; sourceTree = "<group>"; };
 		A5DFB1CC1E481FE4009ACD31 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A5DFB1CE1E481FE4009ACD31 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A5DFB1D01E481FE4009ACD31 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -76,7 +74,6 @@
 			isa = PBXGroup;
 			children = (
 				A51E64E91E4A2DFF00CD5872 /* IGRPhotoScrollView.swift */,
-				A51E64FE1E4AEE3100CD5872 /* IGRAngelScrollView.swift */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -223,7 +220,6 @@
 				A5FE19831E4F8DC600EA6F73 /* IGRCropCornerLine.swift in Sources */,
 				A5FE19841E4F8DC600EA6F73 /* IGRCropMaskView.swift in Sources */,
 				A5FE19851E4F8DC600EA6F73 /* IGRPhotoScrollView.swift in Sources */,
-				A5FE19861E4F8DC600EA6F73 /* IGRAngelScrollView.swift in Sources */,
 				A5FE19871E4F8DC600EA6F73 /* IGRPhotoTweakViewController.swift in Sources */,
 				A5FE19881E4F8DC600EA6F73 /* IGRPhotoTweakView.swift in Sources */,
 				A5FE19891E4F8DC600EA6F73 /* IGRPhotoTweakConstants.swift in Sources */,
@@ -410,6 +406,7 @@
 				A5FE197D1E4F8D5700EA6F73 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
