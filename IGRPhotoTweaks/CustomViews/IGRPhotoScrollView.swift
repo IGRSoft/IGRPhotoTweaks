@@ -9,15 +9,36 @@
 import UIKit
 
 protocol IGRPhotoScrollViewDelegate: NSObjectProtocol {
+    /*
+     Calls ones, when user start interaction with view
+     */
     func scrollViewDidStartUpdateScrollContentOffset(_ scrollView: UIScrollView)
+    
+    /*
+     Calls ones, when user stop interaction with view
+     */
     func scrollViewDidStopScrollUpdateContentOffset(_ scrollView: UIScrollView)
 }
 
 class IGRPhotoScrollView: UIScrollView {
+    
+    //MARK: - Public VARs
+    
+    /*
+     View for func viewForZooming(in scrollView: UIScrollView)
+     */
     var photoContentView: IGRPhotoContentView!
     
+    /*
+     The optional scroll delegate.
+     */
     weak var updateDelegate: IGRPhotoScrollViewDelegate?
+    
+    //MARK: - Protected VARs
+    
     fileprivate var isUpdatingContentOffset = false
+    
+    //MARK: - Content Offsets
     
     func setContentOffsetY(_ offsetY: CGFloat) {
         var contentOffset: CGPoint = self.contentOffset
@@ -41,7 +62,9 @@ class IGRPhotoScrollView: UIScrollView {
             }
             
             let selector = #selector(self.stopUpdateContentOffset)
-            IGRPhotoScrollView.cancelPreviousPerformRequests(withTarget: self, selector: selector, object: nil)
+            IGRPhotoScrollView.cancelPreviousPerformRequests(withTarget: self,
+                                                             selector: selector,
+                                                             object: nil)
             perform(selector, with: nil, afterDelay: 0.5)
         }
         get {
@@ -49,17 +72,19 @@ class IGRPhotoScrollView: UIScrollView {
         }
     }
     
-    func zoomScaleToBound() -> CGFloat {
-        let scaleW: CGFloat = self.bounds.size.width / self.photoContentView.bounds.size.width
-        let scaleH: CGFloat = self.bounds.size.height / self.photoContentView.bounds.size.height
-        
-        return max(scaleW, scaleH)
-    }
-    
     func stopUpdateContentOffset() {
         if (isUpdatingContentOffset && updateDelegate != nil) {
             isUpdatingContentOffset = false
             updateDelegate?.scrollViewDidStopScrollUpdateContentOffset(self)
         }
+    }
+    
+    //MARK: - Zoom
+    
+    func zoomScaleToBound() -> CGFloat {
+        let scaleW: CGFloat = self.bounds.size.width / self.photoContentView.bounds.size.width
+        let scaleH: CGFloat = self.bounds.size.height / self.photoContentView.bounds.size.height
+        
+        return max(scaleW, scaleH)
     }
 }

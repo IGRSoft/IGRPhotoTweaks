@@ -28,10 +28,16 @@ import UIKit
     
     fileprivate func setup(cornerType type: CropCornerType, lineWidth: CGFloat, lineLenght: CGFloat) {
         
-        let horizontal = IGRCropCornerLine(frame: CGRect(x: 0.0, y: 0.0, width: lineLenght, height: lineWidth))
+        let horizontal = IGRCropCornerLine(frame: CGRect(x: 0.0,
+                                                         y: 0.0,
+                                                         width: lineLenght,
+                                                         height: lineWidth))
         self.addSubview(horizontal)
         
-        let vertical = IGRCropCornerLine(frame: CGRect(x: 0.0, y: 0.0, width: lineWidth, height: lineLenght))
+        let vertical = IGRCropCornerLine(frame: CGRect(x: 0.0,
+                                                       y: 0.0,
+                                                       width: lineWidth,
+                                                       height: lineLenght))
         self.addSubview(vertical)
         
         if type == .upperLeft {

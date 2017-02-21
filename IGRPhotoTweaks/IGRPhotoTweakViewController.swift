@@ -24,21 +24,28 @@ import Photos
 
 @objc(IGRPhotoTweakViewController) open class IGRPhotoTweakViewController: UIViewController {
     
-    /**
+    //MARK: - Public VARs
+    
+    /*
      Image to process.
      */
     open var image: UIImage!
-    /**
-     Flag indicating whether the image cropped will be saved to photo library automatically. Defaults to YES.
-     */
-    internal var isAutoSaveToLibray: Bool = false
-
-    /**
+    
+    /*
      The optional photo tweaks controller delegate.
      */
     open weak var delegate: IGRPhotoTweakViewControllerDelegate?
     
-    fileprivate var photoView: IGRPhotoTweakView!;
+    //MARK: - Protected VARs
+    
+    /*
+     Flag indicating whether the image cropped will be saved to photo library automatically. Defaults to YES.
+     */
+    internal var isAutoSaveToLibray: Bool = false
+    
+    //MARK: - Private VARs
+    
+    fileprivate var photoView: IGRPhotoTweakView!
     
     fileprivate let kBitsPerComponent = 8
     fileprivate let kBitmapBytesPerRow = 0
@@ -71,11 +78,11 @@ import Photos
     // MARK: - Public
     
     open func changedAngel(value: CGFloat) {
-        self.photoView.changedAngel(value: value)
+        self.photoView.changedAngle(value: value)
     }
     
     open func stopChangeAngel() {
-        self.photoView.stopChangeAngel()
+        self.photoView.stopChangeAngle()
     }
     
     open func resetView() {
@@ -95,12 +102,16 @@ import Photos
         // rotate
         transform = transform.rotated(by: self.photoView.angle)
         // scale
+        
         let t: CGAffineTransform = self.photoView.photoContentView.transform
         let xScale: CGFloat = sqrt(t.a * t.a + t.c * t.c)
         let yScale: CGFloat = sqrt(t.b * t.b + t.d * t.d)
         transform = transform.scaledBy(x: xScale, y: yScale)
+        
         let imageRef: CGImage = self.newTransformedImage(transform, sourceImage: self.image.cgImage!, sourceSize: self.image.size, sourceOrientation: self.image.imageOrientation, outputWidth: self.image.size.width, cropSize: self.photoView.cropView.frame.size, imageViewSize: self.photoView.photoContentView.bounds.size)
+        
         let image = UIImage(cgImage: imageRef)
+        
         if self.isAutoSaveToLibray {
             
             let writePhotoToLibraryBlock: ((_: Void) -> Void)? = {(_: Void) -> Void in
@@ -156,6 +167,7 @@ import Photos
     fileprivate func newScaledImage(_ source: CGImage, with orientation: UIImageOrientation, to size: CGSize, with quality: CGInterpolationQuality) -> CGImage {
         var srcSize: CGSize = size
         var rotation: CGFloat = 0.0
+        
         switch orientation {
         case .up:
             rotation = 0
@@ -173,6 +185,7 @@ import Photos
         
         let rgbColorSpace: CGColorSpace? = CGColorSpaceCreateDeviceRGB()
         var bitmapInfo: CGBitmapInfo!
+        
         if #available(iOS 10.0, *) {
             bitmapInfo = CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedLast.rawValue | CGImageByteOrderInfo.order32Big.rawValue)
         } else {
@@ -201,8 +214,10 @@ import Photos
     
     fileprivate func newTransformedImage(_ transform: CGAffineTransform, sourceImage: CGImage, sourceSize: CGSize, sourceOrientation: UIImageOrientation, outputWidth: CGFloat, cropSize: CGSize, imageViewSize: CGSize) -> CGImage {
         let source: CGImage = self.newScaledImage(sourceImage, with: sourceOrientation, to: sourceSize, with: .none)
+        
         let aspect: CGFloat = cropSize.height / cropSize.width
         let outputSize = CGSize(width: outputWidth, height: (outputWidth * aspect))
+        
         let context = CGContext(data: nil,
                                 width: Int(outputSize.width),
                                 height: Int(outputSize.height),
@@ -230,11 +245,17 @@ import Photos
     
     internal func image(image: UIImage, didFinishSavingWithError error: NSError?, contextInfo:UnsafeRawPointer) {
         if error == nil {
-            let ac = UIAlertController(title: "Save error", message: error?.localizedDescription, preferredStyle: .alert)
-            ac.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            let ac = UIAlertController(title: "Save error",
+                                       message: error?.localizedDescription,
+                                       preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "OK",
+                                       style: .default,
+                                       handler: nil))
             present(ac, animated: true, completion: nil)
         }
     }
+    
+    //MARK: - Customization
     
     open func customBorderColor() -> UIColor {
         return UIColor.cropLine()
@@ -264,6 +285,8 @@ import Photos
         return kCanvasHeaderHeigth
     }
 }
+
+//MARK: - Delegats funcs
 
 extension IGRPhotoTweakViewController : IGRPhotoTweakViewCustomizationDelegate {
     public func borderColor() -> UIColor {

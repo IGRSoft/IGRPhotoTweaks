@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A5F746251E5C093900B02B9D /* UIColor+Tweak.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F746241E5C093900B02B9D /* UIColor+Tweak.swift */; };
 		A5FE197A1E4F8D5700EA6F73 /* IGRPhotoTweaks.h in Headers */ = {isa = PBXBuildFile; fileRef = A5FE19781E4F8D5700EA6F73 /* IGRPhotoTweaks.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A5FE197E1E4F8DC600EA6F73 /* IGRCropCornerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51E64E51E4A2DFF00CD5872 /* IGRCropCornerView.swift */; };
 		A5FE197F1E4F8DC600EA6F73 /* IGRCropView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51E64E61E4A2DFF00CD5872 /* IGRCropView.swift */; };
@@ -19,7 +20,6 @@
 		A5FE19871E4F8DC600EA6F73 /* IGRPhotoTweakViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5DFB1E71E483D35009ACD31 /* IGRPhotoTweakViewController.swift */; };
 		A5FE19881E4F8DC600EA6F73 /* IGRPhotoTweakView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5DFB1DB1E4822B7009ACD31 /* IGRPhotoTweakView.swift */; };
 		A5FE19891E4F8DC600EA6F73 /* IGRPhotoTweakConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5DFB1E31E482801009ACD31 /* IGRPhotoTweakConstants.swift */; };
-		A5FE198A1E4F8DC600EA6F73 /* UIColor+Tweak.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5DFB1D91E482216009ACD31 /* UIColor+Tweak.swift */; };
 		A5FE198B1E4F8DC600EA6F73 /* IGRRadianAngle.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51E64F91E4AD94E00CD5872 /* IGRRadianAngle.swift */; };
 /* End PBXBuildFile section */
 
@@ -37,10 +37,10 @@
 		A5DFB1CE1E481FE4009ACD31 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A5DFB1D01E481FE4009ACD31 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A5DFB1D21E481FE4009ACD31 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A5DFB1D91E482216009ACD31 /* UIColor+Tweak.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Tweak.swift"; sourceTree = "<group>"; };
 		A5DFB1DB1E4822B7009ACD31 /* IGRPhotoTweakView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGRPhotoTweakView.swift; sourceTree = "<group>"; };
 		A5DFB1E31E482801009ACD31 /* IGRPhotoTweakConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGRPhotoTweakConstants.swift; sourceTree = "<group>"; };
 		A5DFB1E71E483D35009ACD31 /* IGRPhotoTweakViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGRPhotoTweakViewController.swift; sourceTree = "<group>"; };
+		A5F746241E5C093900B02B9D /* UIColor+Tweak.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Tweak.swift"; sourceTree = "<group>"; };
 		A5FE19761E4F8D5600EA6F73 /* IGRPhotoTweaks.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = IGRPhotoTweaks.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5FE19781E4F8D5700EA6F73 /* IGRPhotoTweaks.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IGRPhotoTweaks.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -99,12 +99,12 @@
 		A5DFB1CA1E481FE4009ACD31 /* IGRPhotoTweaks */ = {
 			isa = PBXGroup;
 			children = (
+				A5F746231E5C093900B02B9D /* Category */,
 				A51E64E41E4A2DFF00CD5872 /* CropView */,
 				A51E64E81E4A2DFF00CD5872 /* CustomViews */,
 				A5DFB1E71E483D35009ACD31 /* IGRPhotoTweakViewController.swift */,
 				A5DFB1DB1E4822B7009ACD31 /* IGRPhotoTweakView.swift */,
 				A5DFB1E31E482801009ACD31 /* IGRPhotoTweakConstants.swift */,
-				A5DFB1D91E482216009ACD31 /* UIColor+Tweak.swift */,
 				A51E64F91E4AD94E00CD5872 /* IGRRadianAngle.swift */,
 				A5FE19781E4F8D5700EA6F73 /* IGRPhotoTweaks.h */,
 			);
@@ -127,6 +127,14 @@
 				A5DFB1D21E481FE4009ACD31 /* Info.plist */,
 			);
 			path = Settings;
+			sourceTree = "<group>";
+		};
+		A5F746231E5C093900B02B9D /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				A5F746241E5C093900B02B9D /* UIColor+Tweak.swift */,
+			);
+			path = Category;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -214,6 +222,7 @@
 			files = (
 				A5FE197E1E4F8DC600EA6F73 /* IGRCropCornerView.swift in Sources */,
 				A5FE197F1E4F8DC600EA6F73 /* IGRCropView.swift in Sources */,
+				A5F746251E5C093900B02B9D /* UIColor+Tweak.swift in Sources */,
 				A5FE19801E4F8DC600EA6F73 /* IGRPhotoContentView.swift in Sources */,
 				A5FE19811E4F8DC600EA6F73 /* IGRCropLine.swift in Sources */,
 				A5FE19821E4F8DC600EA6F73 /* IGRCropGridLine.swift in Sources */,
@@ -223,7 +232,6 @@
 				A5FE19871E4F8DC600EA6F73 /* IGRPhotoTweakViewController.swift in Sources */,
 				A5FE19881E4F8DC600EA6F73 /* IGRPhotoTweakView.swift in Sources */,
 				A5FE19891E4F8DC600EA6F73 /* IGRPhotoTweakConstants.swift in Sources */,
-				A5FE198A1E4F8DC600EA6F73 /* UIColor+Tweak.swift in Sources */,
 				A5FE198B1E4F8DC600EA6F73 /* IGRRadianAngle.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -255,8 +263,6 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
@@ -271,12 +277,10 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -306,8 +310,6 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
@@ -322,12 +324,10 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
@@ -348,10 +348,8 @@
 		A5FE197C1E4F8D5700EA6F73 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 104;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = DMP42GVPJ3;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -362,17 +360,14 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
 			};
 			name = Debug;
 		};
 		A5FE197D1E4F8D5700EA6F73 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 104;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = DMP42GVPJ3;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -383,7 +378,6 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
 		};
