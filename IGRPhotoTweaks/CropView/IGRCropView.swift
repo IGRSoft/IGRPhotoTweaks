@@ -42,11 +42,11 @@ class IGRCropView: UIView {
     fileprivate var lowerRight: IGRCropCornerView!
     fileprivate var lowerLeft:  IGRCropCornerView!
     
-    fileprivate var horizontalCropLines     = [UIView]()
-    fileprivate var verticalCropLines       = [UIView]()
+    fileprivate var horizontalCropLines     = [IGRCropLine]()
+    fileprivate var verticalCropLines       = [IGRCropLine]()
     
-    fileprivate var horizontalGridLines     = [UIView]()
-    fileprivate var verticalGridLines       = [UIView]()
+    fileprivate var horizontalGridLines     = [IGRCropGridLine]()
+    fileprivate var verticalGridLines       = [IGRCropGridLine]()
     
     fileprivate var cornerBorderLength      = kCropViewCornerLength
     fileprivate var cornerBorderWidth       = kCropViewCornerWidth

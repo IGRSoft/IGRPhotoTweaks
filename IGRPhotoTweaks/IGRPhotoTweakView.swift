@@ -158,8 +158,6 @@ import UIKit
             
             self.cropView.center = self.scrollView.center
             self.checkScrollViewContentOffset();
-            
-            self.cropViewDidStopCrop(self.cropView)
         }
     }
     
