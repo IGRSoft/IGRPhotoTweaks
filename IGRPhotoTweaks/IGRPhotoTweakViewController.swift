@@ -9,6 +9,7 @@
 import UIKit
 import Photos
 
+
 @objc public protocol IGRPhotoTweakViewControllerDelegate: NSObjectProtocol {
     
     /**
@@ -108,7 +109,9 @@ import Photos
         let yScale: CGFloat = sqrt(t.b * t.b + t.d * t.d)
         transform = transform.scaledBy(x: xScale, y: yScale)
         
-        let imageRef: CGImage = self.newTransformedImage(transform, sourceImage: self.image.cgImage!, sourceSize: self.image.size, sourceOrientation: self.image.imageOrientation, outputWidth: self.image.size.width, cropSize: self.photoView.cropView.frame.size, imageViewSize: self.photoView.photoContentView.bounds.size)
+        let fixedImage = fixOrientation(imageToFix: self.image)
+        
+        let imageRef: CGImage = self.newTransformedImage(transform, sourceImage: fixedImage!, sourceSize: self.image.size, outputWidth: self.image.size.width, cropSize: self.photoView.cropView.frame.size, imageViewSize: self.photoView.photoContentView.bounds.size)
         
         let image = UIImage(cgImage: imageRef)
         
@@ -164,67 +167,100 @@ import Photos
     
     // MARK: - Image Processor
     
-    fileprivate func newScaledImage(_ source: CGImage, with orientation: UIImageOrientation, to size: CGSize, with quality: CGInterpolationQuality) -> CGImage {
-        var srcSize: CGSize = size
-        var rotation: CGFloat = 0.0
+    fileprivate func fixOrientation(imageToFix: UIImage) -> CGImage? {
         
-        switch orientation {
-        case .up:
-            rotation = 0
-        case .down:
-            rotation = .pi
-        case .left:
-            rotation = CGFloat(M_PI_2)
-            srcSize = CGSize(width: size.height, height: size.width)
-        case .right:
-            rotation = -(CGFloat)(M_PI_2)
-            srcSize = CGSize(width: size.height, height: size.width)
-        default:
+        guard let cgImage = imageToFix.cgImage else {
+            return nil
+        }
+        
+        if imageToFix.imageOrientation == UIImageOrientation.up {
+            return imageToFix.cgImage
+        }
+        
+        let width  = imageToFix.size.width
+        let height = imageToFix.size.height
+        
+        var transform = CGAffineTransform.identity
+        
+        switch imageToFix.imageOrientation {
+        case .down, .downMirrored:
+            transform = transform.translatedBy(x: width, y: height)
+            transform = transform.rotated(by: CGFloat.pi)
+            
+        case .left, .leftMirrored:
+            transform = transform.translatedBy(x: width, y: 0)
+            transform = transform.rotated(by: 0.5*CGFloat.pi)
+            
+        case .right, .rightMirrored:
+            transform = transform.translatedBy(x: 0, y: height)
+            transform = transform.rotated(by: -0.5*CGFloat.pi)
+            
+        case .up, .upMirrored:
             break
         }
         
-        let rgbColorSpace: CGColorSpace? = CGColorSpaceCreateDeviceRGB()
-        var bitmapInfo: CGBitmapInfo!
-        
-        if #available(iOS 10.0, *) {
-            bitmapInfo = CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedLast.rawValue | CGImageByteOrderInfo.order32Big.rawValue)
-        } else {
-            bitmapInfo = CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedLast.rawValue | (4 << 12))
+        switch imageToFix.imageOrientation {
+        case .upMirrored, .downMirrored:
+            transform = transform.translatedBy(x: width, y: 0)
+            transform = transform.scaledBy(x: -1, y: 1)
+            
+        case .leftMirrored, .rightMirrored:
+            transform = transform.translatedBy(x: height, y: 0)
+            transform = transform.scaledBy(x: -1, y: 1)
+            
+        default:
+            break;
         }
         
-        let context = CGContext(data: nil,
-                                width: Int(size.width),
-                                height: Int(size.height),
-                                bitsPerComponent: kBitsPerComponent,
-                                bytesPerRow: kBitmapBytesPerRow,
-                                space: rgbColorSpace!,
-                                bitmapInfo: bitmapInfo.rawValue
-        )
-        context!.interpolationQuality = quality
-        context?.translateBy(x: size.width / 2, y: size.height / 2)
-        context?.rotate(by: rotation)
-        context?.draw(source, in: CGRect(x: (-srcSize.width / 2.0),
-                                         y: (-srcSize.height / 2.0),
-                                         width: srcSize.width,
-                                         height: srcSize.height))
-        let resultRef: CGImage = context!.makeImage()!
         
-        return resultRef
+        guard let colorSpace = cgImage.colorSpace else {
+            return nil
+        }
+        
+        guard let context = CGContext(
+            data: nil,
+            width: Int(width),
+            height: Int(height),
+            bitsPerComponent: cgImage.bitsPerComponent,
+            bytesPerRow: 0,
+            space: colorSpace,
+            bitmapInfo: UInt32(cgImage.bitmapInfo.rawValue)
+            ) else {
+                return nil
+        }
+        
+        context.concatenate(transform);
+        
+        switch imageToFix.imageOrientation {
+            
+        case .left, .leftMirrored, .right, .rightMirrored:
+            context.draw(cgImage, in: CGRect(x: 0, y: 0, width: height, height: width))
+            
+        default:
+            context.draw(cgImage, in: CGRect(x: 0, y: 0, width: width, height: height))
+        }
+        
+        // And now we just create a new UIImage from the drawing context
+        guard let newCGImg = context.makeImage() else {
+            return nil
+        }
+        
+        return newCGImg
     }
     
-    fileprivate func newTransformedImage(_ transform: CGAffineTransform, sourceImage: CGImage, sourceSize: CGSize, sourceOrientation: UIImageOrientation, outputWidth: CGFloat, cropSize: CGSize, imageViewSize: CGSize) -> CGImage {
-        let source: CGImage = self.newScaledImage(sourceImage, with: sourceOrientation, to: sourceSize, with: .none)
-        
+    
+    fileprivate func newTransformedImage(_ transform: CGAffineTransform, sourceImage: CGImage, sourceSize: CGSize, outputWidth: CGFloat, cropSize: CGSize, imageViewSize: CGSize) -> CGImage {
+     
         let aspect: CGFloat = cropSize.height / cropSize.width
         let outputSize = CGSize(width: outputWidth, height: (outputWidth * aspect))
         
         let context = CGContext(data: nil,
                                 width: Int(outputSize.width),
                                 height: Int(outputSize.height),
-                                bitsPerComponent: source.bitsPerComponent,
+                                bitsPerComponent: sourceImage.bitsPerComponent,
                                 bytesPerRow: kBitmapBytesPerRow,
-                                space: source.colorSpace!,
-                                bitmapInfo: source.bitmapInfo.rawValue)
+                                space: sourceImage.colorSpace!,
+                                bitmapInfo: sourceImage.bitmapInfo.rawValue)
         context?.setFillColor(UIColor.clear.cgColor)
         context?.fill(CGRect(x: 0.0, y: 0.0, width: (outputSize.width), height: (outputSize.height)))
         var uiCoords = CGAffineTransform(scaleX: outputSize.width / cropSize.width, y: outputSize.height / cropSize.height)
@@ -285,6 +321,7 @@ import Photos
         return kCanvasHeaderHeigth
     }
 }
+
 
 //MARK: - Delegats funcs
 
