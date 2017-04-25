@@ -79,19 +79,19 @@ override open func setupThemes() {
     IGRPhotoTweakView.appearance().backgroundColor = UIColor.brown
 }
 
-override open func borderColor() -> UIColor {
+override open func customBorderColor() -> UIColor {
     return UIColor.red
 }
 
-override open func borderWidth() -> CGFloat {
+override open func customBorderWidth() -> CGFloat {
     return 2.0
 }
 
-override open func cornerBorderWidth() -> CGFloat {
+override open func customCornerBorderWidth() -> CGFloat {
     return 4.0
 }
 
-override open func cornerBorderLength() -> CGFloat {
+override open func customCornerBorderLength() -> CGFloat {
     return 30.0
 }
 
