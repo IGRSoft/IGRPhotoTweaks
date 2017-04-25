@@ -9,10 +9,6 @@
 import UIKit
 
 @objc public class IGRCropCornerView: UIView {
-
-    override public class func initialize () {
-        self.appearance().backgroundColor = UIColor.clear
-    }
     
     init(cornerType type: CropCornerType, lineWidth: CGFloat, lineLenght: CGFloat) {
         super.init(frame: CGRect(x: 0.0, y: 0.0, width: lineLenght, height: lineLenght))

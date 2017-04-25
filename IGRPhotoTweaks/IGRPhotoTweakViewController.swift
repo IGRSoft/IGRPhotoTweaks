@@ -55,13 +55,14 @@ import Photos
     
     override open func viewDidLoad() {
         super.viewDidLoad()
-
+        
         self.automaticallyAdjustsScrollViewInsets = false
         self.view.clipsToBounds = true
         
+        self.setupThemes()
         self.setupSubviews()
     }
-
+    
     override open func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -74,6 +75,17 @@ import Photos
         self.photoView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         self.view.addSubview(self.photoView)
         self.view.sendSubview(toBack: self.photoView)
+    }
+    
+    open func setupThemes() {
+        IGRPhotoTweakView.appearance().backgroundColor = UIColor.photoTweakCanvasBackground()
+        IGRPhotoContentView.appearance().backgroundColor = UIColor.clear
+        IGRCropView.appearance().backgroundColor = UIColor.clear
+        IGRCropGridLine.appearance().backgroundColor = UIColor.gridLine()
+        IGRCropLine.appearance().backgroundColor = UIColor.cropLine()
+        IGRCropCornerView.appearance().backgroundColor = UIColor.clear
+        IGRCropCornerLine.appearance().backgroundColor = UIColor.cropLine()
+        IGRCropMaskView.appearance().backgroundColor = UIColor.mask()
     }
     
     // MARK: - Public
@@ -133,7 +145,9 @@ import Photos
                     }
                     else {
                         DispatchQueue.main.async{
-                            let ac = UIAlertController(title: "Authorization error", message: "App don't granted to access to Photo Library", preferredStyle: .alert)
+                            let ac = UIAlertController(title: "Authorization error",
+                                                       message: "App don't granted to access to Photo Library",
+                                                       preferredStyle: .alert)
                             ac.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
                             ac.addAction(UIAlertAction(title: "Settings", style: .default, handler: { (action) in
                                 guard let settingsUrl = URL(string: UIApplicationOpenSettingsURLString) else {
@@ -189,11 +203,11 @@ import Photos
             
         case .left, .leftMirrored:
             transform = transform.translatedBy(x: width, y: 0)
-            transform = transform.rotated(by: 0.5*CGFloat.pi)
+            transform = transform.rotated(by: 0.5 * CGFloat.pi)
             
         case .right, .rightMirrored:
             transform = transform.translatedBy(x: 0, y: height)
-            transform = transform.rotated(by: -0.5*CGFloat.pi)
+            transform = transform.rotated(by: -0.5 * CGFloat.pi)
             
         case .up, .upMirrored:
             break
@@ -250,7 +264,7 @@ import Photos
     
     
     fileprivate func newTransformedImage(_ transform: CGAffineTransform, sourceImage: CGImage, sourceSize: CGSize, outputWidth: CGFloat, cropSize: CGSize, imageViewSize: CGSize) -> CGImage {
-     
+        
         let aspect: CGFloat = cropSize.height / cropSize.width
         let outputSize = CGSize(width: outputWidth, height: (outputWidth * aspect))
         
@@ -263,17 +277,18 @@ import Photos
                                 bitmapInfo: sourceImage.bitmapInfo.rawValue)
         context?.setFillColor(UIColor.clear.cgColor)
         context?.fill(CGRect(x: 0.0, y: 0.0, width: (outputSize.width), height: (outputSize.height)))
-        var uiCoords = CGAffineTransform(scaleX: outputSize.width / cropSize.width, y: outputSize.height / cropSize.height)
+        var uiCoords = CGAffineTransform(scaleX: outputSize.width / cropSize.width,
+                                         y: outputSize.height / cropSize.height)
         uiCoords = uiCoords.translatedBy(x: cropSize.width / 2.0, y: cropSize.height / 2.0)
         uiCoords = uiCoords.scaledBy(x: 1.0, y: -1.0)
         context?.concatenate(uiCoords)
         context?.concatenate(transform)
         context?.scaleBy(x: 1.0, y: -1.0)
         context?.draw(sourceImage, in: CGRect(x: (-imageViewSize.width / 2.0),
-                                        y: (-imageViewSize.height / 2.0),
-                                        width: imageViewSize.width,
-                                        height: imageViewSize.height))
-
+                                              y: (-imageViewSize.height / 2.0),
+                                              width: imageViewSize.width,
+                                              height: imageViewSize.height))
+        
         let resultRef: CGImage = context!.makeImage()!
         
         return resultRef

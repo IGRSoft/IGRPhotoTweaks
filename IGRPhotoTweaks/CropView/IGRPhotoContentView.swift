@@ -10,10 +10,6 @@ import UIKit
 
 @objc public class IGRPhotoContentView: UIView {
     
-    override public class func initialize () {
-        self.appearance().backgroundColor = UIColor.clear
-    }
-    
     var imageView: UIImageView!
     var image: UIImage! {
         didSet {

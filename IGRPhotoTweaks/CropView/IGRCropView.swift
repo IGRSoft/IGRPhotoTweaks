@@ -56,11 +56,7 @@ class IGRCropView: UIView {
     
     // MARK: - Life Cicle
     
-    override class func initialize () {
-        self.appearance().backgroundColor = UIColor.clear
-    }
-    
-    init(frame: CGRect, cornerBorderWidth: CGFloat, cornerBorderLength:CGFloat) {
+    init(frame: CGRect, cornerBorderWidth: CGFloat, cornerBorderLength: CGFloat) {
         super.init(frame: frame)
         
         self.cornerBorderLength = cornerBorderLength

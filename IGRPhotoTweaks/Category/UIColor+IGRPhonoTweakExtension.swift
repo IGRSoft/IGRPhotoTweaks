@@ -1,5 +1,5 @@
 //
-//  UIColor+Tweak.swift
+//  UIColor+IGRPhonoTweakExtension.swift
 //  IGRPhotoTweaks
 //
 //  Created by Vitalii Parovishnyk on 2/6/17.

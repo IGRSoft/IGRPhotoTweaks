@@ -82,10 +82,6 @@ import UIKit
     
     // MARK: - Life Cicle
     
-    override public class func initialize () {
-        self.appearance().backgroundColor = UIColor.photoTweakCanvasBackground()
-    }
-    
     init(frame: CGRect, image: UIImage, customizationDelegate: IGRPhotoTweakViewCustomizationDelegate!) {
         super.init(frame: frame)
         
