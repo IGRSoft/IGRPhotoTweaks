@@ -48,7 +48,7 @@
 - (void)setupSlider {
     self.angleSlider.minimumValue = -[IGRRadianAngle toRadians:45.0];
     self.angleSlider.maximumValue = [IGRRadianAngle toRadians:45.0];
-    self.angleSlider.value = 0.0;
+    self.angleSlider.value = CGFloat.zero;
     
     [self setupAngleLabelValue:self.angleSlider.value];
 }
@@ -71,13 +71,13 @@
 }
 
 - (IBAction)onChandeAnglePickerViewValue:(UIPickerView *)sender {
-    CGFloat radians = 0.0;
+    CGFloat radians = CGFloat.zero;
     [self setupAngleLabelValue:radians];
     [self changedAngleWithValue:radians];
 }
 
 - (IBAction)onTouchResetButton:(UIButton *)sender {
-    self.angleSlider.value = 0.0;
+    self.angleSlider.value = CGFloat.zero;
     [self setupAngleLabelValue:self.angleSlider.value];
     
     [self resetView];

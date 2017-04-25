@@ -32,8 +32,8 @@ class ViewController: UIViewController {
                                           target: self,
                                           action: #selector(self.openLibrary))
         
-        self.navigationItem.leftBarButtonItem = libraryItem;
-        self.navigationItem.rightBarButtonItem = editItem;
+        self.navigationItem.leftBarButtonItem = libraryItem
+        self.navigationItem.rightBarButtonItem = editItem
         
         if (self.image == nil) {
             openLibrary()
@@ -52,7 +52,7 @@ class ViewController: UIViewController {
             
             let exampleCropViewController = segue.destination as! ExampleCropViewController
             exampleCropViewController.image = sender as! UIImage
-            exampleCropViewController.delegate = self;
+            exampleCropViewController.delegate = self
         }
     }
     

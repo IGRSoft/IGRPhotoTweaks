@@ -42,7 +42,7 @@ import UIKit
     
     open weak var customizationDelegate: IGRPhotoTweakViewCustomizationDelegate?
     
-    private(set) var angle:                 CGFloat = 0.0
+    private(set) var angle:                 CGFloat = CGFloat.zero
     private(set) var photoContentOffset =   CGPoint.zero
     private(set) var cropView:              IGRCropView!
     private(set) var photoContentView:      IGRPhotoContentView!
@@ -51,9 +51,9 @@ import UIKit
         get {
             let rect: CGRect = self.photoContentView.convert(self.photoContentView.bounds,
                                                              to: self)
-            let point = CGPoint(x: (rect.origin.x + rect.size.width / 2.0),
-                                y: (rect.origin.y + rect.size.height / 2.0))
-            let zeroPoint = CGPoint(x: (self.frame.width / 2.0), y: self.centerY)
+            let point = CGPoint(x: (rect.origin.x + rect.size.width.half),
+                                y: (rect.origin.y + rect.size.height.half))
+            let zeroPoint = CGPoint(x: self.frame.width.half, y: self.centerY)
             
             return CGPoint(x: (point.x - zeroPoint.x), y: (point.y - zeroPoint.y))
         }
@@ -67,13 +67,13 @@ import UIKit
     fileprivate var originalSize = CGSize.zero
     
     fileprivate var manualZoomed = false
-    fileprivate var manualMove = false
+    fileprivate var manualMove   = false
     
     // masks
-    fileprivate var topMask: UIView!
-    fileprivate var leftMask: UIView!
+    fileprivate var topMask:    UIView!
+    fileprivate var leftMask:   UIView!
     fileprivate var bottomMask: UIView!
-    fileprivate var rightMask: UIView!
+    fileprivate var rightMask:  UIView!
     
     // constants
     fileprivate var maximumCanvasSize: CGSize!
@@ -93,7 +93,7 @@ import UIKit
         self.originalSize = bounds.size
         
         self.scrollView = IGRPhotoScrollView(frame: bounds)
-        self.scrollView.center = CGPoint(x: (self.frame.width / 2.0), y: self.centerY)
+        self.scrollView.center = CGPoint(x: self.frame.width.half, y: self.centerY)
         self.scrollView.bounces = true
         self.scrollView.layer.anchorPoint = CGPoint(x: 0.5, y: 0.5)
         self.scrollView.alwaysBounceVertical = true
@@ -136,7 +136,7 @@ import UIKit
         
         self.rightMask = IGRCropMaskView()
         self.addSubview(self.rightMask)
-        self.updateMasks(false)
+        self.updateMasks(animate: false)
         
         self.originalPoint = self.convert(self.scrollView.center, to: self)
     }
@@ -150,10 +150,9 @@ import UIKit
         
         if !manualMove {
             self.originalSize = self.maxBounds().size
-            self.scrollView.center = CGPoint(x: (self.frame.width / 2.0), y: self.centerY)
+            self.scrollView.center = CGPoint(x: self.frame.width.half, y: self.centerY)
             
             self.cropView.center = self.scrollView.center
-            self.checkScrollViewContentOffset();
         }
     }
     
@@ -203,13 +202,13 @@ import UIKit
     
     //MARK: - Masks
     
-    fileprivate func updateMasks(_ animate: Bool) {
+    fileprivate func updateMasks(animate: Bool) {
         let animationBlock: ((_: Void) -> Void)? = {(_: Void) -> Void in
-            self.topMask.frame = CGRect(x: 0.0,
-                                        y: 0.0,
+            self.topMask.frame = CGRect(x: CGFloat.zero,
+                                        y: CGFloat.zero,
                                         width: (self.cropView.frame.origin.x + self.cropView.frame.size.width),
                                         height: self.cropView.frame.origin.y)
-            self.leftMask.frame = CGRect(x: 0.0,
+            self.leftMask.frame = CGRect(x: CGFloat.zero,
                                          y: self.cropView.frame.origin.y,
                                          width: self.cropView.frame.origin.x,
                                          height: self.frame.size.height - self.cropView.frame.origin.y)
@@ -218,13 +217,13 @@ import UIKit
                                            width: (self.frame.size.width - self.cropView.frame.origin.x),
                                            height: (self.frame.size.height - (self.cropView.frame.origin.y + self.cropView.frame.size.height)))
             self.rightMask.frame = CGRect(x: (self.cropView.frame.origin.x + self.cropView.frame.size.width),
-                                          y: 0.0,
+                                          y: CGFloat.zero,
                                           width: (self.frame.size.width - (self.cropView.frame.origin.x + self.cropView.frame.size.width)),
                                           height: (self.cropView.frame.origin.y + self.cropView.frame.size.height))
         }
         
         if animate {
-            UIView.animate(withDuration: 0.25, animations: animationBlock!)
+            UIView.animate(withDuration: kAnimationDuration, animations: animationBlock!)
         }
         else {
             animationBlock!()
@@ -243,7 +242,7 @@ import UIKit
             }
             
             if animate {
-                UIView.animate(withDuration: 0.25, animations: animationBlock!)
+                UIView.animate(withDuration: kAnimationDuration, animations: animationBlock!)
             }
             else {
                 animationBlock!()
@@ -255,8 +254,8 @@ import UIKit
     
     open func changedAngle(value: CGFloat) {
         // update masks
-        self.updateMasks(false)
-        self.highlightMask(true, animate: false);
+        self.updateMasks(animate: false)
+        self.highlightMask(true, animate: false)
         
         // update grids
         self.cropView.updateGridLines(false)
@@ -270,18 +269,18 @@ import UIKit
     
     open func stopChangeAngle() {
         self.cropView.dismissGridLines()
-        self.highlightMask(false, animate: false);
+        self.highlightMask(false, animate: false)
     }
     
     //MARK: - Reset
     
     open func resetView() {
-        UIView.animate(withDuration: 0.25, animations: {() -> Void in
+        UIView.animate(withDuration: kAnimationDuration, animations: {() -> Void in
             self.angle = 0
             self.scrollView.transform = CGAffineTransform.identity
-            self.scrollView.center = CGPoint(x: (self.frame.width / 2.0), y: self.centerY)
-            self.scrollView.bounds = CGRect(x: 0.0,
-                                            y: 0.0,
+            self.scrollView.center = CGPoint(x: self.frame.width.half, y: self.centerY)
+            self.scrollView.bounds = CGRect(x: CGFloat.zero,
+                                            y: CGFloat.zero,
                                             width: self.originalSize.width,
                                             height: self.originalSize.height)
             self.scrollView.minimumZoomScale = 1
@@ -289,22 +288,20 @@ import UIKit
             
             self.cropView.frame = self.scrollView.frame
             self.cropView.center = self.scrollView.center
-            self.updateMasks(false)
+            self.updateMasks(animate: false)
         })
     }
     
     //MARK: - Aspect Ratio
     
     open func resetAspectRect() {
-        self.cropView.frame = CGRect(x: 0.0,
-                                     y: 0.0,
+        self.cropView.frame = CGRect(x: CGFloat.zero,
+                                     y: CGFloat.zero,
                                      width: self.originalSize.width,
                                      height: self.originalSize.height)
         self.cropView.center = self.scrollView.center
         
         self.cropViewDidStopCrop(self.cropView)
-        
-        self.updateMasks(false)
     }
     
     open func setCropAspectRect(aspect: String) {
@@ -312,8 +309,6 @@ import UIKit
         self.cropView.center = self.scrollView.center
         
         self.cropViewDidStopCrop(self.cropView)
-        
-        self.updateMasks(false)
     }
     
     //MARK: - Private FUNCs
@@ -323,31 +318,18 @@ import UIKit
         self.maximumCanvasSize = CGSize(width: (kMaximumCanvasWidthRatio * self.frame.size.width),
                                         height: (kMaximumCanvasHeightRatio * self.frame.size.height - self.canvasHeaderHeigth()))
         
-        self.centerY = self.maximumCanvasSize.height / 2.0 + self.canvasHeaderHeigth()
+        self.centerY = self.maximumCanvasSize.height.half + self.canvasHeaderHeigth()
         
         let scaleX: CGFloat = self.image.size.width / self.maximumCanvasSize.width
         let scaleY: CGFloat = self.image.size.height / self.maximumCanvasSize.height
         let scale: CGFloat = max(scaleX, scaleY)
         
-        let bounds = CGRect(x: 0.0,
-                            y: 0.0,
+        let bounds = CGRect(x: CGFloat.zero,
+                            y: CGFloat.zero,
                             width: (self.image.size.width / scale),
                             height: (self.image.size.height / scale))
         
         return bounds
-    }
-    
-    fileprivate func checkScrollViewContentOffset() {
-        self.scrollView.setContentOffsetX(max(self.scrollView.contentOffset.x, 0))
-        self.scrollView.setContentOffsetY(max(self.scrollView.contentOffset.y, 0))
-        
-        if self.scrollView.contentSize.height - self.scrollView.contentOffset.y <= self.scrollView.bounds.size.height {
-            self.scrollView.setContentOffsetY(self.scrollView.contentSize.height - self.scrollView.bounds.size.height)
-        }
-        
-        if self.scrollView.contentSize.width - self.scrollView.contentOffset.x <= self.scrollView.bounds.size.width {
-            self.scrollView.setContentOffsetX(self.scrollView.contentSize.width - self.scrollView.bounds.size.width)
-        }
     }
     
     fileprivate func updatePosition() {
@@ -356,11 +338,11 @@ import UIKit
         let height: CGFloat = fabs(sin(self.angle)) * self.cropView.frame.size.width + fabs(cos(self.angle)) * self.cropView.frame.size.height
         let center: CGPoint = self.scrollView.center
         let contentOffset: CGPoint = self.scrollView.contentOffset
-        let contentOffsetCenter = CGPoint(x: (contentOffset.x + self.scrollView.bounds.size.width / 2.0),
-                                          y: (contentOffset.y + self.scrollView.bounds.size.height / 2.0))
-        self.scrollView.bounds = CGRect(x: 0.0, y: 0.0, width: width, height: height)
-        let newContentOffset = CGPoint(x: (contentOffsetCenter.x - self.scrollView.bounds.size.width / 2.0),
-                                       y: (contentOffsetCenter.y - self.scrollView.bounds.size.height / 2.0))
+        let contentOffsetCenter = CGPoint(x: (contentOffset.x + self.scrollView.bounds.size.width.half),
+                                          y: (contentOffset.y + self.scrollView.bounds.size.height.half))
+        self.scrollView.bounds = CGRect(x: CGFloat.zero, y: CGFloat.zero, width: width, height: height)
+        let newContentOffset = CGPoint(x: (contentOffsetCenter.x - self.scrollView.bounds.size.width.half),
+                                       y: (contentOffsetCenter.y - self.scrollView.bounds.size.height.half))
         self.scrollView.contentOffset = newContentOffset
         self.scrollView.center = center
         
@@ -373,7 +355,8 @@ import UIKit
             self.scrollView.minimumZoomScale = zoom
             self.manualZoomed = false
         }
-        self.checkScrollViewContentOffset()
+        
+        self.scrollView.checkContentOffset()
     }
 }
 
@@ -400,6 +383,7 @@ extension IGRPhotoTweakView : IGRPhotoScrollViewDelegate {
     }
     
     func scrollViewDidStopScrollUpdateContentOffset(_ scrollView: UIScrollView) {
+        self.updateMasks(animate: false)
         self.highlightMask(false, animate: true)
     }
 }
@@ -408,11 +392,11 @@ extension IGRPhotoTweakView : IGRCropViewDelegate {
     
     func cropViewDidStartCrop(_ cropView: IGRCropView) {
         self.highlightMask(true, animate: true)
-        self.manualMove = true;
+        self.manualMove = true
     }
     
     func cropViewDidMove(_ cropView: IGRCropView) {
-        self.updateMasks(false)
+        self.updateMasks(animate: false)
     }
     
     func cropViewDidStopCrop(_ cropView: IGRCropView) {
@@ -421,8 +405,8 @@ extension IGRPhotoTweakView : IGRCropViewDelegate {
         let scale: CGFloat = min(scaleX, scaleY)
         
         // calculate the new bounds of crop view
-        let newCropBounds = CGRect(x: 0.0,
-                                   y: 0.0,
+        let newCropBounds = CGRect(x: CGFloat.zero,
+                                   y: CGFloat.zero,
                                    width: (scale * cropView.frame.size.width),
                                    height: (scale * cropView.frame.size.height))
         
@@ -432,31 +416,31 @@ extension IGRPhotoTweakView : IGRCropViewDelegate {
         
         // calculate the zoom area of scroll view
         var scaleFrame: CGRect = cropView.frame
-        if scaleFrame.size.width >= self.scrollView.bounds.size.width {
-            scaleFrame.size.width = self.scrollView.bounds.size.width - 1
+        if scaleFrame.size.width >= self.scrollView.contentSize.width {
+            scaleFrame.size.width = self.scrollView.contentSize.width - 1
         }
-        if scaleFrame.size.height >= self.scrollView.bounds.size.height {
-            scaleFrame.size.height = self.scrollView.bounds.size.height - 1
+        if scaleFrame.size.height >= self.scrollView.contentSize.height {
+            scaleFrame.size.height = self.scrollView.contentSize.height - 1
         }
         
         let contentOffset: CGPoint = self.scrollView.contentOffset
-        let contentOffsetCenter = CGPoint(x: (contentOffset.x + self.scrollView.bounds.size.width / 2.0),
-                                          y: (contentOffset.y + self.scrollView.bounds.size.height / 2.0))
+        let contentOffsetCenter = CGPoint(x: (contentOffset.x + self.scrollView.bounds.size.width.half),
+                                          y: (contentOffset.y + self.scrollView.bounds.size.height.half))
         var bounds: CGRect = self.scrollView.bounds
         bounds.size.width = width
         bounds.size.height = height
-        self.scrollView.bounds = CGRect(x: 0.0, y: 0.0, width: width, height: height)
-        let newContentOffset = CGPoint(x: (contentOffsetCenter.x - self.scrollView.bounds.size.width / 2.0),
-                                       y: (contentOffsetCenter.y - self.scrollView.bounds.size.height / 2.0))
+        self.scrollView.bounds = CGRect(x: CGFloat.zero, y: CGFloat.zero, width: width, height: height)
+        let newContentOffset = CGPoint(x: (contentOffsetCenter.x - self.scrollView.bounds.size.width.half),
+                                       y: (contentOffsetCenter.y - self.scrollView.bounds.size.height.half))
         self.scrollView.contentOffset = newContentOffset
         
-        UIView.animate(withDuration: 0.25, animations: {() -> Void in
+        UIView.animate(withDuration: kAnimationDuration, animations: {() -> Void in
             // animate crop view
-            cropView.bounds = CGRect(x: 0.0,
-                                     y: 0.0,
+            cropView.bounds = CGRect(x: CGFloat.zero,
+                                     y: CGFloat.zero,
                                      width: (newCropBounds.size.width),
                                      height: (newCropBounds.size.height))
-            cropView.center = CGPoint(x: (self.frame.width / 2.0), y: self.centerY)
+            cropView.center = CGPoint(x: self.frame.width.half, y: self.centerY)
             
             // zoom the specified area of scroll view
             let zoomRect: CGRect = self.convert(scaleFrame, to: self.scrollView.photoContentView)
@@ -466,7 +450,7 @@ extension IGRPhotoTweakView : IGRCropViewDelegate {
         self.manualZoomed = true
         
         // update masks
-        self.updateMasks(true)
+        self.updateMasks(animate: false)
         self.cropView.dismissCropLines()
         self.cropView.dismissGridLines()
         
@@ -474,18 +458,17 @@ extension IGRPhotoTweakView : IGRCropViewDelegate {
         let scaleW: CGFloat = self.scrollView.bounds.size.width / self.scrollView.contentSize.width
         var scaleM: CGFloat = max(scaleH, scaleW)
         
-        let duration = 0.2
-        DispatchQueue.main.asyncAfter(deadline: .now() + duration, execute: {() -> Void in
+        DispatchQueue.main.asyncAfter(deadline: .now() + kAnimationDuration, execute: {() -> Void in
             if scaleM > 1 {
                 scaleM = scaleM * self.scrollView.zoomScale
                 self.scrollView.setZoomScale(scaleM, animated: false)
             }
-            UIView.animate(withDuration: duration, animations: {() -> Void in
-                self.checkScrollViewContentOffset()
+            UIView.animate(withDuration: kAnimationDuration, animations: {() -> Void in
+                self.scrollView.checkContentOffset()
             })
         })
         
         self.highlightMask(false, animate: true)
-        self.manualMove = false;
+        self.manualMove = false
     }
 }

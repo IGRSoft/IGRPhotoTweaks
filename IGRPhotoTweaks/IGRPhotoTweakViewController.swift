@@ -223,7 +223,7 @@ import Photos
             transform = transform.scaledBy(x: -1, y: 1)
             
         default:
-            break;
+            break
         }
         
         
@@ -243,7 +243,7 @@ import Photos
                 return nil
         }
         
-        context.concatenate(transform);
+        context.concatenate(transform)
         
         switch imageToFix.imageOrientation {
             
@@ -276,16 +276,16 @@ import Photos
                                 space: sourceImage.colorSpace!,
                                 bitmapInfo: sourceImage.bitmapInfo.rawValue)
         context?.setFillColor(UIColor.clear.cgColor)
-        context?.fill(CGRect(x: 0.0, y: 0.0, width: (outputSize.width), height: (outputSize.height)))
+        context?.fill(CGRect(x: CGFloat.zero, y: CGFloat.zero, width: (outputSize.width), height: (outputSize.height)))
         var uiCoords = CGAffineTransform(scaleX: outputSize.width / cropSize.width,
                                          y: outputSize.height / cropSize.height)
-        uiCoords = uiCoords.translatedBy(x: cropSize.width / 2.0, y: cropSize.height / 2.0)
+        uiCoords = uiCoords.translatedBy(x: cropSize.width.half, y: cropSize.height.half)
         uiCoords = uiCoords.scaledBy(x: 1.0, y: -1.0)
         context?.concatenate(uiCoords)
         context?.concatenate(transform)
         context?.scaleBy(x: 1.0, y: -1.0)
-        context?.draw(sourceImage, in: CGRect(x: (-imageViewSize.width / 2.0),
-                                              y: (-imageViewSize.height / 2.0),
+        context?.draw(sourceImage, in: CGRect(x: (-imageViewSize.width.half),
+                                              y: (-imageViewSize.height.half),
                                               width: imageViewSize.width,
                                               height: imageViewSize.height))
         

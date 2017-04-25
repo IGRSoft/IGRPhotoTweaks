@@ -11,7 +11,7 @@ import UIKit
 extension UIColor {
     
     class func mask() -> UIColor {
-        return UIColor(white: 0.0, alpha: 0.6)
+        return UIColor(white: CGFloat.zero, alpha: 0.6)
     }
     
     class func cropLine() -> UIColor {
@@ -23,6 +23,6 @@ extension UIColor {
     }
     
     class func photoTweakCanvasBackground() -> UIColor {
-        return UIColor(white: 0.0, alpha: 1.0)
+        return UIColor(white: CGFloat.zero, alpha: 1.0)
     }
 }

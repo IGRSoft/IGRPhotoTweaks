@@ -126,7 +126,7 @@ class ExampleCropViewController: IGRPhotoTweakViewController {
             self.setCropAspectRect(aspect: "9:16")
         })
         
-        actionSheet.addAction(UIAlertAction(title: "9:16", style: .cancel))
+        actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         
         present(actionSheet, animated: true, completion: nil)
     }

@@ -37,11 +37,6 @@ class IGRCropView: UIView {
     
     //MARK: - Private VARs
     
-    fileprivate var upperLeft:  IGRCropCornerView!
-    fileprivate var upperRight: IGRCropCornerView!
-    fileprivate var lowerRight: IGRCropCornerView!
-    fileprivate var lowerLeft:  IGRCropCornerView!
-    
     fileprivate var horizontalCropLines     = [IGRCropLine]()
     fileprivate var verticalCropLines       = [IGRCropLine]()
     
@@ -51,8 +46,8 @@ class IGRCropView: UIView {
     fileprivate var cornerBorderLength      = kCropViewCornerLength
     fileprivate var cornerBorderWidth       = kCropViewCornerWidth
     
-    private(set) var isCropLinesDismissed: Bool  = false
-    private(set) var isGridLinesDismissed: Bool  = false
+    private(set) var isCropLinesDismissed: Bool  = true
+    private(set) var isGridLinesDismissed: Bool  = true
     
     // MARK: - Life Cicle
     
@@ -72,63 +67,67 @@ class IGRCropView: UIView {
     }
     
     fileprivate func setup() {
-        for _ in 0 ..< kCropLines {
-            let line = IGRCropLine()
-            self.horizontalCropLines.append(line)
-            self.addSubview(line)
-        }
-        for _ in 0 ..< kCropLines {
-            let line = IGRCropLine()
-            self.verticalCropLines.append(line)
-            self.addSubview(line)
-        }
-        for _ in 0 ..< kGridLines {
-            let line = IGRCropGridLine()
-            self.horizontalGridLines.append(line)
-            self.addSubview(line)
-        }
-        for _ in 0 ..< kGridLines {
-            let line = IGRCropGridLine()
-            self.verticalGridLines.append(line)
-            self.addSubview(line)
-        }
         
-        self.isCropLinesDismissed = true
-        self.isGridLinesDismissed = true
+        var lines = self.setupLines(count: kCropLines, className: IGRCropLine.self)
+        self.update(lines, horizontal: true)
+        horizontalCropLines = lines as! [IGRCropLine]
         
-        self.upperLeft = IGRCropCornerView(cornerType: .upperLeft,
+        lines = self.setupLines(count: kCropLines, className: IGRCropLine.self)
+        self.update(lines, horizontal: false)
+        verticalCropLines = lines as! [IGRCropLine]
+        
+        lines = self.setupLines(count: kGridLines, className: IGRCropGridLine.self)
+        self.update(lines, horizontal: true)
+        horizontalGridLines = lines as! [IGRCropGridLine]
+        
+        lines = self.setupLines(count: kGridLines, className: IGRCropGridLine.self)
+        self.update(lines, horizontal: false)
+        verticalGridLines = lines as! [IGRCropGridLine]
+        
+        let upperLeft = IGRCropCornerView(cornerType: .upperLeft,
+                                          lineWidth: cornerBorderWidth,
+                                          lineLenght:cornerBorderLength)
+        upperLeft.center = CGPoint(x: cornerBorderLength.half,
+                                   y: cornerBorderLength.half)
+        upperLeft.autoresizingMask  = []
+        self.addSubview(upperLeft)
+        
+        let upperRight = IGRCropCornerView(cornerType: .upperRight,
                                            lineWidth: cornerBorderWidth,
                                            lineLenght:cornerBorderLength)
-        self.upperLeft.center = CGPoint(x: (cornerBorderLength / 2.0),
-                                        y: (cornerBorderLength / 2.0))
-        self.upperLeft.autoresizingMask = []
-        self.addSubview(self.upperLeft)
+        upperRight.center = CGPoint(x: (self.frame.size.width - cornerBorderLength.half),
+                                    y: cornerBorderLength.half)
+        upperRight.autoresizingMask  = [.flexibleLeftMargin]
+        self.addSubview(upperRight)
         
-        self.upperRight = IGRCropCornerView(cornerType: .upperRight,
-                                            lineWidth: cornerBorderWidth,
-                                            lineLenght:cornerBorderLength)
-        self.upperRight.center = CGPoint(x: (self.frame.size.width - cornerBorderLength / 2.0),
-                                         y: (cornerBorderLength / 2.0))
-        self.upperRight.autoresizingMask = .flexibleLeftMargin
-        self.addSubview(self.upperRight)
-        
-        self.lowerRight = IGRCropCornerView(cornerType: .lowerRight,
-                                            lineWidth: cornerBorderWidth,
-                                            lineLenght:cornerBorderLength)
-        self.lowerRight.center = CGPoint(x: (self.frame.size.width - cornerBorderLength / 2.0),
-                                         y: (self.frame.size.height - cornerBorderLength / 2.0))
-        self.lowerRight.autoresizingMask = [.flexibleTopMargin, .flexibleLeftMargin]
-        self.addSubview(self.lowerRight)
-        
-        self.lowerLeft = IGRCropCornerView(cornerType: .lowerLeft,
+        let lowerRight = IGRCropCornerView(cornerType: .lowerRight,
                                            lineWidth: cornerBorderWidth,
                                            lineLenght:cornerBorderLength)
-        self.lowerLeft.center = CGPoint(x: (cornerBorderLength / 2.0),
-                                        y: (self.frame.size.height - cornerBorderLength / 2.0))
-        self.lowerLeft.autoresizingMask = .flexibleTopMargin
-        self.addSubview(self.lowerLeft)
+        lowerRight.center = CGPoint(x: (self.frame.size.width - cornerBorderLength.half),
+                                    y: (self.frame.size.height - cornerBorderLength.half))
+        lowerRight.autoresizingMask  = [.flexibleTopMargin, .flexibleLeftMargin]
+        self.addSubview(lowerRight)
+        
+        let lowerLeft = IGRCropCornerView(cornerType: .lowerLeft,
+                                          lineWidth: cornerBorderWidth,
+                                          lineLenght:cornerBorderLength)
+        lowerLeft.center = CGPoint(x: cornerBorderLength.half,
+                                   y: (self.frame.size.height - cornerBorderLength.half))
+        lowerLeft.autoresizingMask  = [.flexibleTopMargin]
+        self.addSubview(lowerLeft)
     }
     
+    fileprivate func setupLines(count: Int, className: UIView.Type) -> [UIView] {
+        var lines = [UIView]()
+        for _ in 0 ..< count {
+            let line = className.init()
+            line.alpha = CGFloat.zero
+            lines.append(line)
+            self.addSubview(line)
+        }
+        
+        return lines
+    }
     //MARK: - Touches
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -144,15 +143,15 @@ class IGRCropView: UIView {
             let location: CGPoint = (touches.first?.location(in: self))!
             var frame: CGRect = self.frame
             
-            let p0 = CGPoint(x: 0.0, y: 0.0)
-            let p1 = CGPoint(x: self.frame.size.width, y: 0.0)
-            let p2 = CGPoint(x: 0.0, y: self.frame.size.height)
+            let p0 = CGPoint(x: CGFloat.zero, y: CGFloat.zero)
+            let p1 = CGPoint(x: self.frame.size.width, y: CGFloat.zero)
+            let p2 = CGPoint(x: CGFloat.zero, y: self.frame.size.height)
             let p3 = CGPoint(x: self.frame.size.width, y: self.frame.size.height)
             
             let canChangeWidth: Bool = frame.size.width > kMinimumCropArea
             let canChangeHeight: Bool = frame.size.height > kMinimumCropArea
             
-            if IGRCropView.distanceBetweenPoints(point0: location, point1: p0) < kCropViewHotArea {
+            if location.distanceTo(point: p0) < kCropViewHotArea {
                 if canChangeWidth {
                     frame.origin.x += location.x
                     frame.size.width -= location.x
@@ -163,7 +162,7 @@ class IGRCropView: UIView {
                     frame.size.height -= location.y
                 }
             }
-            else if IGRCropView.distanceBetweenPoints(point0: location, point1: p1) < kCropViewHotArea {
+            else if location.distanceTo(point: p1) < kCropViewHotArea {
                 if canChangeWidth {
                     frame.size.width = location.x
                 }
@@ -173,7 +172,7 @@ class IGRCropView: UIView {
                     frame.size.height -= location.y
                 }
             }
-            else if IGRCropView.distanceBetweenPoints(point0: location, point1: p2) < kCropViewHotArea {
+            else if location.distanceTo(point: p2) < kCropViewHotArea {
                 if canChangeWidth {
                     frame.origin.x += location.x
                     frame.size.width -= location.x
@@ -183,7 +182,7 @@ class IGRCropView: UIView {
                     frame.size.height = location.y
                 }
             }
-            else if IGRCropView.distanceBetweenPoints(point0: location, point1: p3) < kCropViewHotArea {
+            else if location.distanceTo(point: p3) < kCropViewHotArea {
                 if canChangeWidth {
                     frame.size.width = location.x
                 }
@@ -236,9 +235,7 @@ class IGRCropView: UIView {
     
     func updateCropLines(_ animate: Bool) {
         // show crop lines
-        if self.isCropLinesDismissed {
-            self.showCropLines()
-        }
+        self.showCropLines()
         
         let animationBlock: ((_: Void) -> Void)? = {(_: Void) -> Void in
             self.update(self.horizontalCropLines, horizontal: true)
@@ -246,7 +243,7 @@ class IGRCropView: UIView {
         }
         
         if animate {
-            UIView.animate(withDuration: 0.25, animations: animationBlock!)
+            UIView.animate(withDuration: kAnimationDuration, animations: animationBlock!)
         }
         else {
             animationBlock!()
@@ -254,7 +251,7 @@ class IGRCropView: UIView {
     }
     
     func dismissCropLines() {
-        UIView.animate(withDuration: 0.2, animations: {() -> Void in
+        UIView.animate(withDuration: kAnimationDuration, animations: {() -> Void in
             self.dismiss(self.horizontalCropLines)
             self.dismiss(self.verticalCropLines)
         }, completion: {(_ finished: Bool) -> Void in
@@ -263,20 +260,20 @@ class IGRCropView: UIView {
     }
     
     fileprivate func showCropLines() {
-        self.isCropLinesDismissed = false
-        UIView.animate(withDuration: 0.2, animations: {() -> Void in
-            self.show(self.horizontalCropLines)
-            self.show(self.verticalCropLines)
-        })
+        if self.isCropLinesDismissed {
+            self.isCropLinesDismissed = false
+            UIView.animate(withDuration: kAnimationDuration, animations: {() -> Void in
+                self.show(self.horizontalCropLines)
+                self.show(self.verticalCropLines)
+            })
+        }
     }
     
     //MARK: - Crid Lines
     
     func updateGridLines(_ animate: Bool) {
         // show grid lines
-        if self.isGridLinesDismissed {
-            self.showGridLines()
-        }
+        self.showGridLines()
         
         let animationBlock: ((_: Void) -> Void)? = {(_: Void) -> Void in
             self.update(self.horizontalGridLines, horizontal: true)
@@ -284,7 +281,7 @@ class IGRCropView: UIView {
         }
         
         if animate {
-            UIView.animate(withDuration: 0.25, animations: animationBlock!)
+            UIView.animate(withDuration: kAnimationDuration, animations: animationBlock!)
         }
         else {
             animationBlock!()
@@ -292,7 +289,7 @@ class IGRCropView: UIView {
     }
     
     func dismissGridLines() {
-        UIView.animate(withDuration: 0.2, animations: {() -> Void in
+        UIView.animate(withDuration: kAnimationDuration, animations: {() -> Void in
             self.dismiss(self.horizontalGridLines)
             self.dismiss(self.verticalGridLines)
         }, completion: {(_ finished: Bool) -> Void in
@@ -301,11 +298,13 @@ class IGRCropView: UIView {
     }
     
     fileprivate func showGridLines() {
-        self.isGridLinesDismissed = false
-        UIView.animate(withDuration: 0.2, animations: {() -> Void in
-            self.show(self.horizontalGridLines)
-            self.show(self.verticalGridLines)
-        })
+        if self.isGridLinesDismissed {
+            self.isGridLinesDismissed = false
+            UIView.animate(withDuration: kAnimationDuration, animations: {() -> Void in
+                self.show(self.horizontalGridLines)
+                self.show(self.verticalGridLines)
+            })
+        }
     }
     
     //MARK: - Aspect Ratio
@@ -326,8 +325,8 @@ class IGRCropView: UIView {
             size.height = size.width / width * height
         }
         
-        let x = (self.frame.size.width - size.width) / 2.0
-        let y = (self.frame.size.height - size.height) / 2.0
+        let x = (self.frame.size.width - size.width).half
+        let y = (self.frame.size.height - size.height).half
         
         self.frame = CGRect(x:x, y:y, width: size.width, height: size.height)
     }
@@ -336,17 +335,18 @@ class IGRCropView: UIView {
     
     fileprivate func update(_ lines: [UIView], horizontal: Bool) {
         let count = lines.count
+        let scale = (1.0 / UIScreen.main.scale)
         for (idx, line) in lines.enumerated() {
             if horizontal {
-                line.frame = CGRect(x: 0.0,
+                line.frame = CGRect(x: CGFloat.zero,
                                     y: (self.frame.size.height / CGFloat(count + 1)) * CGFloat(idx + 1),
                                     width: self.frame.size.width,
-                                    height: (1.0 / UIScreen.main.scale))
+                                    height: scale)
             }
             else {
                 line.frame = CGRect(x: (self.frame.size.width / CGFloat(count + 1)) * CGFloat(idx + 1),
-                                    y: 0.0,
-                                    width: (1.0 / UIScreen.main.scale),
+                                    y: CGFloat.zero,
+                                    width: scale,
                                     height: self.frame.size.height)
             }
         }
@@ -354,7 +354,7 @@ class IGRCropView: UIView {
     
     fileprivate func dismiss(_ lines: [UIView]) {
         for (_, line) in lines.enumerated() {
-            line.alpha = 0.0
+            line.alpha = CGFloat.zero
         }
     }
     
@@ -362,9 +362,5 @@ class IGRCropView: UIView {
         for (_, line) in lines.enumerated() {
             line.alpha = 1.0
         }
-    }
-    
-    fileprivate static func distanceBetweenPoints(point0: CGPoint, point1: CGPoint) -> CGFloat {
-        return sqrt(pow(point1.x - point0.x, 2) + pow(point1.y - point0.y, 2))
     }
 }

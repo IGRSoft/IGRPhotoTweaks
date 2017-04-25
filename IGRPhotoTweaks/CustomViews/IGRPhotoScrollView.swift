@@ -1,5 +1,5 @@
 //
-//  IGRPhotoScrollView.swift
+//  IGRPhotoswift
 //  IGRPhotoTweaks
 //
 //  Created by Vitalii Parovishnyk on 2/6/17.
@@ -40,13 +40,26 @@ class IGRPhotoScrollView: UIScrollView {
     
     //MARK: - Content Offsets
     
-    func setContentOffsetY(_ offsetY: CGFloat) {
+    public func checkContentOffset() {
+        self.setContentOffsetX(max(self.contentOffset.x, 0))
+        self.setContentOffsetY(max(self.contentOffset.y, 0))
+        
+        if self.contentSize.height - self.contentOffset.y <= self.bounds.size.height {
+            self.setContentOffsetY(self.contentSize.height - self.bounds.size.height)
+        }
+        
+        if self.contentSize.width - self.contentOffset.x <= self.bounds.size.width {
+            self.setContentOffsetX(self.contentSize.width - self.bounds.size.width)
+        }
+    }
+    
+    public func setContentOffsetY(_ offsetY: CGFloat) {
         var contentOffset: CGPoint = self.contentOffset
         contentOffset.y = offsetY
         self.contentOffset = contentOffset
     }
     
-    func setContentOffsetX(_ offsetX: CGFloat) {
+    public func setContentOffsetX(_ offsetX: CGFloat) {
         var contentOffset: CGPoint = self.contentOffset
         contentOffset.x = offsetX
         self.contentOffset = contentOffset
@@ -56,7 +69,7 @@ class IGRPhotoScrollView: UIScrollView {
         set {
             super.contentOffset = newValue
             
-            if (!isUpdatingContentOffset && updateDelegate != nil) {
+            if (!isUpdatingContentOffset) {
                 isUpdatingContentOffset = true
                 updateDelegate?.scrollViewDidStartUpdateScrollContentOffset(self)
             }
@@ -65,15 +78,15 @@ class IGRPhotoScrollView: UIScrollView {
             IGRPhotoScrollView.cancelPreviousPerformRequests(withTarget: self,
                                                              selector: selector,
                                                              object: nil)
-            perform(selector, with: nil, afterDelay: 0.5)
+            perform(selector, with: nil, afterDelay: kAnimationDuration * 2.0)
         }
         get {
             return super.contentOffset
         }
     }
     
-    func stopUpdateContentOffset() {
-        if (isUpdatingContentOffset && updateDelegate != nil) {
+    final func stopUpdateContentOffset() {
+        if (isUpdatingContentOffset) {
             isUpdatingContentOffset = false
             updateDelegate?.scrollViewDidStopScrollUpdateContentOffset(self)
         }
@@ -81,7 +94,7 @@ class IGRPhotoScrollView: UIScrollView {
     
     //MARK: - Zoom
     
-    func zoomScaleToBound() -> CGFloat {
+    public func zoomScaleToBound() -> CGFloat {
         let scaleW: CGFloat = self.bounds.size.width / self.photoContentView.bounds.size.width
         let scaleH: CGFloat = self.bounds.size.height / self.photoContentView.bounds.size.height
         
