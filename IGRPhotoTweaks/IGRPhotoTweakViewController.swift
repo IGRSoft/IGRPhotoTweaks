@@ -121,7 +121,7 @@ import Photos
         let yScale: CGFloat = sqrt(t.b * t.b + t.d * t.d)
         transform = transform.scaledBy(x: xScale, y: yScale)
         
-        let fixedImage = fixOrientation(imageToFix: self.image)
+        let fixedImage = fixOrientation(for: self.image)
         
         let imageRef: CGImage = self.newTransformedImage(transform, sourceImage: fixedImage!, sourceSize: self.image.size, outputWidth: self.image.size.width, cropSize: self.photoView.cropView.frame.size, imageViewSize: self.photoView.photoContentView.bounds.size)
         
@@ -181,22 +181,22 @@ import Photos
     
     // MARK: - Image Processor
     
-    fileprivate func fixOrientation(imageToFix: UIImage) -> CGImage? {
+    fileprivate func fixOrientation(for image: UIImage) -> CGImage? {
         
-        guard let cgImage = imageToFix.cgImage, let colorSpace = cgImage.colorSpace else {
+        guard let cgImage = image.cgImage, let colorSpace = cgImage.colorSpace else {
             return nil
         }
         
-        if imageToFix.imageOrientation == UIImageOrientation.up {
-            return imageToFix.cgImage
+        if image.imageOrientation == UIImageOrientation.up {
+            return image.cgImage
         }
         
-        let width  = imageToFix.size.width
-        let height = imageToFix.size.height
+        let width  = image.size.width
+        let height = image.size.height
         
         var transform = CGAffineTransform.identity
         
-        switch imageToFix.imageOrientation {
+        switch image.imageOrientation {
         case .down, .downMirrored:
             transform = transform.translatedBy(x: width, y: height)
             transform = transform.rotated(by: CGFloat.pi)
@@ -213,7 +213,7 @@ import Photos
             break
         }
         
-        switch imageToFix.imageOrientation {
+        switch image.imageOrientation {
         case .upMirrored, .downMirrored:
             transform = transform.translatedBy(x: width, y: 0)
             transform = transform.scaledBy(x: -1, y: 1)
@@ -240,13 +240,12 @@ import Photos
         
         context.concatenate(transform)
         
-        switch imageToFix.imageOrientation {
+        switch image.imageOrientation {
+            case .left, .leftMirrored, .right, .rightMirrored:
+                context.draw(cgImage, in: CGRect(x: 0, y: 0, width: height, height: width))
             
-        case .left, .leftMirrored, .right, .rightMirrored:
-            context.draw(cgImage, in: CGRect(x: 0, y: 0, width: height, height: width))
-            
-        default:
-            context.draw(cgImage, in: CGRect(x: 0, y: 0, width: width, height: height))
+            default:
+                context.draw(cgImage, in: CGRect(x: 0, y: 0, width: width, height: height))
         }
         
         // And now we just create a new UIImage from the drawing context

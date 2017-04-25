@@ -62,6 +62,18 @@ class ExampleCropViewController: IGRPhotoTweakViewController {
         self.angleLabel?.text = "\(intDegrees)°"
     }
     
+    // MARK: - Rotation
+    
+    override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.willTransition(to: newCollection, with: coordinator)
+        
+        coordinator.animate(alongsideTransition: { (context) in
+            self.view.layoutIfNeeded()
+        }) { (context) in
+            //
+        }
+    }
+    
     // MARK: - Actions
     
     @IBAction func onChandeAngleSliderValue(_ sender: UISlider) {
@@ -155,6 +167,18 @@ class ExampleCropViewController: IGRPhotoTweakViewController {
 //    override open func customHighlightMaskAlphaValue() -> CGFloat {
 //        return 0.3
 //    }
+    
+    open override func customCanvasHeaderHeigth() -> CGFloat {
+        var heigth: CGFloat = 0.0
+        
+        if UIDevice.current.orientation.isLandscape {
+            heigth = 40.0
+        } else {
+            heigth = 100.0
+        }
+        
+        return heigth
+    }
 }
 
 extension ExampleCropViewController: KCHorizontalDialDelegate {
