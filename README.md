@@ -60,10 +60,25 @@ Setup IGRPhotoTweaks Controller
 override func viewDidLoad() {
     super.viewDidLoad()
 
-    self.maxRotationAngle = CGFloat.pi
     self.isAutoSaveToLibray = true
 }
 
+```
+
+Setup/Control Angle
+```swift
+
+fileprivate func setupSlider() {
+    self.angleSlider?.minimumValue = -Float(IGRRadianAngle.toRadians(45))
+    self.angleSlider?.maximumValue = Float(IGRRadianAngle.toRadians(45))
+    self.angleSlider?.value = 0.0
+}
+
+@IBAction func onChandeAngleSliderValue(_ sender: UISlider) {
+    let radians: CGFloat = CGFloat(sender.value)
+    self.changedAngle(value: radians)
+}
+    
 ```
 
 Customize View
