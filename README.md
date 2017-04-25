@@ -54,11 +54,22 @@ extension ViewController: IGRPhotoTweakViewControllerDelegate {
 }
 ```
 
-Customize View
+Setup IGRPhotoTweaks Controller
 ```swift
+
 override func viewDidLoad() {
     super.viewDidLoad()
 
+    self.maxRotationAngle = CGFloat.pi
+    self.isAutoSaveToLibray = true
+}
+
+```
+
+Customize View
+```swift
+
+override open func setupThemes() {
     IGRCropLine.appearance().backgroundColor = UIColor.green
     IGRCropGridLine.appearance().backgroundColor = UIColor.yellow
     IGRCropCornerView.appearance().backgroundColor = UIColor.purple
@@ -66,27 +77,30 @@ override func viewDidLoad() {
     IGRCropMaskView.appearance().backgroundColor = UIColor.blue
     IGRPhotoContentView.appearance().backgroundColor = UIColor.gray
     IGRPhotoTweakView.appearance().backgroundColor = UIColor.brown
-
-    self.photoView.isHighlightMask = true
-    self.photoView.highlightMaskAlphaValue = 0.2
-    self.maxRotationAngle = CGFloat(M_PI)
-    self.isAutoSaveToLibray = true
 }
 
-override func borderColor() -> UIColor {
+override open func borderColor() -> UIColor {
     return UIColor.red
 }
 
-override func borderWidth() -> CGFloat {
+override open func borderWidth() -> CGFloat {
     return 2.0
 }
 
-override func cornerBorderWidth() -> CGFloat {
+override open func cornerBorderWidth() -> CGFloat {
     return 4.0
 }
 
-override func cornerBorderLength() -> CGFloat {
+override open func cornerBorderLength() -> CGFloat {
     return 30.0
+}
+
+override open func customIsHighlightMask() -> Bool {
+    return true
+}
+
+override open func customHighlightMaskAlphaValue() -> CGFloat {
+    return 0.3
 }
 
 ```
