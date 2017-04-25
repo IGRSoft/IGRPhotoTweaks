@@ -19,7 +19,6 @@
 		A5FE19571E4F6ECE00EA6F73 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5FE19561E4F6ECE00EA6F73 /* ViewController.m */; };
 		A5FE195A1E4F6ECE00EA6F73 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5FE19581E4F6ECE00EA6F73 /* Main.storyboard */; };
 		A5FE19661E4F726F00EA6F73 /* ExampleCropViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5FE19651E4F726F00EA6F73 /* ExampleCropViewController.m */; };
-		A5FE19701E4F870900EA6F73 /* IGRPhotoTweakConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5FE196F1E4F870900EA6F73 /* IGRPhotoTweakConstants.swift */; };
 		C31BBE2B1F6DF26E57CED1FE /* Pods_ExampleObjC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E001388CF0AFFB056DC06E8 /* Pods_ExampleObjC.framework */; };
 /* End PBXBuildFile section */
 
@@ -46,8 +45,7 @@
 		A5FE19591E4F6ECE00EA6F73 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A5FE19641E4F726F00EA6F73 /* ExampleCropViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExampleCropViewController.h; sourceTree = "<group>"; };
 		A5FE19651E4F726F00EA6F73 /* ExampleCropViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExampleCropViewController.m; sourceTree = "<group>"; };
-		A5FE196E1E4F870900EA6F73 /* ExampleObjC-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ExampleObjC-Bridging-Header.h"; sourceTree = "<group>"; };
-		A5FE196F1E4F870900EA6F73 /* IGRPhotoTweakConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IGRPhotoTweakConstants.swift; path = ../../IGRPhotoTweaks/IGRPhotoTweakConstants.swift; sourceTree = "<group>"; };
+		A5FE196E1E4F870900EA6F73 /* IGRPhotoTweaks-Swift.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "IGRPhotoTweaks-Swift.h"; sourceTree = "<group>"; };
 		B5E4CDA77E8F904599EAFE3C /* Pods_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -133,7 +131,6 @@
 		A5FE194E1E4F6ECE00EA6F73 /* ExampleObjC */ = {
 			isa = PBXGroup;
 			children = (
-				A5FE196F1E4F870900EA6F73 /* IGRPhotoTweakConstants.swift */,
 				A5FE19521E4F6ECE00EA6F73 /* AppDelegate.h */,
 				A5FE19531E4F6ECE00EA6F73 /* AppDelegate.m */,
 				A5FE19551E4F6ECE00EA6F73 /* ViewController.h */,
@@ -142,7 +139,7 @@
 				A5FE19651E4F726F00EA6F73 /* ExampleCropViewController.m */,
 				A5FE19581E4F6ECE00EA6F73 /* Main.storyboard */,
 				A5FE194F1E4F6ECE00EA6F73 /* Supporting Files */,
-				A5FE196E1E4F870900EA6F73 /* ExampleObjC-Bridging-Header.h */,
+				A5FE196E1E4F870900EA6F73 /* IGRPhotoTweaks-Swift.h */,
 			);
 			path = ExampleObjC;
 			sourceTree = "<group>";
@@ -399,7 +396,6 @@
 				A5FE19571E4F6ECE00EA6F73 /* ViewController.m in Sources */,
 				A5FE19661E4F726F00EA6F73 /* ExampleCropViewController.m in Sources */,
 				A5FE19541E4F6ECE00EA6F73 /* AppDelegate.m in Sources */,
-				A5FE19701E4F870900EA6F73 /* IGRPhotoTweakConstants.swift in Sources */,
 				A5FE19511E4F6ECE00EA6F73 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -570,7 +566,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.igrsoft.ExampleObjC;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "ExampleObjC/ExampleObjC-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "${SRCROOT}/ExampleObjC/IGRPhotoTweaks-Swift.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
@@ -588,7 +584,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.igrsoft.ExampleObjC;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "ExampleObjC/ExampleObjC-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "${SRCROOT}/ExampleObjC/IGRPhotoTweaks-Swift.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;

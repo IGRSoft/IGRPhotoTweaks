@@ -6,7 +6,7 @@
 //  Copyright © 2017 IGR Software. All rights reserved.
 //
 
-#import "ExampleObjC-Bridging-Header.h"
+#import "IGRPhotoTweaks-Swift.h"
 
 @interface ExampleCropViewController : IGRPhotoTweakViewController
 

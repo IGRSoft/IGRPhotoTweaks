@@ -8,24 +8,24 @@
 
 import UIKit
 
-protocol IGRCropViewDelegate: NSObjectProtocol {
+@objc public protocol IGRCropViewDelegate: NSObjectProtocol {
     /*
      Calls ones, when user start interaction with view
      */
-    func cropViewDidStartCrop(_ cropView: IGRCropView)
+    @objc func cropViewDidStartCrop(_ cropView: IGRCropView)
     
     /*
      Calls always, when user move touch around view
      */
-    func cropViewDidMove(_ cropView: IGRCropView)
+    @objc func cropViewDidMove(_ cropView: IGRCropView)
     
     /*
      Calls ones, when user stop interaction with view
      */
-    func cropViewDidStopCrop(_ cropView: IGRCropView)
+    @objc func cropViewDidStopCrop(_ cropView: IGRCropView)
 }
 
-class IGRCropView: UIView {
+@objc(IGRCropView) public class IGRCropView: UIView {
     
     //MARK: - Public VARs
     
@@ -60,7 +60,7 @@ class IGRCropView: UIView {
         setup()
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
         setup()
@@ -130,7 +130,7 @@ class IGRCropView: UIView {
     }
     //MARK: - Touches
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    override public func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if touches.count == 1 {
             self.updateCropLines(false)
         }
@@ -138,7 +138,7 @@ class IGRCropView: UIView {
         self.delegate?.cropViewDidStartCrop(self)
     }
     
-    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+    override public func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         if touches.count == 1 {
             let location: CGPoint = (touches.first?.location(in: self))!
             var frame: CGRect = self.frame
@@ -223,11 +223,11 @@ class IGRCropView: UIView {
         }
     }
     
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+    override public func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.delegate?.cropViewDidStopCrop(self)
     }
     
-    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+    override public func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.delegate?.cropViewDidStopCrop(self)
     }
     
@@ -309,7 +309,7 @@ class IGRCropView: UIView {
     
     //MARK: - Aspect Ratio
     
-    open func setCropAspectRect(aspect: String, maxSize: CGSize) {
+    public func setCropAspectRect(aspect: String, maxSize: CGSize) {
         let elements = aspect.components(separatedBy: ":")
         let width: CGFloat = CGFloat(Float(elements.first!)!)
         let height: CGFloat = CGFloat(Float(elements.last!)!)

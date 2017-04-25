@@ -10,14 +10,14 @@ import UIKit
 
 @objc public class IGRPhotoContentView: UIView {
     
-    lazy var imageView: UIImageView! = {
+    lazy fileprivate var imageView: UIImageView! = {
         let imageView = UIImageView(frame: self.bounds)
         self.addSubview(imageView)
         
         return imageView
     }()
     
-    var image: UIImage! {
+    public var image: UIImage! {
         didSet {
             self.imageView.frame = self.bounds
             self.imageView.image = self.image

@@ -8,39 +8,11 @@
 
 import UIKit
 
-@objc public protocol IGRPhotoTweakViewCustomizationDelegate: NSObjectProtocol {
-    /*
-     Lines between mask and crop area
-     */
-    func borderColor() -> UIColor
-    
-    func borderWidth() -> CGFloat
-    
-    /*
-     Corner of 2 border lines
-     */
-    func cornerBorderWidth() -> CGFloat
-    
-    func cornerBorderLength() -> CGFloat
-    
-    /*
-     Mask customization
-     */
-    func isHighlightMask() -> Bool
-    
-    func highlightMaskAlphaValue() -> CGFloat
-    
-    /*
-     Top offset for crop view
-     */
-    func canvasHeaderHeigth() -> CGFloat
-}
-
 @objc public class IGRPhotoTweakView: UIView {
     
     //MARK: - Public VARs
     
-    open weak var customizationDelegate: IGRPhotoTweakViewCustomizationDelegate?
+    public weak var customizationDelegate: IGRPhotoTweakViewCustomizationDelegate?
     
     private(set) var angle:                 CGFloat = CGFloat.zero
     private(set) var photoContentOffset =   CGPoint.zero
@@ -70,10 +42,10 @@ import UIKit
     fileprivate var manualMove   = false
     
     // masks
-    fileprivate var topMask:    UIView!
-    fileprivate var leftMask:   UIView!
-    fileprivate var bottomMask: UIView!
-    fileprivate var rightMask:  UIView!
+    internal var topMask:    IGRCropMaskView!
+    internal var leftMask:   IGRCropMaskView!
+    internal var bottomMask: IGRCropMaskView!
+    internal var rightMask:  IGRCropMaskView!
     
     // constants
     fileprivate var maximumCanvasSize: CGSize!
@@ -89,23 +61,12 @@ import UIKit
         
         self.customizationDelegate = customizationDelegate
         
-        let bounds = self.maxBounds()
-        self.originalSize = bounds.size
+        let maxBounds = self.maxBounds()
+        self.originalSize = maxBounds.size
         
-        self.scrollView = IGRPhotoScrollView(frame: bounds)
+        self.scrollView = IGRPhotoScrollView(frame: maxBounds)
         self.scrollView.center = CGPoint(x: self.frame.width.half, y: self.centerY)
-        self.scrollView.bounces = true
-        self.scrollView.layer.anchorPoint = CGPoint(x: 0.5, y: 0.5)
-        self.scrollView.alwaysBounceVertical = true
-        self.scrollView.alwaysBounceHorizontal = true
         self.scrollView.delegate = self
-        self.scrollView.minimumZoomScale = 1.0
-        self.scrollView.maximumZoomScale = 10.0
-        self.scrollView.showsVerticalScrollIndicator = false
-        self.scrollView.showsHorizontalScrollIndicator = false
-        self.scrollView.clipsToBounds = false
-        self.scrollView.contentSize = CGSize(width: self.scrollView.bounds.size.width,
-                                             height: self.scrollView.bounds.size.height)
         self.scrollView.updateDelegate = self
         self.addSubview(self.scrollView)
         
@@ -116,27 +77,8 @@ import UIKit
         self.scrollView.photoContentView = self.photoContentView
         self.scrollView.addSubview(self.photoContentView)
         
-        self.cropView = IGRCropView(frame: self.scrollView.frame,
-                                    cornerBorderWidth:self.cornerBorderWidth(),
-                                    cornerBorderLength:self.cornerBorderLength())
-        self.cropView.center = self.scrollView.center
-        self.cropView.delegate = self
-        self.cropView.layer.borderColor = self.borderColor().cgColor
-        self.cropView.layer.borderWidth = self.borderWidth()
-        self.addSubview(self.cropView)
-        
-        self.topMask = IGRCropMaskView()
-        self.addSubview(self.topMask)
-        
-        self.leftMask = IGRCropMaskView()
-        self.addSubview(self.leftMask)
-        
-        self.bottomMask = IGRCropMaskView()
-        self.addSubview(self.bottomMask)
-        
-        self.rightMask = IGRCropMaskView()
-        self.addSubview(self.rightMask)
-        self.updateMasks(animate: false)
+        addCropView()
+        addMasks()
         
         self.originalPoint = self.convert(self.scrollView.center, to: self)
     }
@@ -148,12 +90,10 @@ import UIKit
     public override func layoutSubviews() {
         super.layoutSubviews()
         
-        if !manualMove {
-            self.originalSize = self.maxBounds().size
-            self.scrollView.center = CGPoint(x: self.frame.width.half, y: self.centerY)
-            
-            self.cropView.center = self.scrollView.center
-        }
+        self.originalSize = self.maxBounds().size
+        self.scrollView.center = CGPoint(x: self.frame.width.half, y: self.centerY)
+        
+        self.cropView.center = self.scrollView.center
     }
     
     // MARK: - Touches
@@ -170,64 +110,41 @@ import UIKit
         return self.scrollView
     }
     
-    // MARK: - Customization
+    //MARK: - Crop View
     
-    func borderColor() -> UIColor {
-        return (self.customizationDelegate?.borderColor())!
-    }
-    
-    func borderWidth() -> CGFloat {
-        return (self.customizationDelegate?.borderWidth())!
-    }
-    
-    func cornerBorderWidth() -> CGFloat {
-        return (self.customizationDelegate?.cornerBorderWidth())!
-    }
-    
-    func cornerBorderLength() -> CGFloat {
-        return (self.customizationDelegate?.cornerBorderLength())!
-    }
-    
-    func isHighlightMask() -> Bool {
-        return (self.customizationDelegate?.isHighlightMask())!
-    }
-    
-    func highlightMaskAlphaValue() -> CGFloat {
-        return (self.customizationDelegate?.highlightMaskAlphaValue())!
-    }
-    
-    func canvasHeaderHeigth() -> CGFloat {
-        return (self.customizationDelegate?.canvasHeaderHeigth())!
+    fileprivate func addCropView()
+    {
+        self.cropView = IGRCropView(frame: self.scrollView.frame,
+                                    cornerBorderWidth:self.cornerBorderWidth(),
+                                    cornerBorderLength:self.cornerBorderLength())
+        self.cropView.center = self.scrollView.center
+        self.cropView.delegate = self
+        self.cropView.layer.borderColor = self.borderColor().cgColor
+        self.cropView.layer.borderWidth = self.borderWidth()
+        self.addSubview(self.cropView)
     }
     
     //MARK: - Masks
     
-    fileprivate func updateMasks(animate: Bool) {
-        let animationBlock: ((_: Void) -> Void)? = {(_: Void) -> Void in
-            self.topMask.frame = CGRect(x: CGFloat.zero,
-                                        y: CGFloat.zero,
-                                        width: (self.cropView.frame.origin.x + self.cropView.frame.size.width),
-                                        height: self.cropView.frame.origin.y)
-            self.leftMask.frame = CGRect(x: CGFloat.zero,
-                                         y: self.cropView.frame.origin.y,
-                                         width: self.cropView.frame.origin.x,
-                                         height: self.frame.size.height - self.cropView.frame.origin.y)
-            self.bottomMask.frame = CGRect(x: self.cropView.frame.origin.x,
-                                           y: (self.cropView.frame.origin.y + self.cropView.frame.size.height),
-                                           width: (self.frame.size.width - self.cropView.frame.origin.x),
-                                           height: (self.frame.size.height - (self.cropView.frame.origin.y + self.cropView.frame.size.height)))
-            self.rightMask.frame = CGRect(x: (self.cropView.frame.origin.x + self.cropView.frame.size.width),
-                                          y: CGFloat.zero,
-                                          width: (self.frame.size.width - (self.cropView.frame.origin.x + self.cropView.frame.size.width)),
-                                          height: (self.cropView.frame.origin.y + self.cropView.frame.size.height))
-        }
+    fileprivate func addMasks()
+    {
+        self.topMask = IGRCropMaskView()
+        self.addSubview(self.topMask)
         
-        if animate {
-            UIView.animate(withDuration: kAnimationDuration, animations: animationBlock!)
-        }
-        else {
-            animationBlock!()
-        }
+        self.leftMask = IGRCropMaskView()
+        self.addSubview(self.leftMask)
+        
+        self.rightMask = IGRCropMaskView()
+        self.addSubview(self.rightMask)
+        
+        self.bottomMask = IGRCropMaskView()
+        self.addSubview(self.bottomMask)
+        
+        self.setupMaskLayoutConstraints()
+    }
+    
+    fileprivate func updateMasks() {
+        self.layoutIfNeeded()
     }
     
     fileprivate func highlightMask(_ highlight:Bool, animate: Bool) {
@@ -252,9 +169,8 @@ import UIKit
     
     //MARK: - Angle
     
-    open func changedAngle(value: CGFloat) {
+    public func changedAngle(value: CGFloat) {
         // update masks
-        self.updateMasks(animate: false)
         self.highlightMask(true, animate: false)
         
         // update grids
@@ -267,14 +183,14 @@ import UIKit
         self.updatePosition()
     }
     
-    open func stopChangeAngle() {
+    public func stopChangeAngle() {
         self.cropView.dismissGridLines()
         self.highlightMask(false, animate: false)
     }
     
     //MARK: - Reset
     
-    open func resetView() {
+    public func resetView() {
         UIView.animate(withDuration: kAnimationDuration, animations: {() -> Void in
             self.angle = 0
             self.scrollView.transform = CGAffineTransform.identity
@@ -288,13 +204,12 @@ import UIKit
             
             self.cropView.frame = self.scrollView.frame
             self.cropView.center = self.scrollView.center
-            self.updateMasks(animate: false)
         })
     }
     
     //MARK: - Aspect Ratio
     
-    open func resetAspectRect() {
+    public func resetAspectRect() {
         self.cropView.frame = CGRect(x: CGFloat.zero,
                                      y: CGFloat.zero,
                                      width: self.originalSize.width,
@@ -304,7 +219,7 @@ import UIKit
         self.cropViewDidStopCrop(self.cropView)
     }
     
-    open func setCropAspectRect(aspect: String) {
+    public func setCropAspectRect(aspect: String) {
         self.cropView.setCropAspectRect(aspect: aspect, maxSize:self.originalSize)
         self.cropView.center = self.scrollView.center
         
@@ -378,28 +293,28 @@ extension IGRPhotoTweakView : UIScrollViewDelegate {
 }
 
 extension IGRPhotoTweakView : IGRPhotoScrollViewDelegate {
-    func scrollViewDidStartUpdateScrollContentOffset(_ scrollView: UIScrollView) {
+    public func scrollViewDidStartUpdateScrollContentOffset(_ scrollView: IGRPhotoScrollView) {
         self.highlightMask(true, animate: true)
     }
     
-    func scrollViewDidStopScrollUpdateContentOffset(_ scrollView: UIScrollView) {
-        self.updateMasks(animate: false)
+    public func scrollViewDidStopScrollUpdateContentOffset(_ scrollView: IGRPhotoScrollView) {
+        self.updateMasks()
         self.highlightMask(false, animate: true)
     }
 }
 
 extension IGRPhotoTweakView : IGRCropViewDelegate {
     
-    func cropViewDidStartCrop(_ cropView: IGRCropView) {
+    public func cropViewDidStartCrop(_ cropView: IGRCropView) {
         self.highlightMask(true, animate: true)
         self.manualMove = true
     }
     
-    func cropViewDidMove(_ cropView: IGRCropView) {
-        self.updateMasks(animate: false)
+    public func cropViewDidMove(_ cropView: IGRCropView) {
+        self.updateMasks()
     }
     
-    func cropViewDidStopCrop(_ cropView: IGRCropView) {
+    public func cropViewDidStopCrop(_ cropView: IGRCropView) {
         let scaleX: CGFloat = self.originalSize.width / cropView.bounds.size.width
         let scaleY: CGFloat = self.originalSize.height / cropView.bounds.size.height
         let scale: CGFloat = min(scaleX, scaleY)
@@ -450,22 +365,16 @@ extension IGRPhotoTweakView : IGRCropViewDelegate {
         self.manualZoomed = true
         
         // update masks
-        self.updateMasks(animate: false)
         self.cropView.dismissCropLines()
         self.cropView.dismissGridLines()
         
         let scaleH: CGFloat = self.scrollView.bounds.size.height / self.scrollView.contentSize.height
         let scaleW: CGFloat = self.scrollView.bounds.size.width / self.scrollView.contentSize.width
         var scaleM: CGFloat = max(scaleH, scaleW)
+        scaleM = min(1.0, scaleM)
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + kAnimationDuration, execute: {() -> Void in
-            if scaleM > 1 {
-                scaleM = scaleM * self.scrollView.zoomScale
-                self.scrollView.setZoomScale(scaleM, animated: false)
-            }
-            UIView.animate(withDuration: kAnimationDuration, animations: {() -> Void in
-                self.scrollView.checkContentOffset()
-            })
+        UIView.animate(withDuration: kAnimationDuration, animations: {() -> Void in
+            self.scrollView.checkContentOffset()
         })
         
         self.highlightMask(false, animate: true)

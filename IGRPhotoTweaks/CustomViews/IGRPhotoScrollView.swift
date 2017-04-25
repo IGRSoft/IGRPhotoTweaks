@@ -8,19 +8,19 @@
 
 import UIKit
 
-protocol IGRPhotoScrollViewDelegate: NSObjectProtocol {
+@objc public protocol IGRPhotoScrollViewDelegate: NSObjectProtocol {
     /*
      Calls ones, when user start interaction with view
      */
-    func scrollViewDidStartUpdateScrollContentOffset(_ scrollView: UIScrollView)
+    @objc func scrollViewDidStartUpdateScrollContentOffset(_ scrollView: IGRPhotoScrollView)
     
     /*
      Calls ones, when user stop interaction with view
      */
-    func scrollViewDidStopScrollUpdateContentOffset(_ scrollView: UIScrollView)
+    @objc func scrollViewDidStopScrollUpdateContentOffset(_ scrollView: IGRPhotoScrollView)
 }
 
-class IGRPhotoScrollView: UIScrollView {
+@objc(IGRPhotoScrollView) public class IGRPhotoScrollView: UIScrollView {
     
     //MARK: - Public VARs
     
@@ -35,6 +35,32 @@ class IGRPhotoScrollView: UIScrollView {
     weak var updateDelegate: IGRPhotoScrollViewDelegate?
     
     //MARK: - Protected VARs
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        setup()
+    }
+    
+    required public init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        
+        setup()
+    }
+    
+    fileprivate func setup() {
+        self.bounces = true
+        self.layer.anchorPoint = CGPoint(x: 0.5, y: 0.5)
+        self.alwaysBounceVertical = true
+        self.alwaysBounceHorizontal = true
+        self.minimumZoomScale = 1.0
+        self.maximumZoomScale = 10.0
+        self.showsVerticalScrollIndicator = false
+        self.showsHorizontalScrollIndicator = false
+        self.clipsToBounds = false
+        self.contentSize = CGSize(width: self.bounds.size.width,
+                                  height: self.bounds.size.height)
+    }
     
     fileprivate var isUpdatingContentOffset = false
     
@@ -65,7 +91,7 @@ class IGRPhotoScrollView: UIScrollView {
         self.contentOffset = contentOffset
     }
     
-    override var contentOffset: CGPoint {
+    override public var contentOffset: CGPoint {
         set {
             super.contentOffset = newValue
             

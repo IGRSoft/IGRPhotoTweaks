@@ -15,12 +15,12 @@ import Photos
     /**
      Called on image cropped.
      */
-    func photoTweaksController(_ controller: IGRPhotoTweakViewController, didFinishWithCroppedImage croppedImage: UIImage)
+    @objc func photoTweaksController(_ controller: IGRPhotoTweakViewController, didFinishWithCroppedImage croppedImage: UIImage)
     /**
      Called on cropping image canceled
      */
     
-    func photoTweaksControllerDidCancel(_ controller: IGRPhotoTweakViewController)
+    @objc func photoTweaksControllerDidCancel(_ controller: IGRPhotoTweakViewController)
 }
 
 @objc(IGRPhotoTweakViewController) open class IGRPhotoTweakViewController: UIViewController {
@@ -30,12 +30,12 @@ import Photos
     /*
      Image to process.
      */
-    open var image: UIImage!
+    public var image: UIImage!
     
     /*
      The optional photo tweaks controller delegate.
      */
-    open weak var delegate: IGRPhotoTweakViewControllerDelegate?
+    public weak var delegate: IGRPhotoTweakViewControllerDelegate?
     
     //MARK: - Protected VARs
     
@@ -90,24 +90,24 @@ import Photos
     
     // MARK: - Public
     
-    open func changedAngle(value: CGFloat) {
+    public func changedAngle(value: CGFloat) {
         self.photoView.changedAngle(value: value)
     }
     
-    open func stopChangeAngle() {
+    public func stopChangeAngle() {
         self.photoView.stopChangeAngle()
     }
     
-    open func resetView() {
+    public func resetView() {
         self.photoView.resetView()
         self.stopChangeAngle()
     }
     
-    open func dismissAction() {
+    public func dismissAction() {
         self.delegate?.photoTweaksControllerDidCancel(self)
     }
     
-    open func cropAction() {
+    public func cropAction() {
         var transform = CGAffineTransform.identity
         // translate
         let translation: CGPoint = self.photoView.photoTranslation
@@ -171,11 +171,11 @@ import Photos
         self.delegate?.photoTweaksController(self, didFinishWithCroppedImage: image)
     }
     
-    open func resetAspectRect() {
+    public func resetAspectRect() {
         self.photoView.resetAspectRect()
     }
     
-    open func setCropAspectRect(aspect: String) {
+    public func setCropAspectRect(aspect: String) {
         self.photoView.setCropAspectRect(aspect: aspect)
     }
     
@@ -183,7 +183,7 @@ import Photos
     
     fileprivate func fixOrientation(imageToFix: UIImage) -> CGImage? {
         
-        guard let cgImage = imageToFix.cgImage else {
+        guard let cgImage = imageToFix.cgImage, let colorSpace = cgImage.colorSpace else {
             return nil
         }
         
@@ -224,11 +224,6 @@ import Photos
             
         default:
             break
-        }
-        
-        
-        guard let colorSpace = cgImage.colorSpace else {
-            return nil
         }
         
         guard let context = CGContext(
@@ -289,9 +284,7 @@ import Photos
                                               width: imageViewSize.width,
                                               height: imageViewSize.height))
         
-        let resultRef: CGImage = context!.makeImage()!
-        
-        return resultRef
+        return context!.makeImage()!
     }
     
     internal func image(image: UIImage, didFinishSavingWithError error: NSError?, contextInfo:UnsafeRawPointer) {
@@ -304,68 +297,5 @@ import Photos
                                        handler: nil))
             present(ac, animated: true, completion: nil)
         }
-    }
-    
-    //MARK: - Customization
-    
-    open func customBorderColor() -> UIColor {
-        return UIColor.cropLine()
-    }
-    
-    open func customBorderWidth() -> CGFloat {
-        return 1.0
-    }
-    
-    open func customCornerBorderWidth() -> CGFloat {
-        return kCropViewCornerWidth
-    }
-    
-    open func customCornerBorderLength() -> CGFloat {
-        return kCropViewCornerLength
-    }
-    
-    open func customIsHighlightMask() -> Bool {
-        return true
-    }
-    
-    open func customHighlightMaskAlphaValue() -> CGFloat {
-        return 0.3
-    }
-    
-    open func customCanvasHeaderHeigth() -> CGFloat {
-        return kCanvasHeaderHeigth
-    }
-}
-
-
-//MARK: - Delegats funcs
-
-extension IGRPhotoTweakViewController : IGRPhotoTweakViewCustomizationDelegate {
-    public func borderColor() -> UIColor {
-        return self.customBorderColor()
-    }
-    
-    public func borderWidth() -> CGFloat {
-        return self.customBorderWidth()
-    }
-    
-    public func cornerBorderWidth() -> CGFloat {
-        return self.customCornerBorderWidth()
-    }
-    
-    public func cornerBorderLength() -> CGFloat {
-        return self.customCornerBorderLength()
-    }
-    
-    public func isHighlightMask() -> Bool {
-        return self.customIsHighlightMask()
-    }
-    
-    public func highlightMaskAlphaValue() -> CGFloat {
-        return self.customHighlightMaskAlphaValue()
-    }
-    
-    public func canvasHeaderHeigth() -> CGFloat {
-        return self.customCanvasHeaderHeigth()
     }
 }
