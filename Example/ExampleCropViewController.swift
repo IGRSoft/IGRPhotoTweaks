@@ -14,10 +14,10 @@ import KCHorizontalDial
 class ExampleCropViewController: IGRPhotoTweakViewController {
 
     /**
-     Slider to change angel.
+     Slider to change angle.
      */
-    @IBOutlet weak fileprivate var angelSlider: UISlider?
-    @IBOutlet weak fileprivate var angelLabel: UILabel?
+    @IBOutlet weak fileprivate var angleSlider: UISlider?
+    @IBOutlet weak fileprivate var angleLabel: UILabel?
     @IBOutlet weak fileprivate var horizontalDial: KCHorizontalDial? {
         didSet {
             self.horizontalDial?.migneticOption = .none
@@ -50,35 +50,35 @@ class ExampleCropViewController: IGRPhotoTweakViewController {
     }*/
     
     fileprivate func setupSlider() {
-        self.angelSlider?.minimumValue = -Float(IGRRadianAngle.toRadians(45))
-        self.angelSlider?.maximumValue = Float(IGRRadianAngle.toRadians(45))
-        self.angelSlider?.value = 0.0
+        self.angleSlider?.minimumValue = -Float(IGRRadianAngle.toRadians(45))
+        self.angleSlider?.maximumValue = Float(IGRRadianAngle.toRadians(45))
+        self.angleSlider?.value = 0.0
         
-        setupAngelLabelValue(radians: CGFloat((self.angelSlider?.value)!))
+        setupAngleLabelValue(radians: CGFloat((self.angleSlider?.value)!))
     }
     
-    fileprivate func setupAngelLabelValue(radians: CGFloat) {
+    fileprivate func setupAngleLabelValue(radians: CGFloat) {
         let intDegrees: Int = Int(IGRRadianAngle.toDegrees(radians))
-        self.angelLabel?.text = "\(intDegrees)°"
+        self.angleLabel?.text = "\(intDegrees)°"
     }
     
     // MARK: - Actions
     
-    @IBAction func onChandeAngelSliderValue(_ sender: UISlider) {
+    @IBAction func onChandeAngleSliderValue(_ sender: UISlider) {
         let radians: CGFloat = CGFloat(sender.value)
-        setupAngelLabelValue(radians: radians)
-        self.changedAngel(value: radians)
+        setupAngleLabelValue(radians: radians)
+        self.changedAngle(value: radians)
 
     }
     
-    @IBAction func onEndTouchAngelControl(_ sender: UIControl) {
-        self.stopChangeAngel()
+    @IBAction func onEndTouchAngleControl(_ sender: UIControl) {
+        self.stopChangeAngle()
     }
     
     @IBAction func onTouchResetButton(_ sender: UIButton) {
-        self.angelSlider?.value = 0.0
+        self.angleSlider?.value = 0.0
         self.horizontalDial?.value = 0.0
-        setupAngelLabelValue(radians: 0.0)
+        setupAngleLabelValue(radians: 0.0)
         
         self.resetView()
     }
@@ -162,11 +162,11 @@ extension ExampleCropViewController: KCHorizontalDialDelegate {
         let degrees = horizontalDial.value
         let radians = IGRRadianAngle.toRadians(CGFloat(degrees))
         
-        self.setupAngelLabelValue(radians: radians)
-        self.changedAngel(value: radians)
+        self.setupAngleLabelValue(radians: radians)
+        self.changedAngle(value: radians)
     }
     
     func horizontalDialDidEndScroll(_ horizontalDial: KCHorizontalDial) {
-        self.stopChangeAngel()
+        self.stopChangeAngle()
     }
 }

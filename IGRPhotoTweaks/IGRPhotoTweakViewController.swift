@@ -90,17 +90,17 @@ import Photos
     
     // MARK: - Public
     
-    open func changedAngel(value: CGFloat) {
+    open func changedAngle(value: CGFloat) {
         self.photoView.changedAngle(value: value)
     }
     
-    open func stopChangeAngel() {
+    open func stopChangeAngle() {
         self.photoView.stopChangeAngle()
     }
     
     open func resetView() {
         self.photoView.resetView()
-        self.stopChangeAngel()
+        self.stopChangeAngle()
     }
     
     open func dismissAction() {

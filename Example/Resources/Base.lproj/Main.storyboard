@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Efi-0V-K6A">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Efi-0V-K6A">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -85,8 +85,8 @@
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="XeR-6H-PO5">
                                 <rect key="frame" x="14" y="64" width="278" height="31"/>
                                 <connections>
-                                    <action selector="onChandeAngelSliderValue:" destination="see-Yh-xp4" eventType="valueChanged" id="Dtf-nD-XQd"/>
-                                    <action selector="onEndTouchAngelControl:" destination="see-Yh-xp4" eventType="touchUpInside" id="kdm-DL-JSP"/>
+                                    <action selector="onChandeAngleSliderValue:" destination="see-Yh-xp4" eventType="valueChanged" id="Dtf-nD-XQd"/>
+                                    <action selector="onEndTouchAngleControl:" destination="see-Yh-xp4" eventType="touchUpInside" id="kdm-DL-JSP"/>
                                 </connections>
                             </slider>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="igC-xc-RTc">
@@ -166,8 +166,8 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="angelLabel" destination="igC-xc-RTc" id="8vB-2O-5yT"/>
-                        <outlet property="angelSlider" destination="XeR-6H-PO5" id="7Pw-5n-1Ke"/>
+                        <outlet property="angleLabel" destination="igC-xc-RTc" id="8vB-2O-5yT"/>
+                        <outlet property="angleSlider" destination="XeR-6H-PO5" id="7Pw-5n-1Ke"/>
                         <outlet property="horizontalDial" destination="IAH-oa-CkI" id="X8M-WO-7pX"/>
                     </connections>
                 </viewController>

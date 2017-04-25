@@ -12,8 +12,8 @@
 
 @interface ExampleCropViewController ()
 
-@property (nonatomic, weak) IBOutlet UISlider *angelSlider;
-@property (nonatomic, weak) IBOutlet UILabel *angelLabel;
+@property (nonatomic, weak) IBOutlet UISlider *angleSlider;
+@property (nonatomic, weak) IBOutlet UILabel *angleLabel;
 
 @end
 
@@ -46,39 +46,39 @@
 }
 
 - (void)setupSlider {
-    self.angelSlider.minimumValue = -[IGRRadianAngle toRadians:45.0];
-    self.angelSlider.maximumValue = [IGRRadianAngle toRadians:45.0];
-    self.angelSlider.value = 0.0;
+    self.angleSlider.minimumValue = -[IGRRadianAngle toRadians:45.0];
+    self.angleSlider.maximumValue = [IGRRadianAngle toRadians:45.0];
+    self.angleSlider.value = 0.0;
     
-    [self setupAngelLabelValue:self.angelSlider.value];
+    [self setupAngleLabelValue:self.angleSlider.value];
 }
 
-- (void)setupAngelLabelValue:(CGFloat)radians {
+- (void)setupAngleLabelValue:(CGFloat)radians {
     NSUInteger intDegrees = [IGRRadianAngle toDegrees:radians];
-    self.angelLabel.text = [NSString stringWithFormat:@"%@°", @(intDegrees)];
+    self.angleLabel.text = [NSString stringWithFormat:@"%@°", @(intDegrees)];
 }
 
 // MARK: - Actions
 
-- (IBAction)onChandeAngelSliderValue:(UISlider *)sender {
+- (IBAction)onChandeAngleSliderValue:(UISlider *)sender {
     CGFloat radians = sender.value;
-    [self setupAngelLabelValue:radians];
-    [self changedAngelWithValue:radians];
+    [self setupAngleLabelValue:radians];
+    [self changedAngleWithValue:radians];
 }
 
-- (IBAction)onEndTouchAngelControl:(UIControl *)sender {
-    [self stopChangeAngel];
+- (IBAction)onEndTouchAngleControl:(UIControl *)sender {
+    [self stopChangeAngle];
 }
 
-- (IBAction)onChandeAngelPickerViewValue:(UIPickerView *)sender {
+- (IBAction)onChandeAnglePickerViewValue:(UIPickerView *)sender {
     CGFloat radians = 0.0;
-    [self setupAngelLabelValue:radians];
-    [self changedAngelWithValue:radians];
+    [self setupAngleLabelValue:radians];
+    [self changedAngleWithValue:radians];
 }
 
 - (IBAction)onTouchResetButton:(UIButton *)sender {
-    self.angelSlider.value = 0.0;
-    [self setupAngelLabelValue:self.angelSlider.value];
+    self.angleSlider.value = 0.0;
+    [self setupAngleLabelValue:self.angleSlider.value];
     
     [self resetView];
 }
