@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name                = 'IGRPhotoTweaks'
-  spec.version             = '1.0.4'
+  spec.version             = '1.0.5'
   spec.platform            = :ios, '9.0'
   
   spec.license             = { :type => "MIT", :file => "LICENSE" }

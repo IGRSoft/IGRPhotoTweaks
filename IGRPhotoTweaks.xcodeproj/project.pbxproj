@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A5F746251E5C093900B02B9D /* UIColor+Tweak.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F746241E5C093900B02B9D /* UIColor+Tweak.swift */; };
+		A5F746251E5C093900B02B9D /* UIColor+IGRPhonoTweakExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F746241E5C093900B02B9D /* UIColor+IGRPhonoTweakExtension.swift */; };
 		A5FE197A1E4F8D5700EA6F73 /* IGRPhotoTweaks.h in Headers */ = {isa = PBXBuildFile; fileRef = A5FE19781E4F8D5700EA6F73 /* IGRPhotoTweaks.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A5FE197E1E4F8DC600EA6F73 /* IGRCropCornerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51E64E51E4A2DFF00CD5872 /* IGRCropCornerView.swift */; };
 		A5FE197F1E4F8DC600EA6F73 /* IGRCropView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51E64E61E4A2DFF00CD5872 /* IGRCropView.swift */; };
@@ -40,7 +40,7 @@
 		A5DFB1DB1E4822B7009ACD31 /* IGRPhotoTweakView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGRPhotoTweakView.swift; sourceTree = "<group>"; };
 		A5DFB1E31E482801009ACD31 /* IGRPhotoTweakConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGRPhotoTweakConstants.swift; sourceTree = "<group>"; };
 		A5DFB1E71E483D35009ACD31 /* IGRPhotoTweakViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGRPhotoTweakViewController.swift; sourceTree = "<group>"; };
-		A5F746241E5C093900B02B9D /* UIColor+Tweak.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Tweak.swift"; sourceTree = "<group>"; };
+		A5F746241E5C093900B02B9D /* UIColor+IGRPhonoTweakExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+IGRPhonoTweakExtension.swift"; sourceTree = "<group>"; };
 		A5FE19761E4F8D5600EA6F73 /* IGRPhotoTweaks.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = IGRPhotoTweaks.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5FE19781E4F8D5700EA6F73 /* IGRPhotoTweaks.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IGRPhotoTweaks.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -132,7 +132,7 @@
 		A5F746231E5C093900B02B9D /* Category */ = {
 			isa = PBXGroup;
 			children = (
-				A5F746241E5C093900B02B9D /* UIColor+Tweak.swift */,
+				A5F746241E5C093900B02B9D /* UIColor+IGRPhonoTweakExtension.swift */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -222,7 +222,7 @@
 			files = (
 				A5FE197E1E4F8DC600EA6F73 /* IGRCropCornerView.swift in Sources */,
 				A5FE197F1E4F8DC600EA6F73 /* IGRCropView.swift in Sources */,
-				A5F746251E5C093900B02B9D /* UIColor+Tweak.swift in Sources */,
+				A5F746251E5C093900B02B9D /* UIColor+IGRPhonoTweakExtension.swift in Sources */,
 				A5FE19801E4F8DC600EA6F73 /* IGRPhotoContentView.swift in Sources */,
 				A5FE19811E4F8DC600EA6F73 /* IGRCropLine.swift in Sources */,
 				A5FE19821E4F8DC600EA6F73 /* IGRCropGridLine.swift in Sources */,
