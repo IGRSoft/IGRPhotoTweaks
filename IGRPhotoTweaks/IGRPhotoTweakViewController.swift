@@ -170,7 +170,9 @@ import Photos
         }
         self.delegate?.photoTweaksController(self, didFinishWithCroppedImage: image)
     }
-    
+    public func lockAspectRatio(isLock:Bool) {
+        self.photoView.lockAspectRatio(isLocked: isLock)
+    }
     public func resetAspectRect() {
         self.photoView.resetAspectRect()
     }

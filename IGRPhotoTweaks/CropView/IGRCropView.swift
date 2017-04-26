@@ -49,6 +49,11 @@ import UIKit
     private(set) var isCropLinesDismissed: Bool  = true
     private(set) var isGridLinesDismissed: Bool  = true
     
+    fileprivate var isAspectRatioLocked: Bool = false
+    fileprivate var aspectRatioWidth:CGFloat = 1.0
+    fileprivate var aspectRatioHeight:CGFloat = 1.0
+    
+    fileprivate var shouldFreezeWidth:Bool = false
     // MARK: - Life Cicle
     
     init(frame: CGRect, cornerBorderWidth: CGFloat, cornerBorderLength: CGFloat) {
@@ -214,6 +219,17 @@ import UIKit
                 }
             }
             
+            // If Aspect ratio is Freezed reset frame as per the aspect ratio
+            if self.isAspectRatioLocked {
+                if self.shouldFreezeWidth {
+                    let newHeight = (self.aspectRatioHeight/self.aspectRatioWidth) * frame.size.width
+                    frame = CGRect(x: frame.origin.x, y: frame.origin.y, width: frame.size.width, height: newHeight)
+                }
+                else {
+                    let newWidth =   (frame.size.width * self.aspectRatioWidth)/self.aspectRatioHeight
+                    frame = CGRect(x: frame.origin.x, y: frame.origin.y, width: newWidth, height: frame.size.height)
+                }
+            }
             self.frame = frame
             
             // update crop lines
@@ -314,6 +330,11 @@ import UIKit
         let width: CGFloat = CGFloat(Float(elements.first!)!)
         let height: CGFloat = CGFloat(Float(elements.last!)!)
         
+        self.aspectRatioWidth = width
+        self.aspectRatioHeight = height
+        
+        self.shouldFreezeWidth = self.aspectRatioWidth > self.aspectRatioHeight
+        
         var size = maxSize
         let mW = size.width / width
         let mH = size.height / height
@@ -329,6 +350,10 @@ import UIKit
         let y = (self.frame.size.height - size.height).half
         
         self.frame = CGRect(x:x, y:y, width: size.width, height: size.height)
+    }
+    
+    public func setAspectRatio(locked:Bool) {
+        self.isAspectRatioLocked = locked
     }
     
     //MARK: - Private Lines funcs

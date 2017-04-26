@@ -226,6 +226,10 @@ import UIKit
         self.cropViewDidStopCrop(self.cropView)
     }
     
+    public func lockAspectRatio(isLocked:Bool) {
+        self.cropView.setAspectRatio(locked: isLocked)
+    }
+    
     //MARK: - Private FUNCs
     
     fileprivate func maxBounds() -> CGRect {
