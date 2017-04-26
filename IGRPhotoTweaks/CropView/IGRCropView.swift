@@ -46,8 +46,8 @@ import UIKit
     fileprivate var cornerBorderLength      = kCropViewCornerLength
     fileprivate var cornerBorderWidth       = kCropViewCornerWidth
     
-    private(set) var isCropLinesDismissed: Bool  = true
-    private(set) var isGridLinesDismissed: Bool  = true
+    fileprivate var isCropLinesDismissed: Bool  = true
+    fileprivate var isGridLinesDismissed: Bool  = true
     
     // MARK: - Life Cicle
     
@@ -68,20 +68,24 @@ import UIKit
     
     fileprivate func setup() {
         
-        var lines = self.setupLines(count: kCropLines, className: IGRCropLine.self)
-        self.update(lines, horizontal: true)
+        var lines = self.setupLines(count: kCropLines,
+                                    className: IGRCropLine.self,
+                                    horizontal: true)
         horizontalCropLines = lines as! [IGRCropLine]
         
-        lines = self.setupLines(count: kCropLines, className: IGRCropLine.self)
-        self.update(lines, horizontal: false)
+        lines = self.setupLines(count: kCropLines,
+                                className: IGRCropLine.self,
+                                horizontal: false)
         verticalCropLines = lines as! [IGRCropLine]
         
-        lines = self.setupLines(count: kGridLines, className: IGRCropGridLine.self)
-        self.update(lines, horizontal: true)
+        lines = self.setupLines(count: kGridLines,
+                                className: IGRCropGridLine.self,
+                                horizontal: true)
         horizontalGridLines = lines as! [IGRCropGridLine]
         
-        lines = self.setupLines(count: kGridLines, className: IGRCropGridLine.self)
-        self.update(lines, horizontal: false)
+        lines = self.setupLines(count: kGridLines,
+                                className: IGRCropGridLine.self,
+                                horizontal: false)
         verticalGridLines = lines as! [IGRCropGridLine]
         
         let upperLeft = IGRCropCornerView(cornerType: .upperLeft,
@@ -117,13 +121,85 @@ import UIKit
         self.addSubview(lowerLeft)
     }
     
-    fileprivate func setupLines(count: Int, className: UIView.Type) -> [UIView] {
+    fileprivate func setupLines(count: Int, className: UIView.Type, horizontal: Bool) -> [UIView] {
         var lines = [UIView]()
-        for _ in 0 ..< count {
+        for idx in 0 ..< count {
             let line = className.init()
             line.alpha = CGFloat.zero
             lines.append(line)
             self.addSubview(line)
+            line.translatesAutoresizingMaskIntoConstraints = false
+            
+            if horizontal {
+                let leading = NSLayoutConstraint(item: line,
+                                                 attribute: .leading,
+                                                 relatedBy: .equal,
+                                                 toItem: self,
+                                                 attribute: .leading,
+                                                 multiplier: 1.0,
+                                                 constant: 0.0)
+                
+                let trailing = NSLayoutConstraint(item: self,
+                                                  attribute: .trailing,
+                                                  relatedBy: .equal,
+                                                  toItem: line,
+                                                  attribute: .trailing,
+                                                  multiplier: 1.0,
+                                                  constant: 0.0)
+                
+                let height = NSLayoutConstraint(item: line,
+                                                attribute: .height,
+                                                relatedBy: .equal,
+                                                toItem: nil,
+                                                attribute: .notAnAttribute,
+                                                multiplier: 1.0,
+                                                constant: 1.0)
+                
+                let centerY = NSLayoutConstraint(item: line,
+                                                 attribute: .centerY,
+                                                 relatedBy: .equal,
+                                                 toItem: self,
+                                                 attribute: .centerY,
+                                                 multiplier: (CGFloat(idx+1) / (CGFloat(count + 1) / 2.0)),
+                                                 constant: 0.0)
+                
+                self.addConstraints([leading, trailing, height, centerY])
+            }
+            else {
+                let top = NSLayoutConstraint(item: line,
+                                             attribute: .top,
+                                             relatedBy: .equal,
+                                             toItem: self,
+                                             attribute: .top,
+                                             multiplier: 1.0,
+                                             constant: 0.0)
+                
+                let bottom = NSLayoutConstraint(item: self,
+                                                attribute: .bottom,
+                                                relatedBy: .equal,
+                                                toItem: line,
+                                                attribute: .bottom,
+                                                multiplier: 1.0,
+                                                constant: 0.0)
+                
+                let width = NSLayoutConstraint(item: line,
+                                               attribute: .width,
+                                               relatedBy: .equal,
+                                               toItem: nil,
+                                               attribute: .notAnAttribute,
+                                               multiplier: 1.0,
+                                               constant: 1.0)
+                
+                let centerX = NSLayoutConstraint(item: line,
+                                                 attribute: .centerX,
+                                                 relatedBy: .equal,
+                                                 toItem: self,
+                                                 attribute: .centerX,
+                                                 multiplier: (CGFloat(idx+1) / (CGFloat(count + 1) / 2.0)),
+                                                 constant: 0.0)
+                
+                self.addConstraints([top, bottom, width, centerX])
+            }
         }
         
         return lines
@@ -132,7 +208,7 @@ import UIKit
     
     override public func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if touches.count == 1 {
-            self.updateCropLines(false)
+            self.updateCropLines(animate: false)
         }
         
         self.delegate?.cropViewDidStartCrop(self)
@@ -148,78 +224,49 @@ import UIKit
             let p2 = CGPoint(x: CGFloat.zero, y: self.frame.size.height)
             let p3 = CGPoint(x: self.frame.size.width, y: self.frame.size.height)
             
-            let canChangeWidth: Bool = frame.size.width > kMinimumCropArea
-            let canChangeHeight: Bool = frame.size.height > kMinimumCropArea
-            
             if location.distanceTo(point: p0) < kCropViewHotArea {
-                if canChangeWidth {
-                    frame.origin.x += location.x
-                    frame.size.width -= location.x
-                }
-                
-                if canChangeHeight {
-                    frame.origin.y += location.y
-                    frame.size.height -= location.y
-                }
+                frame.origin.x += location.x
+                frame.size.width -= location.x
+                frame.origin.y += location.y
+                frame.size.height -= location.y
             }
             else if location.distanceTo(point: p1) < kCropViewHotArea {
-                if canChangeWidth {
-                    frame.size.width = location.x
-                }
-                
-                if canChangeHeight {
-                    frame.origin.y += location.y
-                    frame.size.height -= location.y
-                }
+                frame.size.width = location.x
+                frame.origin.y += location.y
+                frame.size.height -= location.y
             }
             else if location.distanceTo(point: p2) < kCropViewHotArea {
-                if canChangeWidth {
-                    frame.origin.x += location.x
-                    frame.size.width -= location.x
-                }
-                
-                if canChangeHeight {
-                    frame.size.height = location.y
-                }
+                frame.origin.x += location.x
+                frame.size.width -= location.x
+                frame.size.height = location.y
             }
             else if location.distanceTo(point: p3) < kCropViewHotArea {
-                if canChangeWidth {
-                    frame.size.width = location.x
-                }
-                
-                if canChangeHeight {
-                    frame.size.height = location.y
-                }
+                frame.size.width = location.x
+                frame.size.height = location.y
             }
             else if fabs(location.x - p0.x) < kCropViewHotArea {
-                if canChangeWidth {
-                    frame.origin.x += location.x
-                    frame.size.width -= location.x
-                }
+                frame.origin.x += location.x
+                frame.size.width -= location.x
             }
             else if fabs(location.x - p1.x) < kCropViewHotArea {
-                if canChangeWidth {
-                    frame.size.width = location.x
-                }
+                frame.size.width = location.x
             }
             else if fabs(location.y - p0.y) < kCropViewHotArea {
-                if canChangeHeight {
-                    frame.origin.y += location.y
-                    frame.size.height -= location.y
-                }
+                frame.origin.y += location.y
+                frame.size.height -= location.y
             }
             else if fabs(location.y - p2.y) < kCropViewHotArea {
-                if canChangeHeight {
-                    frame.size.height = location.y
-                }
+                frame.size.height = location.y
             }
             
-            self.frame = frame
-            
-            // update crop lines
-            self.updateCropLines(false)
-            
-            self.delegate?.cropViewDidMove(self)
+            if (frame.size.width > self.cornerBorderLength
+                && frame.size.height > self.cornerBorderLength) {
+                self.frame = frame
+                // update crop lines
+                self.updateCropLines(animate: false)
+                
+                self.delegate?.cropViewDidMove(self)
+            }
         }
     }
     
@@ -233,13 +280,12 @@ import UIKit
     
     //MARK: - Crop Lines
     
-    func updateCropLines(_ animate: Bool) {
+    func updateCropLines(animate: Bool) {
         // show crop lines
         self.showCropLines()
         
         let animationBlock: ((_: Void) -> Void)? = {(_: Void) -> Void in
-            self.update(self.horizontalCropLines, horizontal: true)
-            self.update(self.verticalCropLines, horizontal: false)
+            self.layoutIfNeeded()
         }
         
         if animate {
@@ -271,13 +317,12 @@ import UIKit
     
     //MARK: - Crid Lines
     
-    func updateGridLines(_ animate: Bool) {
+    func updateGridLines(animate: Bool) {
         // show grid lines
         self.showGridLines()
         
         let animationBlock: ((_: Void) -> Void)? = {(_: Void) -> Void in
-            self.update(self.horizontalGridLines, horizontal: true)
-            self.update(self.verticalGridLines, horizontal: false)
+            self.layoutIfNeeded()
         }
         
         if animate {
@@ -332,25 +377,6 @@ import UIKit
     }
     
     //MARK: - Private Lines funcs
-    
-    fileprivate func update(_ lines: [UIView], horizontal: Bool) {
-        let count = lines.count
-        let scale = (1.0 / UIScreen.main.scale)
-        for (idx, line) in lines.enumerated() {
-            if horizontal {
-                line.frame = CGRect(x: CGFloat.zero,
-                                    y: (self.frame.size.height / CGFloat(count + 1)) * CGFloat(idx + 1),
-                                    width: self.frame.size.width,
-                                    height: scale)
-            }
-            else {
-                line.frame = CGRect(x: (self.frame.size.width / CGFloat(count + 1)) * CGFloat(idx + 1),
-                                    y: CGFloat.zero,
-                                    width: scale,
-                                    height: self.frame.size.height)
-            }
-        }
-    }
     
     fileprivate func dismiss(_ lines: [UIView]) {
         for (_, line) in lines.enumerated() {

@@ -91,9 +91,7 @@ import UIKit
         super.layoutSubviews()
         
         self.originalSize = self.maxBounds().size
-        self.scrollView.center = CGPoint(x: self.frame.width.half, y: self.centerY)
         
-        self.cropView.center = self.scrollView.center
     }
     
     // MARK: - Touches
@@ -174,7 +172,7 @@ import UIKit
         self.highlightMask(true, animate: false)
         
         // update grids
-        self.cropView.updateGridLines(false)
+        self.cropView.updateGridLines(animate: false)
         
         // rotate scroll view
         self.angle = value
@@ -283,7 +281,7 @@ extension IGRPhotoTweakView : UIScrollViewDelegate {
     }
     
     public func scrollViewWillBeginZooming(_ scrollView: UIScrollView, with view: UIView?) {
-        self.cropView.updateCropLines(true)
+        self.cropView.updateCropLines(animate: true)
     }
     
     public func scrollViewDidEndZooming(_ scrollView: UIScrollView, with view: UIView?, atScale scale: CGFloat) {
@@ -358,7 +356,8 @@ extension IGRPhotoTweakView : IGRCropViewDelegate {
             cropView.center = CGPoint(x: self.frame.width.half, y: self.centerY)
             
             // zoom the specified area of scroll view
-            let zoomRect: CGRect = self.convert(scaleFrame, to: self.scrollView.photoContentView)
+            let zoomRect: CGRect = self.convert(scaleFrame,
+                                                to: self.scrollView.photoContentView)
             self.scrollView.zoom(to: zoomRect, animated: false)
         })
         
@@ -375,6 +374,7 @@ extension IGRPhotoTweakView : IGRCropViewDelegate {
         
         UIView.animate(withDuration: kAnimationDuration, animations: {() -> Void in
             self.scrollView.checkContentOffset()
+            self.cropView.layoutIfNeeded()
         })
         
         self.highlightMask(false, animate: true)
