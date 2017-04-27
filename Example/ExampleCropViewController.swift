@@ -9,7 +9,7 @@
 import IGRPhotoTweaks
 
 import UIKit
-import KCHorizontalDial
+import HorizontalDial
 
 class ExampleCropViewController: IGRPhotoTweakViewController {
 
@@ -18,7 +18,7 @@ class ExampleCropViewController: IGRPhotoTweakViewController {
      */
     @IBOutlet weak fileprivate var angleSlider: UISlider?
     @IBOutlet weak fileprivate var angleLabel: UILabel?
-    @IBOutlet weak fileprivate var horizontalDial: KCHorizontalDial? {
+    @IBOutlet weak fileprivate var horizontalDial: HorizontalDial? {
         didSet {
             self.horizontalDial?.migneticOption = .none
         }
@@ -181,8 +181,8 @@ class ExampleCropViewController: IGRPhotoTweakViewController {
     }
 }
 
-extension ExampleCropViewController: KCHorizontalDialDelegate {
-    func horizontalDialDidValueChanged(_ horizontalDial: KCHorizontalDial) {
+extension ExampleCropViewController: HorizontalDialDelegate {
+    func horizontalDialDidValueChanged(_ horizontalDial: HorizontalDial) {
         let degrees = horizontalDial.value
         let radians = IGRRadianAngle.toRadians(CGFloat(degrees))
         
@@ -190,7 +190,7 @@ extension ExampleCropViewController: KCHorizontalDialDelegate {
         self.changedAngle(value: radians)
     }
     
-    func horizontalDialDidEndScroll(_ horizontalDial: KCHorizontalDial) {
+    func horizontalDialDidEndScroll(_ horizontalDial: HorizontalDial) {
         self.stopChangeAngle()
     }
 }
