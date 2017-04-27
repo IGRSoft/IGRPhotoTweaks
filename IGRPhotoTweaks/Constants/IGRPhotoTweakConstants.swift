@@ -16,10 +16,9 @@ enum CropCornerType : Int {
 }
 
 let kCropLines: Int = 2
-let kGridLines: Int = 9
+let kGridLines: Int = 8
 
-let kCropViewHotArea: CGFloat = 16.0
-let kMinimumCropArea: CGFloat = 60.0
+let kCropViewHotArea: CGFloat = 40.0
 
 let kMaximumCanvasWidthRatio: CGFloat  = 0.9
 let kMaximumCanvasHeightRatio: CGFloat = 0.8

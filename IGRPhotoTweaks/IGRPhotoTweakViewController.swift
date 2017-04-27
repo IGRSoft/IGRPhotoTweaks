@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Photos
 
 
 @objc public protocol IGRPhotoTweakViewControllerDelegate: NSObjectProtocol {
@@ -46,10 +45,16 @@ import Photos
     
     //MARK: - Private VARs
     
-    fileprivate var photoView: IGRPhotoTweakView!
-    
-    fileprivate let kBitsPerComponent = 8
-    fileprivate let kBitmapBytesPerRow = 0
+    internal lazy var photoView: IGRPhotoTweakView! = { [unowned self] by in
+        
+        let photoView = IGRPhotoTweakView(frame: self.view.bounds,
+                                          image: self.image,
+                                          customizationDelegate: self)
+        photoView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        self.view.addSubview(photoView)
+        
+        return photoView
+        }()
     
     // MARK: - Life Cicle
     
@@ -69,11 +74,6 @@ import Photos
     }
     
     fileprivate func setupSubviews() {
-        self.photoView = IGRPhotoTweakView(frame: self.view.bounds,
-                                           image: self.image,
-                                           customizationDelegate: self)
-        self.photoView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        self.view.addSubview(self.photoView)
         self.view.sendSubview(toBack: self.photoView)
     }
     
@@ -89,14 +89,6 @@ import Photos
     }
     
     // MARK: - Public
-    
-    public func changedAngle(value: CGFloat) {
-        self.photoView.changedAngle(value: value)
-    }
-    
-    public func stopChangeAngle() {
-        self.photoView.stopChangeAngle()
-    }
     
     public func resetView() {
         self.photoView.resetView()
@@ -121,52 +113,20 @@ import Photos
         let yScale: CGFloat = sqrt(t.b * t.b + t.d * t.d)
         transform = transform.scaledBy(x: xScale, y: yScale)
         
-        let fixedImage = fixOrientation(for: self.image)
-        
-        let imageRef: CGImage = self.newTransformedImage(transform, sourceImage: fixedImage!, sourceSize: self.image.size, outputWidth: self.image.size.width, cropSize: self.photoView.cropView.frame.size, imageViewSize: self.photoView.photoContentView.bounds.size)
-        
-        let image = UIImage(cgImage: imageRef)
-        
-        if self.isAutoSaveToLibray {
+        if let fixedImage = self.image.cgImageWithFixedOrientation() {
+            let imageRef = fixedImage.transformedImage(transform,
+                                                       sourceSize: self.image.size,
+                                                       outputWidth: self.image.size.width,
+                                                       cropSize: self.photoView.cropView.frame.size,
+                                                       imageViewSize: self.photoView.photoContentView.bounds.size)
             
-            let writePhotoToLibraryBlock: ((_: Void) -> Void)? = {(_: Void) -> Void in
-                UIImageWriteToSavedPhotosAlbum(image, self, #selector(self.image(image:didFinishSavingWithError:contextInfo:)), nil)
-            }
+            let image = UIImage(cgImage: imageRef)
             
-            if PHPhotoLibrary.authorizationStatus() == PHAuthorizationStatus.authorized {
-                writePhotoToLibraryBlock!()
+            if self.isAutoSaveToLibray {
+                
+                self.saveToLibrary(image: image)
             }
-            else {
-                PHPhotoLibrary.requestAuthorization({ (status: PHAuthorizationStatus) in
-                    if status == PHAuthorizationStatus.authorized {
-                        DispatchQueue.main.async{
-                            writePhotoToLibraryBlock!()
-                        }
-                    }
-                    else {
-                        DispatchQueue.main.async{
-                            let ac = UIAlertController(title: "Authorization error",
-                                                       message: "App don't granted to access to Photo Library",
-                                                       preferredStyle: .alert)
-                            ac.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                            ac.addAction(UIAlertAction(title: "Settings", style: .default, handler: { (action) in
-                                guard let settingsUrl = URL(string: UIApplicationOpenSettingsURLString) else {
-                                    return
-                                }
-                                
-                                if UIApplication.shared.canOpenURL(settingsUrl) {
-                                    if #available(iOS 10.0, *) {
-                                        UIApplication.shared.open(settingsUrl)
-                                    } else {
-                                        UIApplication.shared.openURL(settingsUrl)
-                                    }
-                                }
-                            }))
-                            self.present(ac, animated: true, completion: nil)
-                        }
-                    }
-                })
-            }
+<<<<<<< HEAD
         }
         self.delegate?.photoTweaksController(self, didFinishWithCroppedImage: image)
     }
@@ -245,58 +205,10 @@ import Photos
         switch image.imageOrientation {
             case .left, .leftMirrored, .right, .rightMirrored:
                 context.draw(cgImage, in: CGRect(x: 0, y: 0, width: height, height: width))
+=======
+>>>>>>> IGRSoft/master
             
-            default:
-                context.draw(cgImage, in: CGRect(x: 0, y: 0, width: width, height: height))
-        }
-        
-        // And now we just create a new UIImage from the drawing context
-        guard let newCGImg = context.makeImage() else {
-            return nil
-        }
-        
-        return newCGImg
-    }
-    
-    
-    fileprivate func newTransformedImage(_ transform: CGAffineTransform, sourceImage: CGImage, sourceSize: CGSize, outputWidth: CGFloat, cropSize: CGSize, imageViewSize: CGSize) -> CGImage {
-        
-        let aspect: CGFloat = cropSize.height / cropSize.width
-        let outputSize = CGSize(width: outputWidth, height: (outputWidth * aspect))
-        
-        let context = CGContext(data: nil,
-                                width: Int(outputSize.width),
-                                height: Int(outputSize.height),
-                                bitsPerComponent: sourceImage.bitsPerComponent,
-                                bytesPerRow: kBitmapBytesPerRow,
-                                space: sourceImage.colorSpace!,
-                                bitmapInfo: sourceImage.bitmapInfo.rawValue)
-        context?.setFillColor(UIColor.clear.cgColor)
-        context?.fill(CGRect(x: CGFloat.zero, y: CGFloat.zero, width: (outputSize.width), height: (outputSize.height)))
-        var uiCoords = CGAffineTransform(scaleX: outputSize.width / cropSize.width,
-                                         y: outputSize.height / cropSize.height)
-        uiCoords = uiCoords.translatedBy(x: cropSize.width.half, y: cropSize.height.half)
-        uiCoords = uiCoords.scaledBy(x: 1.0, y: -1.0)
-        context?.concatenate(uiCoords)
-        context?.concatenate(transform)
-        context?.scaleBy(x: 1.0, y: -1.0)
-        context?.draw(sourceImage, in: CGRect(x: (-imageViewSize.width.half),
-                                              y: (-imageViewSize.height.half),
-                                              width: imageViewSize.width,
-                                              height: imageViewSize.height))
-        
-        return context!.makeImage()!
-    }
-    
-    internal func image(image: UIImage, didFinishSavingWithError error: NSError?, contextInfo:UnsafeRawPointer) {
-        if error == nil {
-            let ac = UIAlertController(title: "Save error",
-                                       message: error?.localizedDescription,
-                                       preferredStyle: .alert)
-            ac.addAction(UIAlertAction(title: "OK",
-                                       style: .default,
-                                       handler: nil))
-            present(ac, animated: true, completion: nil)
+            self.delegate?.photoTweaksController(self, didFinishWithCroppedImage: image)
         }
     }
 }
