@@ -62,6 +62,8 @@ extension IGRCropView {
                 frame.size.height = location.y
             }
             
+            //TODO: Added test cropViewInsideValidFrame
+            
             if (frame.size.width > self.cornerBorderLength
                 && frame.size.height > self.cornerBorderLength) {
                 self.frame = frame

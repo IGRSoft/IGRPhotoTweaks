@@ -23,6 +23,11 @@ import UIKit
      Calls ones, when user stop interaction with view
      */
     @objc func cropViewDidStopCrop(_ cropView: IGRCropView)
+    
+    /*
+     Calls ones, when change a Crop frame
+     */
+    @objc func cropViewInsideValidFrame(for point: CGPoint, from cropView: IGRCropView) -> Bool
 }
 
 @objc(IGRCropView) public class IGRCropView: UIView {

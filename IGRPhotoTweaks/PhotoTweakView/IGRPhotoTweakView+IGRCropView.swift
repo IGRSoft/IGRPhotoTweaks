@@ -95,4 +95,10 @@ extension IGRPhotoTweakView : IGRCropViewDelegate {
         self.highlightMask(false, animate: true)
         self.manualMove = false
     }
+    
+    public func cropViewInsideValidFrame(for point: CGPoint, from cropView: IGRCropView) -> Bool {
+        let updatedPoint = self.convert(point, to: self.scrollView.photoContentView)
+        let frame =  self.scrollView.photoContentView.frame
+        return frame.contains(updatedPoint)
+    }
 }
