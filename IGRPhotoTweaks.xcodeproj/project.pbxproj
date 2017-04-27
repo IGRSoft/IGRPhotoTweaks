@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A5CD58D71EB2089500238BC6 /* IGRPhotoTweaksTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CD58D61EB2089500238BC6 /* IGRPhotoTweaksTests.swift */; };
+		A5CD58D91EB2089500238BC6 /* IGRPhotoTweaks.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5FE19761E4F8D5600EA6F73 /* IGRPhotoTweaks.framework */; };
+		A5CD58E21EB2099600238BC6 /* LinesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CD58E11EB2099600238BC6 /* LinesTests.swift */; };
+		A5CD58E41EB209AA00238BC6 /* CornerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CD58E31EB209AA00238BC6 /* CornerTests.swift */; };
+		A5CD58E61EB209CE00238BC6 /* MasksTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CD58E51EB209CE00238BC6 /* MasksTest.swift */; };
+		A5CD58E81EB209E100238BC6 /* CropTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CD58E71EB209E100238BC6 /* CropTests.swift */; };
+		A5CD58EA1EB209F100238BC6 /* RotationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CD58E91EB209F100238BC6 /* RotationTests.swift */; };
+		A5CD58EC1EB20A0100238BC6 /* AspectRatioTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CD58EB1EB20A0100238BC6 /* AspectRatioTests.swift */; };
+		A5CD58F01EB20F7300238BC6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A5CD58EF1EB20F7300238BC6 /* Assets.xcassets */; };
 		A5FE197A1E4F8D5700EA6F73 /* IGRPhotoTweaks.h in Headers */ = {isa = PBXBuildFile; fileRef = A5FE19781E4F8D5700EA6F73 /* IGRPhotoTweaks.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A5FF6BF71EB11586003F6108 /* CGFloat+IGRPhonoTweakExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5FF6BCF1EB11586003F6108 /* CGFloat+IGRPhonoTweakExtension.swift */; };
 		A5FF6BF81EB11586003F6108 /* CGImage+IGRPhonoTweakExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5FF6BD01EB11586003F6108 /* CGImage+IGRPhonoTweakExtension.swift */; };
@@ -43,10 +52,27 @@
 		A5FF6C171EB11586003F6108 /* IGRPhotoScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5FF6BF61EB11586003F6108 /* IGRPhotoScrollView.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		A5CD58DA1EB2089500238BC6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A5DFB1AA1E481F48009ACD31 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A5FE19751E4F8D5600EA6F73;
+			remoteInfo = IGRPhotoTweaks;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
-		A5DFB1CC1E481FE4009ACD31 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		A5DFB1CE1E481FE4009ACD31 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		A5DFB1D01E481FE4009ACD31 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		A5CD58D41EB2089500238BC6 /* IGRPhotoTweaksTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IGRPhotoTweaksTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A5CD58D61EB2089500238BC6 /* IGRPhotoTweaksTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IGRPhotoTweaksTests.swift; sourceTree = "<group>"; };
+		A5CD58D81EB2089500238BC6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A5CD58E11EB2099600238BC6 /* LinesTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinesTests.swift; sourceTree = "<group>"; };
+		A5CD58E31EB209AA00238BC6 /* CornerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CornerTests.swift; sourceTree = "<group>"; };
+		A5CD58E51EB209CE00238BC6 /* MasksTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MasksTest.swift; sourceTree = "<group>"; };
+		A5CD58E71EB209E100238BC6 /* CropTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CropTests.swift; sourceTree = "<group>"; };
+		A5CD58E91EB209F100238BC6 /* RotationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RotationTests.swift; sourceTree = "<group>"; };
+		A5CD58EB1EB20A0100238BC6 /* AspectRatioTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AspectRatioTests.swift; sourceTree = "<group>"; };
+		A5CD58EF1EB20F7300238BC6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A5DFB1D21E481FE4009ACD31 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A5FE19761E4F8D5600EA6F73 /* IGRPhotoTweaks.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = IGRPhotoTweaks.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5FE19781E4F8D5700EA6F73 /* IGRPhotoTweaks.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IGRPhotoTweaks.h; sourceTree = "<group>"; };
@@ -86,6 +112,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		A5CD58D11EB2089500238BC6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A5CD58D91EB2089500238BC6 /* IGRPhotoTweaks.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A5FE19721E4F8D5600EA6F73 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -96,12 +130,28 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A5CD58D51EB2089500238BC6 /* IGRPhotoTweaksTests */ = {
+			isa = PBXGroup;
+			children = (
+				A5CD58D61EB2089500238BC6 /* IGRPhotoTweaksTests.swift */,
+				A5CD58E11EB2099600238BC6 /* LinesTests.swift */,
+				A5CD58E31EB209AA00238BC6 /* CornerTests.swift */,
+				A5CD58E51EB209CE00238BC6 /* MasksTest.swift */,
+				A5CD58E71EB209E100238BC6 /* CropTests.swift */,
+				A5CD58E91EB209F100238BC6 /* RotationTests.swift */,
+				A5CD58EB1EB20A0100238BC6 /* AspectRatioTests.swift */,
+				A5CD58D81EB2089500238BC6 /* Info.plist */,
+				A5CD58EF1EB20F7300238BC6 /* Assets.xcassets */,
+			);
+			path = IGRPhotoTweaksTests;
+			sourceTree = "<group>";
+		};
 		A5DFB1A91E481F48009ACD31 = {
 			isa = PBXGroup;
 			children = (
 				A5DFB1CA1E481FE4009ACD31 /* IGRPhotoTweaks */,
-				A5DFB1CB1E481FE4009ACD31 /* Resources */,
 				A5DFB1D11E481FE4009ACD31 /* Settings */,
+				A5CD58D51EB2089500238BC6 /* IGRPhotoTweaksTests */,
 				A5DFB1B31E481F48009ACD31 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -110,6 +160,7 @@
 			isa = PBXGroup;
 			children = (
 				A5FE19761E4F8D5600EA6F73 /* IGRPhotoTweaks.framework */,
+				A5CD58D41EB2089500238BC6 /* IGRPhotoTweaksTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -129,16 +180,6 @@
 				A5FE19781E4F8D5700EA6F73 /* IGRPhotoTweaks.h */,
 			);
 			path = IGRPhotoTweaks;
-			sourceTree = "<group>";
-		};
-		A5DFB1CB1E481FE4009ACD31 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				A5DFB1CC1E481FE4009ACD31 /* Assets.xcassets */,
-				A5DFB1CD1E481FE4009ACD31 /* LaunchScreen.storyboard */,
-				A5DFB1CF1E481FE4009ACD31 /* Main.storyboard */,
-			);
-			path = Resources;
 			sourceTree = "<group>";
 		};
 		A5DFB1D11E481FE4009ACD31 /* Settings */ = {
@@ -251,6 +292,24 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		A5CD58D31EB2089500238BC6 /* IGRPhotoTweaksTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A5CD58DC1EB2089500238BC6 /* Build configuration list for PBXNativeTarget "IGRPhotoTweaksTests" */;
+			buildPhases = (
+				A5CD58D01EB2089500238BC6 /* Sources */,
+				A5CD58D11EB2089500238BC6 /* Frameworks */,
+				A5CD58D21EB2089500238BC6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A5CD58DB1EB2089500238BC6 /* PBXTargetDependency */,
+			);
+			name = IGRPhotoTweaksTests;
+			productName = IGRPhotoTweaksTests;
+			productReference = A5CD58D41EB2089500238BC6 /* IGRPhotoTweaksTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		A5FE19751E4F8D5600EA6F73 /* IGRPhotoTweaks */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = A5FE197B1E4F8D5700EA6F73 /* Build configuration list for PBXNativeTarget "IGRPhotoTweaks" */;
@@ -276,10 +335,15 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = IGR;
-				LastSwiftUpdateCheck = 0820;
+				LastSwiftUpdateCheck = 0830;
 				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = "IGR Software";
 				TargetAttributes = {
+					A5CD58D31EB2089500238BC6 = {
+						CreatedOnToolsVersion = 8.3.2;
+						DevelopmentTeam = DMP42GVPJ3;
+						ProvisioningStyle = Automatic;
+					};
 					A5FE19751E4F8D5600EA6F73 = {
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = DMP42GVPJ3;
@@ -302,11 +366,20 @@
 			projectRoot = "";
 			targets = (
 				A5FE19751E4F8D5600EA6F73 /* IGRPhotoTweaks */,
+				A5CD58D31EB2089500238BC6 /* IGRPhotoTweaksTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		A5CD58D21EB2089500238BC6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A5CD58F01EB20F7300238BC6 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A5FE19741E4F8D5600EA6F73 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -317,6 +390,20 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		A5CD58D01EB2089500238BC6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A5CD58D71EB2089500238BC6 /* IGRPhotoTweaksTests.swift in Sources */,
+				A5CD58E81EB209E100238BC6 /* CropTests.swift in Sources */,
+				A5CD58EC1EB20A0100238BC6 /* AspectRatioTests.swift in Sources */,
+				A5CD58E61EB209CE00238BC6 /* MasksTest.swift in Sources */,
+				A5CD58E21EB2099600238BC6 /* LinesTests.swift in Sources */,
+				A5CD58E41EB209AA00238BC6 /* CornerTests.swift in Sources */,
+				A5CD58EA1EB209F100238BC6 /* RotationTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A5FE19711E4F8D5600EA6F73 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -359,26 +446,51 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXVariantGroup section */
-		A5DFB1CD1E481FE4009ACD31 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				A5DFB1CE1E481FE4009ACD31 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
+/* Begin PBXTargetDependency section */
+		A5CD58DB1EB2089500238BC6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A5FE19751E4F8D5600EA6F73 /* IGRPhotoTweaks */;
+			targetProxy = A5CD58DA1EB2089500238BC6 /* PBXContainerItemProxy */;
 		};
-		A5DFB1CF1E481FE4009ACD31 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				A5DFB1D01E481FE4009ACD31 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		A5CD58DD1EB2089500238BC6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = DMP42GVPJ3;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				INFOPLIST_FILE = IGRPhotoTweaksTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.igrsoft.IGRPhotoTweaksTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		A5CD58DE1EB2089500238BC6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = DMP42GVPJ3;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				INFOPLIST_FILE = IGRPhotoTweaksTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.igrsoft.IGRPhotoTweaksTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
 		A5DFB1C21E481F48009ACD31 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -510,6 +622,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		A5CD58DC1EB2089500238BC6 /* Build configuration list for PBXNativeTarget "IGRPhotoTweaksTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A5CD58DD1EB2089500238BC6 /* Debug */,
+				A5CD58DE1EB2089500238BC6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		A5DFB1AD1E481F48009ACD31 /* Build configuration list for PBXProject "IGRPhotoTweaks" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

@@ -42,6 +42,8 @@ extension CGImage {
                                               width: imageViewSize.width,
                                               height: imageViewSize.height))
         
-        return context!.makeImage()!
+        let result = context!.makeImage()!
+        
+        return result
     }
 }
