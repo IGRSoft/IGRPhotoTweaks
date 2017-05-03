@@ -15,6 +15,7 @@ extension IGRPhotoTweakView {
                                      width: self.originalSize.width,
                                      height: self.originalSize.height)
         self.cropView.center = self.scrollView.center
+        self.cropView.resetAspectRect()
         
         self.cropViewDidStopCrop(self.cropView)
     }
@@ -24,5 +25,9 @@ extension IGRPhotoTweakView {
         self.cropView.center = self.scrollView.center
         
         self.cropViewDidStopCrop(self.cropView)
+    }
+    
+    public func lockAspectRatio(_ lock: Bool) {
+        self.cropView.lockAspectRatio(lock)
     }
 }

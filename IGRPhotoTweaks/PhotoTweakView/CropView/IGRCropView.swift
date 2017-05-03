@@ -71,6 +71,10 @@ import UIKit
     internal var isCropLinesDismissed: Bool  = true
     internal var isGridLinesDismissed: Bool  = true
     
+    internal var isAspectRatioLocked: Bool = false
+    internal var aspectRatioWidth: CGFloat = 0.0
+    internal var aspectRatioHeight: CGFloat = 0.0
+    
     // MARK: - Life Cicle
     
     init(frame: CGRect, cornerBorderWidth: CGFloat, cornerBorderLength: CGFloat) {
@@ -119,5 +123,7 @@ import UIKit
         lowerLeft.center = CGPoint(x: cornerBorderLength.half,
                                    y: (self.frame.size.height - cornerBorderLength.half))
         self.addSubview(lowerLeft)
+        
+        resetAspectRect()
     }
 }

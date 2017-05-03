@@ -62,6 +62,15 @@ extension IGRCropView {
                 frame.size.height = location.y
             }
             
+            // If Aspect ratio is Freezed reset frame as per the aspect ratio
+            if self.isAspectRatioLocked {
+                let newHeight = (self.aspectRatioHeight / self.aspectRatioWidth) * frame.size.width
+                frame = CGRect(x: frame.origin.x,
+                               y: frame.origin.y,
+                               width: frame.size.width,
+                               height: newHeight)
+            }
+
             //TODO: Added test cropViewInsideValidFrame
             
             if (frame.size.width > self.cornerBorderLength

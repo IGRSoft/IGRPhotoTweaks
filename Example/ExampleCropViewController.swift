@@ -103,7 +103,6 @@ class ExampleCropViewController: IGRPhotoTweakViewController {
         cropAction()
     }
     
-    
     @IBAction func onTouchAspectButton(_ sender: UIButton) {
         let actionSheet = UIAlertController(title: nil,
                                             message: nil,
@@ -141,6 +140,10 @@ class ExampleCropViewController: IGRPhotoTweakViewController {
         actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         
         present(actionSheet, animated: true, completion: nil)
+    }
+    
+    @IBAction func onTouchLockAspectRatioButton(_ sender: UISwitch) {
+        self.lockAspectRatio(sender.isOn)
     }
     
     //FIXME: Themes Preview
