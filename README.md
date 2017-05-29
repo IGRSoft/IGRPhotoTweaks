@@ -131,5 +131,8 @@ pod 'IGRPhotoTweaks', '~> 1.0.0'
 ```
 Alternatively, you can manually drag the ```IGRPhotoTweaks``` folder into your Xcode project.
 
+## Issues
+Not works in Objective-C
+
 ## Protip
 If using with an existing UIImagePickerController, be sure to set ```allowsEditing = NO``` otherwise you may force the user to crop with the native editing tool before showing IGRPhotoTweaksViewController.
