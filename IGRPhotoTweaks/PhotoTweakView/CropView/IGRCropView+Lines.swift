@@ -58,7 +58,7 @@ extension IGRCropView {
         // show crop lines
         self.showCropLines()
         
-        let animationBlock: ((_: Void) -> Void)? = {(_: Void) -> Void in
+        let animationBlock: (() -> Void)? = {(_: Void) -> Void in
             self.layoutIfNeeded()
         }
         
@@ -95,7 +95,7 @@ extension IGRCropView {
         // show grid lines
         self.showGridLines()
         
-        let animationBlock: ((_: Void) -> Void)? = {(_: Void) -> Void in
+        let animationBlock: (() -> Void)? = {(_: Void) -> Void in
             self.layoutIfNeeded()
         }
         

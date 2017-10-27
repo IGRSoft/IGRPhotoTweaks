@@ -12,7 +12,7 @@ import UIKit
 import HorizontalDial
 
 class ExampleCropViewController: IGRPhotoTweakViewController {
-
+    
     /**
      Slider to change angle.
      */
@@ -31,23 +31,23 @@ class ExampleCropViewController: IGRPhotoTweakViewController {
         
         self.setupSlider()
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
     //FIXME: Themes Preview
-    /*override open func setupThemes() {
-        
-        IGRCropLine.appearance().backgroundColor = UIColor.green
-        IGRCropGridLine.appearance().backgroundColor = UIColor.yellow
-        IGRCropCornerView.appearance().backgroundColor = UIColor.purple
-        IGRCropCornerLine.appearance().backgroundColor = UIColor.orange
-        IGRCropMaskView.appearance().backgroundColor = UIColor.blue
-        IGRPhotoContentView.appearance().backgroundColor = UIColor.gray
-        IGRPhotoTweakView.appearance().backgroundColor = UIColor.brown
-    }*/
+    override open func setupThemes() {
+     
+     IGRCropLine.appearance().backgroundColor = UIColor.green
+     IGRCropGridLine.appearance().backgroundColor = UIColor.yellow
+     IGRCropCornerView.appearance().backgroundColor = UIColor.purple
+     IGRCropCornerLine.appearance().backgroundColor = UIColor.orange
+     IGRCropMaskView.appearance().backgroundColor = UIColor.blue
+     IGRPhotoContentView.appearance().backgroundColor = UIColor.gray
+     IGRPhotoTweakView.appearance().backgroundColor = UIColor.brown
+     }
     
     fileprivate func setupSlider() {
         self.angleSlider?.minimumValue = -Float(IGRRadianAngle.toRadians(45))
@@ -80,7 +80,7 @@ class ExampleCropViewController: IGRPhotoTweakViewController {
         let radians: CGFloat = CGFloat(sender.value)
         setupAngleLabelValue(radians: radians)
         self.changedAngle(value: radians)
-
+        
     }
     
     @IBAction func onEndTouchAngleControl(_ sender: UIControl) {
@@ -147,31 +147,31 @@ class ExampleCropViewController: IGRPhotoTweakViewController {
     }
     
     //FIXME: Themes Preview
-//    override open func customBorderColor() -> UIColor {
-//        return UIColor.red
-//    }
-//    
-//    override open func customBorderWidth() -> CGFloat {
-//        return 2.0
-//    }
-//    
-//    override open func customCornerBorderWidth() -> CGFloat {
-//        return 4.0
-//    }
-//    
-//    override open func customCornerBorderLength() -> CGFloat {
-//        return 30.0
-//    }
-//    
-//    override open func customIsHighlightMask() -> Bool {
-//        return true
-//    }
-//    
-//    override open func customHighlightMaskAlphaValue() -> CGFloat {
-//        return 0.3
-//    }
+    //    override open func customBorderColor() -> UIColor {
+    //        return UIColor.red
+    //    }
+    //
+    //    override open func customBorderWidth() -> CGFloat {
+    //        return 2.0
+    //    }
+    //
+    //    override open func customCornerBorderWidth() -> CGFloat {
+    //        return 4.0
+    //    }
+    //
+    //    override open func customCornerBorderLength() -> CGFloat {
+    //        return 30.0
+    //    }
+    //
+    //    override open func customIsHighlightMask() -> Bool {
+    //        return true
+    //    }
+    //
+    //    override open func customHighlightMaskAlphaValue() -> CGFloat {
+    //        return 0.3
+    //    }
     
-    open override func customCanvasHeaderHeigth() -> CGFloat {
+    override open func customCanvasHeaderHeigth() -> CGFloat {
         var heigth: CGFloat = 0.0
         
         if UIDevice.current.orientation.isLandscape {

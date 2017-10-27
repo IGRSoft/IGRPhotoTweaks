@@ -8,6 +8,6 @@
 
 import UIKit
 
-@objc public class IGRCropMaskView: UIView {
+public class IGRCropMaskView: UIView {
     
 }

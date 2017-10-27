@@ -8,7 +8,7 @@
 
 import CoreGraphics
 
-@objc open class IGRRadianAngle : NSObject {
+open class IGRRadianAngle : NSObject {
     
     static open func toRadians(_ degrees: CGFloat) -> CGFloat {
         return (degrees * CGFloat.pi / 180.0)

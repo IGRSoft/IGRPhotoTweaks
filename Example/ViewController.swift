@@ -26,11 +26,11 @@ class ViewController: UIViewController {
                 
         let editItem = UIBarButtonItem(barButtonSystemItem: .edit,
                                        target: self,
-                                       action: #selector(self.openEdit))
+                                       action: #selector(openEdit))
         
         let libraryItem = UIBarButtonItem(barButtonSystemItem: .camera,
                                           target: self,
-                                          action: #selector(self.openLibrary))
+                                          action: #selector(openLibrary))
         
         self.navigationItem.leftBarButtonItem = libraryItem
         self.navigationItem.rightBarButtonItem = editItem
@@ -58,14 +58,14 @@ class ViewController: UIViewController {
     
     // MARK: - Funcs
     
-    func openLibrary() {
+    @objc func openLibrary() {
         let pickerView = UIImagePickerController.init()
         pickerView.delegate = self
         pickerView.sourceType = UIImagePickerControllerSourceType.photoLibrary
         self.present(pickerView, animated: true, completion: nil)
     }
     
-    func openEdit() {
+    @objc func openEdit() {
         self.edit(image: self.image)
     }
     

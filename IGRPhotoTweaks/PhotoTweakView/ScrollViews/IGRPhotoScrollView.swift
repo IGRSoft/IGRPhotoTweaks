@@ -8,19 +8,19 @@
 
 import UIKit
 
-@objc public protocol IGRPhotoScrollViewDelegate: NSObjectProtocol {
+public protocol IGRPhotoScrollViewDelegate : class{
     /*
      Calls ones, when user start interaction with view
      */
-    @objc func scrollViewDidStartUpdateScrollContentOffset(_ scrollView: IGRPhotoScrollView)
+    func scrollViewDidStartUpdateScrollContentOffset(_ scrollView: IGRPhotoScrollView)
     
     /*
      Calls ones, when user stop interaction with view
      */
-    @objc func scrollViewDidStopScrollUpdateContentOffset(_ scrollView: IGRPhotoScrollView)
+    func scrollViewDidStopScrollUpdateContentOffset(_ scrollView: IGRPhotoScrollView)
 }
 
-@objc(IGRPhotoScrollView) public class IGRPhotoScrollView: UIScrollView {
+public class IGRPhotoScrollView: UIScrollView {
     
     //MARK: - Public VARs
     
@@ -111,7 +111,7 @@ import UIKit
         }
     }
     
-    final func stopUpdateContentOffset() {
+    @objc func stopUpdateContentOffset() {
         if (isUpdatingContentOffset) {
             isUpdatingContentOffset = false
             updateDelegate?.scrollViewDidStopScrollUpdateContentOffset(self)

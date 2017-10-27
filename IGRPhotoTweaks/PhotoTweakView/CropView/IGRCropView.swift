@@ -8,29 +8,29 @@
 
 import UIKit
 
-@objc public protocol IGRCropViewDelegate: NSObjectProtocol {
+public protocol IGRCropViewDelegate : class {
     /*
      Calls ones, when user start interaction with view
      */
-    @objc func cropViewDidStartCrop(_ cropView: IGRCropView)
+    func cropViewDidStartCrop(_ cropView: IGRCropView)
     
     /*
      Calls always, when user move touch around view
      */
-    @objc func cropViewDidMove(_ cropView: IGRCropView)
+    func cropViewDidMove(_ cropView: IGRCropView)
     
     /*
      Calls ones, when user stop interaction with view
      */
-    @objc func cropViewDidStopCrop(_ cropView: IGRCropView)
+    func cropViewDidStopCrop(_ cropView: IGRCropView)
     
     /*
      Calls ones, when change a Crop frame
      */
-    @objc func cropViewInsideValidFrame(for point: CGPoint, from cropView: IGRCropView) -> Bool
+    func cropViewInsideValidFrame(for point: CGPoint, from cropView: IGRCropView) -> Bool
 }
 
-@objc(IGRCropView) public class IGRCropView: UIView {
+public class IGRCropView: UIView {
     
     //MARK: - Public VARs
     
@@ -46,24 +46,24 @@ import UIKit
         var lines = self.setupHorisontalLines(count: kCropLines,
                                               className: IGRCropLine.self)
         return lines as! [IGRCropLine]
-    }()
+    }(())
     
     internal lazy var verticalCropLines: [IGRCropLine] = { [unowned self] by in
         var lines = self.setupVerticalLines(count: kCropLines,
                                             className: IGRCropLine.self)
         return lines as! [IGRCropLine]
-    }()
+    }(())
     
     internal lazy var horizontalGridLines: [IGRCropGridLine] = { [unowned self] by in
         var lines = self.setupHorisontalLines(count: kGridLines,
                                               className: IGRCropGridLine.self)
         return lines as! [IGRCropGridLine]
-    }()
+    }(())
     internal lazy var verticalGridLines: [IGRCropGridLine] = { [unowned self] by in
         var lines = self.setupVerticalLines(count: kGridLines,
                                             className: IGRCropGridLine.self)
         return lines as! [IGRCropGridLine]
-    }()
+    }(())
     
     internal var cornerBorderLength      = kCropViewCornerLength
     internal var cornerBorderWidth       = kCropViewCornerWidth

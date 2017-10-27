@@ -7,7 +7,6 @@
 //
 
 import XCTest
-import IGRPhotoTweaks
 
 class CornerTests: XCTestCase {
     

@@ -8,61 +8,61 @@
 
 import Foundation
 
-@objc public protocol IGRPhotoTweakViewCustomizationDelegate: NSObjectProtocol {
+public protocol IGRPhotoTweakViewCustomizationDelegate : class {
     /*
      Lines between mask and crop area
      */
-    @objc optional func borderColor() -> UIColor
+    func borderColor() -> UIColor
     
-    @objc optional func borderWidth() -> CGFloat
+    func borderWidth() -> CGFloat
     
     /*
      Corner of 2 border lines
      */
-    @objc optional func cornerBorderWidth() -> CGFloat
+    func cornerBorderWidth() -> CGFloat
     
-    @objc optional func cornerBorderLength() -> CGFloat
+    func cornerBorderLength() -> CGFloat
     
     /*
      Mask customization
      */
-    @objc optional func isHighlightMask() -> Bool
+    func isHighlightMask() -> Bool
     
-    @objc optional func highlightMaskAlphaValue() -> CGFloat
+    func highlightMaskAlphaValue() -> CGFloat
     
     /*
      Top offset for crop view
      */
-    @objc optional func canvasHeaderHeigth() -> CGFloat
+    func canvasHeaderHeigth() -> CGFloat
 }
 
 extension IGRPhotoTweakView {
     
     func borderColor() -> UIColor {
-        return (self.customizationDelegate?.borderColor!())!
+        return (self.customizationDelegate?.borderColor())!
     }
     
     func borderWidth() -> CGFloat {
-        return (self.customizationDelegate?.borderWidth!())!
+        return (self.customizationDelegate?.borderWidth())!
     }
     
     func cornerBorderWidth() -> CGFloat {
-        return (self.customizationDelegate?.cornerBorderWidth!())!
+        return (self.customizationDelegate?.cornerBorderWidth())!
     }
     
     func cornerBorderLength() -> CGFloat {
-        return (self.customizationDelegate?.cornerBorderLength!())!
+        return (self.customizationDelegate?.cornerBorderLength())!
     }
     
     func isHighlightMask() -> Bool {
-        return (self.customizationDelegate?.isHighlightMask!())!
+        return (self.customizationDelegate?.isHighlightMask())!
     }
     
     func highlightMaskAlphaValue() -> CGFloat {
-        return (self.customizationDelegate?.highlightMaskAlphaValue!())!
+        return (self.customizationDelegate?.highlightMaskAlphaValue())!
     }
     
     func canvasHeaderHeigth() -> CGFloat {
-        return (self.customizationDelegate?.canvasHeaderHeigth!())!
+        return (self.customizationDelegate?.canvasHeaderHeigth())!
     }
 }

@@ -9,20 +9,20 @@
 import UIKit
 
 
-@objc public protocol IGRPhotoTweakViewControllerDelegate: NSObjectProtocol {
+public protocol IGRPhotoTweakViewControllerDelegate : class {
     
     /**
      Called on image cropped.
      */
-    @objc func photoTweaksController(_ controller: IGRPhotoTweakViewController, didFinishWithCroppedImage croppedImage: UIImage)
+    func photoTweaksController(_ controller: IGRPhotoTweakViewController, didFinishWithCroppedImage croppedImage: UIImage)
     /**
      Called on cropping image canceled
      */
     
-    @objc func photoTweaksControllerDidCancel(_ controller: IGRPhotoTweakViewController)
+    func photoTweaksControllerDidCancel(_ controller: IGRPhotoTweakViewController)
 }
 
-@objc(IGRPhotoTweakViewController) open class IGRPhotoTweakViewController: UIViewController {
+open class IGRPhotoTweakViewController: UIViewController {
     
     //MARK: - Public VARs
     
@@ -54,7 +54,7 @@ import UIKit
         self.view.addSubview(photoView)
         
         return photoView
-        }()
+        }(())
     
     // MARK: - Life Cicle
     
@@ -129,5 +129,35 @@ import UIKit
             
             self.delegate?.photoTweaksController(self, didFinishWithCroppedImage: image)
         }
+    }
+    
+    //MARK: - Customization
+    
+    open func customBorderColor() -> UIColor {
+        return UIColor.cropLine()
+    }
+    
+    open func customBorderWidth() -> CGFloat {
+        return 1.0
+    }
+    
+    open func customCornerBorderWidth() -> CGFloat {
+        return kCropViewCornerWidth
+    }
+    
+    open func customCornerBorderLength() -> CGFloat {
+        return kCropViewCornerLength
+    }
+    
+    open func customIsHighlightMask() -> Bool {
+        return true
+    }
+    
+    open func customHighlightMaskAlphaValue() -> CGFloat {
+        return 0.3
+    }
+    
+    open func customCanvasHeaderHeigth() -> CGFloat {
+        return kCanvasHeaderHeigth
     }
 }

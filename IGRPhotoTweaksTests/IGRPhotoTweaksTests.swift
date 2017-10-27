@@ -7,7 +7,6 @@
 //
 
 import XCTest
-import IGRPhotoTweaks
 
 class IGRPhotoTweaksTests: XCTestCase {
     

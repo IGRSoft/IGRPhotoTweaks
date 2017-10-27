@@ -12,7 +12,7 @@ import Photos
 extension IGRPhotoTweakViewController {
 
     internal func saveToLibrary(image: UIImage) {
-        let writePhotoToLibraryBlock: ((_: Void) -> Void)? = {(_: Void) -> Void in
+        let writePhotoToLibraryBlock: (() -> Void)? = {(_: Void) -> Void in
             UIImageWriteToSavedPhotosAlbum(image, self, #selector(self.image(image:didFinishSavingWithError:contextInfo:)), nil)
         }
         
@@ -52,7 +52,7 @@ extension IGRPhotoTweakViewController {
         }
     }
     
-    internal func image(image: UIImage, didFinishSavingWithError error: NSError?, contextInfo:UnsafeRawPointer) {
+    @objc func image(image: UIImage, didFinishSavingWithError error: NSError?, contextInfo:UnsafeRawPointer) {
         if error == nil {
             let ac = UIAlertController(title: "Save error",
                                        message: error?.localizedDescription,

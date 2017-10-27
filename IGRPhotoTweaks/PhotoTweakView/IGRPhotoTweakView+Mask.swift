@@ -35,7 +35,7 @@ extension IGRPhotoTweakView {
         if (self.isHighlightMask()) {
             let newAlphaValue: CGFloat = highlight ? self.highlightMaskAlphaValue() : 1.0
             
-            let animationBlock: ((_: Void) -> Void)? = {(_: Void) -> Void in
+            let animationBlock: (() -> Void)? = {(_: Void) -> Void in
                 self.topMask.alpha = newAlphaValue
                 self.leftMask.alpha = newAlphaValue
                 self.bottomMask.alpha = newAlphaValue

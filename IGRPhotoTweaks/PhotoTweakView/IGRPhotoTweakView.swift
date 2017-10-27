@@ -8,7 +8,7 @@
 
 import UIKit
 
-@objc public class IGRPhotoTweakView: UIView {
+public class IGRPhotoTweakView: UIView {
     
     //MARK: - Public VARs
     
@@ -26,7 +26,7 @@ import UIKit
         self.addSubview(cropView)
         
         return cropView
-    }()
+    }(())
     
     private(set) lazy var photoContentView: IGRPhotoContentView! = { [unowned self] by in
         
@@ -35,7 +35,7 @@ import UIKit
         self.scrollView.addSubview(photoContentView)
         
         return photoContentView
-    }()
+    }(())
     
     public var photoTranslation: CGPoint {
         get {
@@ -65,7 +65,7 @@ import UIKit
         self.addSubview(scrollView)
         
         return scrollView
-    }()
+    }(())
     
     internal weak var image: UIImage!
     internal var originalSize = CGSize.zero

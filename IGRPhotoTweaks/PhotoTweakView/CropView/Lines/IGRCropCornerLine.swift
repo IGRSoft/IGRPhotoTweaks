@@ -8,6 +8,6 @@
 
 import UIKit
 
-@objc public class IGRCropCornerLine: UIView {
+public class IGRCropCornerLine: UIView {
     
 }

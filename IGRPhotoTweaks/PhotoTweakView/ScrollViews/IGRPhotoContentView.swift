@@ -8,7 +8,7 @@
 
 import UIKit
 
-@objc public class IGRPhotoContentView: UIView {
+public class IGRPhotoContentView: UIView {
     
     lazy fileprivate var imageView: UIImageView! = {
         let imageView = UIImageView(frame: self.bounds)
