@@ -73,6 +73,14 @@ open class IGRPhotoTweakViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    override open func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        
+        coordinator.animate(alongsideTransition: { (UIViewControllerTransitionCoordinatorContext) in
+            self.photoView.applyDeviceRotation()
+        })
+    }
+    
     fileprivate func setupSubviews() {
         self.view.sendSubview(toBack: self.photoView)
     }

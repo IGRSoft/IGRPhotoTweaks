@@ -39,15 +39,15 @@ class ExampleCropViewController: IGRPhotoTweakViewController {
     
     //FIXME: Themes Preview
     override open func setupThemes() {
-     
-     IGRCropLine.appearance().backgroundColor = UIColor.green
-     IGRCropGridLine.appearance().backgroundColor = UIColor.yellow
-     IGRCropCornerView.appearance().backgroundColor = UIColor.purple
-     IGRCropCornerLine.appearance().backgroundColor = UIColor.orange
-     IGRCropMaskView.appearance().backgroundColor = UIColor.blue
-     IGRPhotoContentView.appearance().backgroundColor = UIColor.gray
-     IGRPhotoTweakView.appearance().backgroundColor = UIColor.brown
-     }
+        
+//        IGRCropLine.appearance().backgroundColor = UIColor.green
+//        IGRCropGridLine.appearance().backgroundColor = UIColor.yellow
+//        IGRCropCornerView.appearance().backgroundColor = UIColor.purple
+//        IGRCropCornerLine.appearance().backgroundColor = UIColor.orange
+//        IGRCropMaskView.appearance().backgroundColor = UIColor.blue
+//        IGRPhotoContentView.appearance().backgroundColor = UIColor.gray
+//        IGRPhotoTweakView.appearance().backgroundColor = UIColor.brown
+    }
     
     fileprivate func setupSlider() {
         self.angleSlider?.minimumValue = -Float(IGRRadianAngle.toRadians(45))

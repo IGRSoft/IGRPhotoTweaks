@@ -62,6 +62,7 @@ public class IGRPhotoTweakView: UIView {
         let scrollView = IGRPhotoScrollView(frame: maxBounds)
         scrollView.center = CGPoint(x: self.frame.width.half, y: self.centerY)
         scrollView.delegate = self
+        scrollView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         self.addSubview(scrollView)
         
         return scrollView
@@ -108,7 +109,6 @@ public class IGRPhotoTweakView: UIView {
         super.layoutSubviews()
         
         self.originalSize = self.maxBounds().size
-        
     }
     
     //MARK: - Public FUNCs
@@ -128,6 +128,19 @@ public class IGRPhotoTweakView: UIView {
             self.cropView.frame = self.scrollView.frame
             self.cropView.center = self.scrollView.center
         })
+    }
+    
+    public func applyDeviceRotation() {
+        self.scrollView.center = CGPoint(x: self.frame.width.half, y: self.centerY)
+        self.scrollView.bounds = CGRect(x: CGFloat.zero,
+                                        y: CGFloat.zero,
+                                        width: self.originalSize.width,
+                                        height: self.originalSize.height)
+        
+        self.cropView.frame = self.scrollView.frame
+        self.cropView.center = self.scrollView.center
+        
+        updatePosition()
     }
     
     //MARK: - Private FUNCs
