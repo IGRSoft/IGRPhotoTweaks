@@ -5,7 +5,7 @@ use_frameworks!
 source "https://github.com/CocoaPods/Specs.git"
 
 pod 'IGRPhotoTweaks', :path => '../'
-pod 'HorizontalDial'
+pod 'HorizontalDial', :git => 'https://github.com/iKorich/HorizontalDial.git'
 
 target 'Example' do
 end
