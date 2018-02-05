@@ -12,7 +12,7 @@ import Photos
 extension IGRPhotoTweakViewController {
 
     internal func saveToLibrary(image: UIImage) {
-        let writePhotoToLibraryBlock: (() -> Void)? = {(_: Void) -> Void in
+        let writePhotoToLibraryBlock: (() -> Void)? = {
             UIImageWriteToSavedPhotosAlbum(image, self, #selector(self.image(image:didFinishSavingWithError:contextInfo:)), nil)
         }
         
