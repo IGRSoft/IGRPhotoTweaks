@@ -15,5 +15,5 @@ Pod::Spec.new do |spec|
   spec.framework           = 'Foundation', 'CoreGraphics', 'UIKit', 'Photos'
   spec.requires_arc        = true
 
-  spec.pod_target_xcconfig = { 'SWIFT_VERSION' => '3.0' }
+  spec.pod_target_xcconfig = { 'SWIFT_VERSION' => '4.0' }
 end
