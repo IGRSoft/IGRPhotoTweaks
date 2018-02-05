@@ -38,7 +38,7 @@ extension IGRPhotoTweakView {
                                           attribute: .trailing,
                                           multiplier: 1.0,
                                           constant: 0.0)
-        trailing.priority = UILayoutPriority.defaultHigh
+        trailing.priority = .defaultHigh
         
         var bottom = NSLayoutConstraint(item: self.topMask,
                                         attribute: .bottom,
@@ -47,7 +47,7 @@ extension IGRPhotoTweakView {
                                         attribute: .top,
                                         multiplier: 1.0,
                                         constant: 0.0)
-        bottom.priority = UILayoutPriority.defaultHigh
+        bottom.priority = .defaultHigh
         
         self.addConstraints([top, leading, trailing, bottom])
         
@@ -61,7 +61,7 @@ extension IGRPhotoTweakView {
                                  attribute: .top,
                                  multiplier: 1.0,
                                  constant: 0.0)
-        top.priority = UILayoutPriority.defaultHigh
+        top.priority = .defaultHigh
         
         leading = NSLayoutConstraint(item: self.leftMask,
                                      attribute: .leading,
@@ -78,7 +78,7 @@ extension IGRPhotoTweakView {
                                       attribute: .leading,
                                       multiplier: 1.0,
                                       constant: 0.0)
-        trailing.priority = UILayoutPriority.defaultHigh
+        trailing.priority = .defaultHigh
         
         bottom = NSLayoutConstraint(item: self.leftMask,
                                     attribute: .bottom,
@@ -108,7 +108,7 @@ extension IGRPhotoTweakView {
                                      attribute: .trailing,
                                      multiplier: 1.0,
                                      constant: 0.0)
-        leading.priority = UILayoutPriority.defaultHigh
+        leading.priority = .defaultHigh
         
         trailing = NSLayoutConstraint(item: self.rightMask,
                                       attribute: .trailing,
@@ -125,7 +125,7 @@ extension IGRPhotoTweakView {
                                     attribute: .bottom,
                                     multiplier: 1.0,
                                     constant: 0.0)
-        bottom.priority = UILayoutPriority.defaultHigh
+        bottom.priority = .defaultHigh
         
         self.addConstraints([top, leading, trailing, bottom])
         
@@ -139,7 +139,7 @@ extension IGRPhotoTweakView {
                                  attribute: .bottom,
                                  multiplier: 1.0,
                                  constant: 0.0)
-        top.priority = UILayoutPriority.defaultHigh
+        top.priority = .defaultHigh
         
         leading = NSLayoutConstraint(item: self.bottomMask,
                                      attribute: .leading,
@@ -148,7 +148,7 @@ extension IGRPhotoTweakView {
                                      attribute: .leading,
                                      multiplier: 1.0,
                                      constant: 0.0)
-        leading.priority = UILayoutPriority.defaultHigh
+        leading.priority = .defaultHigh
         
         trailing = NSLayoutConstraint(item: self.bottomMask,
                                       attribute: .trailing,
