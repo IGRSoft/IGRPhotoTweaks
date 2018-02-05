@@ -3,7 +3,7 @@
 <img src="https://github.com/IGRSoft/IGRPhotoTweaks/blob/master/Info/IGRPhotoTweaks.gif?raw=true" alt="IGRPhotoTweaks" title="IGRPhotoTweaks">
 </p>
 
-IGRPhotoTweaks is a swift 3.0 library allow to expand an interface to crop photos, based on [PhotoTweaks](https://github.com/itouch2/PhotoTweaks). It can let user drag, rotate, scale the image, and crop it. You will find it mimics the interaction of Photos.app on iOS 9. :]
+IGRPhotoTweaks is a swift 4.0 library allow to expand an interface to crop photos, based on [PhotoTweaks](https://github.com/itouch2/PhotoTweaks). It can let user drag, rotate, scale the image, and crop it. You will find it mimics the interaction of Photos.app on iOS 9. :]
 
 [![Build Status](https://travis-ci.org/IGRSoft/IGRPhotoTweaks.svg)](https://travis-ci.org/IGRSoft/IGRPhotoTweaks)
 [![Pod Version](http://img.shields.io/cocoapods/v/IGRPhotoTweaks.svg?style=flat)](http://cocoapods.org/?q=IGRPhotoTweaks)
