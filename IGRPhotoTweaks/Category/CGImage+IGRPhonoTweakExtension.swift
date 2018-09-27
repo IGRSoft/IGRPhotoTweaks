@@ -10,10 +10,10 @@ import Foundation
 
 extension CGImage {
     
-    func transformedImage(_ transform: CGAffineTransform, sourceSize: CGSize, outputWidth: CGFloat, cropSize: CGSize, imageViewSize: CGSize) -> CGImage {
-        
-        let aspect: CGFloat = cropSize.height / cropSize.width
-        let outputSize = CGSize(width: outputWidth, height: (outputWidth * aspect))
+    func transformedImage(_ transform: CGAffineTransform, zoomScale: CGFloat, sourceSize: CGSize, cropSize: CGSize, imageViewSize: CGSize) -> CGImage {
+        let expectedWidth = floor(sourceSize.width / imageViewSize.width * cropSize.width) / zoomScale
+        let expectedHeight = floor(sourceSize.height / imageViewSize.height * cropSize.height) / zoomScale
+        let outputSize = CGSize(width: expectedWidth, height: expectedHeight)
         let bitmapBytesPerRow = 0
         
         let context = CGContext(data: nil,
