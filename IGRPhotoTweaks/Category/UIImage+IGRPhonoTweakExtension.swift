@@ -16,7 +16,7 @@ extension UIImage {
             return nil
         }
         
-        if self.imageOrientation == UIImageOrientation.up {
+        if self.imageOrientation == UIImage.Orientation.up {
             return self.cgImage
         }
         
