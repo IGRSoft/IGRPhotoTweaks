@@ -47,18 +47,18 @@ extension IGRCropView {
                 frame.size.width = location.x
                 frame.size.height = location.y
             }
-            else if fabs(location.x - p0.x) < kCropViewHotArea {
+            else if abs(location.x - p0.x) < kCropViewHotArea {
                 frame.origin.x += location.x
                 frame.size.width -= location.x
             }
-            else if fabs(location.x - p1.x) < kCropViewHotArea {
+            else if abs(location.x - p1.x) < kCropViewHotArea {
                 frame.size.width = location.x
             }
-            else if fabs(location.y - p0.y) < kCropViewHotArea {
+            else if abs(location.y - p0.y) < kCropViewHotArea {
                 frame.origin.y += location.y
                 frame.size.height -= location.y
             }
-            else if fabs(location.y - p2.y) < kCropViewHotArea {
+            else if abs(location.y - p2.y) < kCropViewHotArea {
                 frame.size.height = location.y
             }
             

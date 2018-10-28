@@ -1,5 +1,5 @@
 //
-//  CGFloat+IGRPhonoTweakExtension.swift
+//  CGFloat+IGRPhotoTweakExtension.swift
 //  Pods
 //
 //  Created by Vitalii Parovishnyk on 4/25/17.

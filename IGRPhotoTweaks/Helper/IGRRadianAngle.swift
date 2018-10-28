@@ -10,11 +10,11 @@ import CoreGraphics
 
 open class IGRRadianAngle : NSObject {
     
-    static open func toRadians(_ degrees: CGFloat) -> CGFloat {
+    static public func toRadians(_ degrees: CGFloat) -> CGFloat {
         return (degrees * CGFloat.pi / 180.0)
     }
     
-    static open func toDegrees(_ radians: CGFloat) -> CGFloat {
+    static public func toDegrees(_ radians: CGFloat) -> CGFloat {
         return (radians * 180.0 / CGFloat.pi)
     }
 }

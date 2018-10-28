@@ -1,5 +1,5 @@
 //
-//  CGPoint+IGRPhonoTweakExtension.swift
+//  CGPoint+IGRPhotoTweakExtension.swift
 //  Pods
 //
 //  Created by Vitalii Parovishnyk on 4/25/17.

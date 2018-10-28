@@ -15,11 +15,6 @@ class ViewController: UIViewController {
     @IBOutlet weak fileprivate var imageView: UIImageView?
     
     fileprivate var image: UIImage!
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-    }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -51,7 +46,7 @@ class ViewController: UIViewController {
         if segue.identifier == "showCrop" {
             
             let exampleCropViewController = segue.destination as! ExampleCropViewController
-            exampleCropViewController.image = sender as! UIImage
+            exampleCropViewController.image = sender as? UIImage
             exampleCropViewController.delegate = self
         }
     }
@@ -61,7 +56,7 @@ class ViewController: UIViewController {
     @objc func openLibrary() {
         let pickerView = UIImagePickerController.init()
         pickerView.delegate = self
-        pickerView.sourceType = UIImagePickerControllerSourceType.photoLibrary
+        pickerView.sourceType = UIImagePickerController.SourceType.photoLibrary
         self.present(pickerView, animated: true, completion: nil)
     }
     
@@ -75,8 +70,8 @@ class ViewController: UIViewController {
 }
 
 extension ViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        let image = info[UIImagePickerControllerOriginalImage] as! UIImage
+    public func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        let image = info[UIImagePickerController.InfoKey.originalImage] as! UIImage
         
         self.image = image
         

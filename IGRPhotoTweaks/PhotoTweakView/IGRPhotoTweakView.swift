@@ -166,8 +166,8 @@ public class IGRPhotoTweakView: UIView {
     
     internal func updatePosition() {
         // position scroll view
-        let width: CGFloat = fabs(cos(self.angle)) * self.cropView.frame.size.width + fabs(sin(self.angle)) * self.cropView.frame.size.height
-        let height: CGFloat = fabs(sin(self.angle)) * self.cropView.frame.size.width + fabs(cos(self.angle)) * self.cropView.frame.size.height
+        let width: CGFloat = abs(cos(self.angle)) * self.cropView.frame.size.width + abs(sin(self.angle)) * self.cropView.frame.size.height
+        let height: CGFloat = abs(sin(self.angle)) * self.cropView.frame.size.width + abs(cos(self.angle)) * self.cropView.frame.size.height
         let center: CGPoint = self.scrollView.center
         let contentOffset: CGPoint = self.scrollView.contentOffset
         let contentOffsetCenter = CGPoint(x: (contentOffset.x + self.scrollView.bounds.size.width.half),

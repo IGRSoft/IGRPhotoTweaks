@@ -39,8 +39,8 @@ extension IGRPhotoTweakView : IGRCropViewDelegate {
                                    height: (scale * cropView.frame.size.height))
         
         // calculate the new bounds of scroll view
-        let width: CGFloat = fabs(cos(self.angle)) * newCropBounds.size.width + fabs(sin(self.angle)) * newCropBounds.size.height
-        let height: CGFloat = fabs(sin(self.angle)) * newCropBounds.size.width + fabs(cos(self.angle)) * newCropBounds.size.height
+        let width: CGFloat = abs(cos(self.angle)) * newCropBounds.size.width + abs(sin(self.angle)) * newCropBounds.size.height
+        let height: CGFloat = abs(sin(self.angle)) * newCropBounds.size.width + abs(cos(self.angle)) * newCropBounds.size.height
         
         // calculate the zoom area of scroll view
         var scaleFrame: CGRect = cropView.frame
