@@ -28,7 +28,7 @@ public class IGRPhotoTweakView: UIView {
         return cropView
     }(())
     
-    private(set) lazy var photoContentView: IGRPhotoContentView! = { [unowned self] by in
+    public private(set) lazy var photoContentView: IGRPhotoContentView! = { [unowned self] by in
         
         let photoContentView = IGRPhotoContentView(frame: self.scrollView.bounds)
         photoContentView.isUserInteractionEnabled = true

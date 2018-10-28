@@ -45,7 +45,7 @@ open class IGRPhotoTweakViewController: UIViewController {
     
     //MARK: - Private VARs
     
-    internal lazy var photoView: IGRPhotoTweakView! = { [unowned self] by in
+    public lazy var photoView: IGRPhotoTweakView! = { [unowned self] by in
         
         let photoView = IGRPhotoTweakView(frame: self.view.bounds,
                                           image: self.image,
