@@ -157,6 +157,14 @@ open class IGRPhotoTweakViewController: UIViewController {
         return kCropViewCornerLength
     }
     
+    open func customCropLinesCount() -> Int {
+        return kCropLinesCount
+    }
+    
+    open func customGridLinesCount() -> Int {
+        return kGridLinesCount
+    }
+    
     open func customIsHighlightMask() -> Bool {
         return true
     }

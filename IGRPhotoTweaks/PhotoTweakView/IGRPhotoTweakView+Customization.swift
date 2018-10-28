@@ -24,6 +24,13 @@ public protocol IGRPhotoTweakViewCustomizationDelegate : class {
     func cornerBorderLength() -> CGFloat
     
     /*
+     Lines Count
+     */
+    func cropLinesCount() -> Int
+    
+    func gridLinesCount() -> Int
+    
+    /*
      Mask customization
      */
     func isHighlightMask() -> Bool
@@ -52,6 +59,14 @@ extension IGRPhotoTweakView {
     
     func cornerBorderLength() -> CGFloat {
         return (self.customizationDelegate?.cornerBorderLength())!
+    }
+    
+    func cropLinesCount() -> Int {
+        return (self.customizationDelegate?.cropLinesCount())!
+    }
+    
+    func gridLinesCount() -> Int {
+        return (self.customizationDelegate?.gridLinesCount())!
     }
     
     func isHighlightMask() -> Bool {

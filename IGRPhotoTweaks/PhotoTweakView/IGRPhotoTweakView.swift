@@ -18,7 +18,9 @@ public class IGRPhotoTweakView: UIView {
         
         let cropView = IGRCropView(frame: self.scrollView.frame,
                                    cornerBorderWidth:self.cornerBorderWidth(),
-                                   cornerBorderLength:self.cornerBorderLength())
+                                   cornerBorderLength:self.cornerBorderLength(),
+                                   cropLinesCount:self.cropLinesCount(),
+                                   gridLinesCount:self.gridLinesCount())
         cropView.center = self.scrollView.center
         
         cropView.layer.borderColor = self.borderColor().cgColor

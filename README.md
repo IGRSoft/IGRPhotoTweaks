@@ -106,6 +106,14 @@ override open func customCornerBorderWidth() -> CGFloat {
     return 4.0
 }
 
+override open func customCropLinesCount() -> Int {
+    return 3
+}
+
+override open func customGridLinesCount() -> Int {
+    return 4
+}
+
 override open func customCornerBorderLength() -> CGFloat {
     return 30.0
 }

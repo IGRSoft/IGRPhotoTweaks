@@ -27,6 +27,14 @@ extension IGRPhotoTweakViewController : IGRPhotoTweakViewCustomizationDelegate {
         return self.customCornerBorderLength()
     }
     
+    public func cropLinesCount() -> Int {
+        return self.customCropLinesCount()
+    }
+    
+    public func gridLinesCount() -> Int {
+        return self.customGridLinesCount()
+    }
+    
     public func isHighlightMask() -> Bool {
         return self.customIsHighlightMask()
     }
