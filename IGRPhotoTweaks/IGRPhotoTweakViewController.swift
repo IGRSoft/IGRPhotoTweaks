@@ -113,7 +113,7 @@ open class IGRPhotoTweakViewController: UIViewController {
         let translation: CGPoint = self.photoView.photoTranslation
         transform = transform.translatedBy(x: translation.x, y: translation.y)
         // rotate
-        transform = transform.rotated(by: self.photoView.angle)
+        transform = transform.rotated(by: self.photoView.radians)
         // scale
         
         let t: CGAffineTransform = self.photoView.photoContentView.transform

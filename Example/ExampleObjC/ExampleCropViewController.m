@@ -63,7 +63,7 @@
 - (IBAction)onChandeAngleSliderValue:(UISlider *)sender {
     CGFloat radians = sender.value;
     [self setupAngleLabelValue:radians];
-    [self changedAngleWithValue:radians];
+    [self changeAngleWithValue:radians];
 }
 
 - (IBAction)onEndTouchAngleControl:(UIControl *)sender {
@@ -73,7 +73,7 @@
 - (IBAction)onChandeAnglePickerViewValue:(UIPickerView *)sender {
     CGFloat radians = CGFloat.zero;
     [self setupAngleLabelValue:radians];
-    [self changedAngleWithValue:radians];
+    [self changeAngleWithValue:radians];
 }
 
 - (IBAction)onTouchResetButton:(UIButton *)sender {

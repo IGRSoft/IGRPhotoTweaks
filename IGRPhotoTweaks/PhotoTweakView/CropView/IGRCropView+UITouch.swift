@@ -70,7 +70,7 @@ extension IGRCropView {
                                width: frame.size.width,
                                height: newHeight)
             }
-
+            
             //TODO: Added test cropViewInsideValidFrame
             
             if (frame.size.width > self.cornerBorderLength

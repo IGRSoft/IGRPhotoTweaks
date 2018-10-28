@@ -79,8 +79,7 @@ class ExampleCropViewController: IGRPhotoTweakViewController {
     @IBAction func onChandeAngleSliderValue(_ sender: UISlider) {
         let radians: CGFloat = CGFloat(sender.value)
         setupAngleLabelValue(radians: radians)
-        self.changedAngle(value: radians)
-        
+        self.changeAngle(radians: radians)
     }
     
     @IBAction func onEndTouchAngleControl(_ sender: UIControl) {
@@ -190,7 +189,7 @@ extension ExampleCropViewController: HorizontalDialDelegate {
         let radians = IGRRadianAngle.toRadians(CGFloat(degrees))
         
         self.setupAngleLabelValue(radians: radians)
-        self.changedAngle(value: radians)
+        self.changeAngle(radians: radians)
     }
     
     func horizontalDialDidEndScroll(_ horizontalDial: HorizontalDial) {

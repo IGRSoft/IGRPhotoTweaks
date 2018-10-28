@@ -76,7 +76,7 @@ fileprivate func setupSlider() {
 
 @IBAction func onChandeAngleSliderValue(_ sender: UISlider) {
     let radians: CGFloat = CGFloat(sender.value)
-    self.changedAngle(value: radians)
+    self.changeAngle(radians: radians)
 }
     
 ```

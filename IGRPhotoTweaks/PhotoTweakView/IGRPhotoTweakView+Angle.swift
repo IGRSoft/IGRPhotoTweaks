@@ -9,7 +9,7 @@
 import Foundation
 
 extension IGRPhotoTweakView {
-    public func changedAngle(value: CGFloat) {
+    public func changeAngle(radians: CGFloat) {
         // update masks
         self.highlightMask(true, animate: false)
         
@@ -17,8 +17,8 @@ extension IGRPhotoTweakView {
         self.cropView.updateGridLines(animate: false)
         
         // rotate scroll view
-        self.angle = value
-        self.scrollView.transform = CGAffineTransform(rotationAngle: self.angle)
+        self.radians = radians
+        self.scrollView.transform = CGAffineTransform(rotationAngle: self.radians)
         
         self.updatePosition()
     }

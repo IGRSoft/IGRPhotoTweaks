@@ -9,7 +9,7 @@
 import Foundation
 
 extension IGRPhotoTweakView {
-
+    
     internal func setupMasks()
     {
         self.topMask = IGRCropMaskView()

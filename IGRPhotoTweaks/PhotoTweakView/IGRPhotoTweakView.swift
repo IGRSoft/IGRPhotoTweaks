@@ -17,8 +17,8 @@ public class IGRPhotoTweakView: UIView {
     private(set) lazy var cropView: IGRCropView! = { [unowned self] by in
         
         let cropView = IGRCropView(frame: self.scrollView.frame,
-                                    cornerBorderWidth:self.cornerBorderWidth(),
-                                    cornerBorderLength:self.cornerBorderLength())
+                                   cornerBorderWidth:self.cornerBorderWidth(),
+                                   cornerBorderLength:self.cornerBorderLength())
         cropView.center = self.scrollView.center
         
         cropView.layer.borderColor = self.borderColor().cgColor
@@ -26,7 +26,7 @@ public class IGRPhotoTweakView: UIView {
         self.addSubview(cropView)
         
         return cropView
-    }(())
+        }(())
     
     public private(set) lazy var photoContentView: IGRPhotoContentView! = { [unowned self] by in
         
@@ -35,7 +35,7 @@ public class IGRPhotoTweakView: UIView {
         self.scrollView.addSubview(photoContentView)
         
         return photoContentView
-    }(())
+        }(())
     
     public var photoTranslation: CGPoint {
         get {
@@ -51,7 +51,7 @@ public class IGRPhotoTweakView: UIView {
     
     //MARK: - Private VARs
     
-    internal var angle: CGFloat         = CGFloat.zero
+    internal var radians: CGFloat       = CGFloat.zero
     fileprivate var photoContentOffset  = CGPoint.zero
     
     internal lazy var scrollView: IGRPhotoScrollView! = { [unowned self] by in
@@ -66,7 +66,7 @@ public class IGRPhotoTweakView: UIView {
         self.addSubview(scrollView)
         
         return scrollView
-    }(())
+        }(())
     
     internal weak var image: UIImage!
     internal var originalSize = CGSize.zero
@@ -112,10 +112,10 @@ public class IGRPhotoTweakView: UIView {
     }
     
     //MARK: - Public FUNCs
-
+    
     public func resetView() {
         UIView.animate(withDuration: kAnimationDuration, animations: {() -> Void in
-            self.angle = 0
+            self.radians = CGFloat.zero
             self.scrollView.transform = CGAffineTransform.identity
             self.scrollView.center = CGPoint(x: self.frame.width.half, y: self.centerY)
             self.scrollView.bounds = CGRect(x: CGFloat.zero,
@@ -166,8 +166,8 @@ public class IGRPhotoTweakView: UIView {
     
     internal func updatePosition() {
         // position scroll view
-        let width: CGFloat = abs(cos(self.angle)) * self.cropView.frame.size.width + abs(sin(self.angle)) * self.cropView.frame.size.height
-        let height: CGFloat = abs(sin(self.angle)) * self.cropView.frame.size.width + abs(cos(self.angle)) * self.cropView.frame.size.height
+        let width: CGFloat = abs(cos(self.radians)) * self.cropView.frame.size.width + abs(sin(self.radians)) * self.cropView.frame.size.height
+        let height: CGFloat = abs(sin(self.radians)) * self.cropView.frame.size.width + abs(cos(self.radians)) * self.cropView.frame.size.height
         let center: CGPoint = self.scrollView.center
         let contentOffset: CGPoint = self.scrollView.contentOffset
         let contentOffsetCenter = CGPoint(x: (contentOffset.x + self.scrollView.bounds.size.width.half),

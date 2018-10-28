@@ -38,9 +38,9 @@ extension CGImage {
         context?.concatenate(transform)
         context?.scaleBy(x: 1.0, y: -1.0)
         context?.draw(self, in: CGRect(x: (-imageViewSize.width.half),
-                                              y: (-imageViewSize.height.half),
-                                              width: imageViewSize.width,
-                                              height: imageViewSize.height))
+                                       y: (-imageViewSize.height.half),
+                                       width: imageViewSize.width,
+                                       height: imageViewSize.height))
         
         let result = context!.makeImage()!
         
