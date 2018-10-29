@@ -53,7 +53,7 @@ extension IGRPhotoTweakViewController {
     }
     
     @objc func image(image: UIImage, didFinishSavingWithError error: NSError?, contextInfo:UnsafeRawPointer) {
-        if error == nil {
+        if error != nil {
             let ac = UIAlertController(title: "Save error",
                                        message: error?.localizedDescription,
                                        preferredStyle: .alert)
