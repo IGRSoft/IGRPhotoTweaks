@@ -133,6 +133,8 @@ public class IGRPhotoTweakView: UIView {
     }
     
     public func applyDeviceRotation() {
+        self.resetView()
+        
         self.scrollView.center = CGPoint(x: self.frame.width.half, y: self.centerY)
         self.scrollView.bounds = CGRect(x: CGFloat.zero,
                                         y: CGFloat.zero,
@@ -141,6 +143,10 @@ public class IGRPhotoTweakView: UIView {
         
         self.cropView.frame = self.scrollView.frame
         self.cropView.center = self.scrollView.center
+        
+        // Update 'photoContent' frame and set the image.
+        self.scrollView.photoContentView.frame = .init(x: .zero, y: .zero, width: self.cropView.frame.width, height: self.cropView.frame.height)
+        self.scrollView.photoContentView.image = self.image
         
         updatePosition()
     }
