@@ -134,7 +134,13 @@ public class IGRPhotoTweakView: UIView {
     public override func layoutSubviews() {
         super.layoutSubviews()
         
-        self.originalSize = self.maxBounds().size
+        if !manualMove {
+            self.originalSize = self.maxBounds().size
+            self.scrollView.center = CGPoint(x: (self.frame.width * 0.5), y: self.centerY)
+            
+            self.cropView.center = self.scrollView.center
+            self.scrollView.checkContentOffset()
+        }
     }
     
     //MARK: - Public FUNCs
