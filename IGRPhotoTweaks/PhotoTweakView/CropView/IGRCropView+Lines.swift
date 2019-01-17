@@ -10,7 +10,7 @@ import Foundation
 
 extension IGRCropView {
     
-    internal func seetupLines() {
+    internal func setupLines() {
         self.dismiss(self.horizontalCropLines)
         self.dismiss(self.verticalCropLines)
         self.dismiss(self.horizontalGridLines)
