@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A52B73FA21F1140E007922CE /* IGRPhotoTweakView+Rotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52B73F921F1140E007922CE /* IGRPhotoTweakView+Rotation.swift */; };
 		A5435F291FA3CABB001BAE32 /* IGRPhotoTweaks.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5FE19761E4F8D5600EA6F73 /* IGRPhotoTweaks.framework */; };
 		A5CD58D71EB2089500238BC6 /* IGRPhotoTweaksTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CD58D61EB2089500238BC6 /* IGRPhotoTweaksTests.swift */; };
 		A5CD58E21EB2099600238BC6 /* LinesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CD58E11EB2099600238BC6 /* LinesTests.swift */; };
@@ -25,7 +26,7 @@
 		A5FF6BFC1EB11586003F6108 /* IGRPhotoTweakConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5FF6BD51EB11586003F6108 /* IGRPhotoTweakConstants.swift */; };
 		A5FF6BFD1EB11586003F6108 /* IGRRadianAngle.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5FF6BD71EB11586003F6108 /* IGRRadianAngle.swift */; };
 		A5FF6BFE1EB11586003F6108 /* IGRPhotoTweakViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5FF6BD81EB11586003F6108 /* IGRPhotoTweakViewController.swift */; };
-		A5FF6BFF1EB11586003F6108 /* IGRPhotoTweakViewController+Angle.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5FF6BD91EB11586003F6108 /* IGRPhotoTweakViewController+Angle.swift */; };
+		A5FF6BFF1EB11586003F6108 /* IGRPhotoTweakViewController+Rotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5FF6BD91EB11586003F6108 /* IGRPhotoTweakViewController+Rotation.swift */; };
 		A5FF6C001EB11586003F6108 /* IGRPhotoTweakViewController+AspectRatio.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5FF6BDA1EB11586003F6108 /* IGRPhotoTweakViewController+AspectRatio.swift */; };
 		A5FF6C011EB11586003F6108 /* IGRPhotoTweakViewController+Customization.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5FF6BDB1EB11586003F6108 /* IGRPhotoTweakViewController+Customization.swift */; };
 		A5FF6C021EB11586003F6108 /* IGRPhotoTweakViewController+PHPhotoLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5FF6BDC1EB11586003F6108 /* IGRPhotoTweakViewController+PHPhotoLibrary.swift */; };
@@ -63,6 +64,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A52B73F921F1140E007922CE /* IGRPhotoTweakView+Rotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IGRPhotoTweakView+Rotation.swift"; sourceTree = "<group>"; };
 		A5CD58D41EB2089500238BC6 /* IGRPhotoTweaksTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IGRPhotoTweaksTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5CD58D61EB2089500238BC6 /* IGRPhotoTweaksTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IGRPhotoTweaksTests.swift; sourceTree = "<group>"; };
 		A5CD58D81EB2089500238BC6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -84,7 +86,7 @@
 		A5FF6BD51EB11586003F6108 /* IGRPhotoTweakConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGRPhotoTweakConstants.swift; sourceTree = "<group>"; };
 		A5FF6BD71EB11586003F6108 /* IGRRadianAngle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGRRadianAngle.swift; sourceTree = "<group>"; };
 		A5FF6BD81EB11586003F6108 /* IGRPhotoTweakViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGRPhotoTweakViewController.swift; sourceTree = "<group>"; };
-		A5FF6BD91EB11586003F6108 /* IGRPhotoTweakViewController+Angle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "IGRPhotoTweakViewController+Angle.swift"; sourceTree = "<group>"; };
+		A5FF6BD91EB11586003F6108 /* IGRPhotoTweakViewController+Rotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "IGRPhotoTweakViewController+Rotation.swift"; sourceTree = "<group>"; };
 		A5FF6BDA1EB11586003F6108 /* IGRPhotoTweakViewController+AspectRatio.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "IGRPhotoTweakViewController+AspectRatio.swift"; sourceTree = "<group>"; };
 		A5FF6BDB1EB11586003F6108 /* IGRPhotoTweakViewController+Customization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "IGRPhotoTweakViewController+Customization.swift"; sourceTree = "<group>"; };
 		A5FF6BDC1EB11586003F6108 /* IGRPhotoTweakViewController+PHPhotoLibrary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "IGRPhotoTweakViewController+PHPhotoLibrary.swift"; sourceTree = "<group>"; };
@@ -180,7 +182,7 @@
 				A5FF6BD41EB11586003F6108 /* Constants */,
 				A5FF6BD61EB11586003F6108 /* Helper */,
 				A5FF6BD81EB11586003F6108 /* IGRPhotoTweakViewController.swift */,
-				A5FF6BD91EB11586003F6108 /* IGRPhotoTweakViewController+Angle.swift */,
+				A5FF6BD91EB11586003F6108 /* IGRPhotoTweakViewController+Rotation.swift */,
 				A5FF6BDA1EB11586003F6108 /* IGRPhotoTweakViewController+AspectRatio.swift */,
 				A5FF6BDB1EB11586003F6108 /* IGRPhotoTweakViewController+Customization.swift */,
 				A5FF6BDC1EB11586003F6108 /* IGRPhotoTweakViewController+PHPhotoLibrary.swift */,
@@ -231,6 +233,7 @@
 			children = (
 				A5FF6BDE1EB11586003F6108 /* CropView */,
 				A5FF6BEB1EB11586003F6108 /* IGRPhotoTweakView+Angle.swift */,
+				A52B73F921F1140E007922CE /* IGRPhotoTweakView+Rotation.swift */,
 				A5FF6BEC1EB11586003F6108 /* IGRPhotoTweakView+AspectRatio.swift */,
 				A5FF6BED1EB11586003F6108 /* IGRPhotoTweakView+Customization.swift */,
 				A5FF6BEE1EB11586003F6108 /* IGRPhotoTweakView+IGRCropView.swift */,
@@ -423,6 +426,7 @@
 				A5FF6C091EB11586003F6108 /* IGRCropCornerView.swift in Sources */,
 				A5FF6C0A1EB11586003F6108 /* IGRCropGridLine.swift in Sources */,
 				A5FF6C0C1EB11586003F6108 /* IGRCropMaskView.swift in Sources */,
+				A52B73FA21F1140E007922CE /* IGRPhotoTweakView+Rotation.swift in Sources */,
 				A5FF6C0D1EB11586003F6108 /* IGRPhotoTweakView+Angle.swift in Sources */,
 				A5FF6C101EB11586003F6108 /* IGRPhotoTweakView+IGRCropView.swift in Sources */,
 				A5FF6C081EB11586003F6108 /* IGRCropCornerLine.swift in Sources */,
@@ -441,7 +445,7 @@
 				A5FF6C031EB11586003F6108 /* IGRCropView+AspectRatio.swift in Sources */,
 				A5FF6BFC1EB11586003F6108 /* IGRPhotoTweakConstants.swift in Sources */,
 				A5FF6C161EB11586003F6108 /* IGRPhotoContentView.swift in Sources */,
-				A5FF6BFF1EB11586003F6108 /* IGRPhotoTweakViewController+Angle.swift in Sources */,
+				A5FF6BFF1EB11586003F6108 /* IGRPhotoTweakViewController+Rotation.swift in Sources */,
 				A5FF6C131EB11586003F6108 /* IGRPhotoTweakView+Touch.swift in Sources */,
 				A5FF6C011EB11586003F6108 /* IGRPhotoTweakViewController+Customization.swift in Sources */,
 				A5FF6C041EB11586003F6108 /* IGRCropView+Lines.swift in Sources */,

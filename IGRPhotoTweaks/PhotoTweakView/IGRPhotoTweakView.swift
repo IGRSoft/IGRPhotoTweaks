@@ -71,8 +71,14 @@ public class IGRPhotoTweakView: UIView {
     
     //MARK: - Private VARs
     
-    internal var radians: CGFloat       = CGFloat.zero
-    fileprivate var photoContentOffset  = CGPoint.zero
+    internal var radians: CGFloat = CGFloat.zero {
+        didSet {
+            assert(radians <= IGRRadianAngle.toRadians(45.0), "45 is a max angle")
+            assert(radians >= IGRRadianAngle.toRadians(-45.0), "-45 is a min angle")
+        }
+    }
+    
+    fileprivate var photoContentOffset = CGPoint.zero
     
     internal lazy var scrollView: IGRPhotoScrollView! = { [unowned self] by in
         
@@ -151,27 +157,14 @@ public class IGRPhotoTweakView: UIView {
     }
     
     public func applyDeviceRotation() {
-        self.resetView()
+        resetView()
         
-        self.scrollView.center = CGPoint(x: self.frame.width.half, y: self.centerY)
-        self.scrollView.bounds = CGRect(x: CGFloat.zero,
-                                        y: CGFloat.zero,
-                                        width: self.originalSize.width,
-                                        height: self.originalSize.height)
-        
-        self.cropView.frame = self.scrollView.frame
-        self.cropView.center = self.scrollView.center
-        
-        // Update 'photoContent' frame and set the image.
-        self.scrollView.photoContentView.frame = .init(x: .zero, y: .zero, width: self.cropView.frame.width, height: self.cropView.frame.height)
-        self.scrollView.photoContentView.image = self.image
-        
-        updatePosition()
+        updateImage()
     }
     
     //MARK: - Private FUNCs
     
-    fileprivate func maxBounds() -> CGRect {
+    internal func maxBounds() -> CGRect {
         // scale the image
         self.maximumCanvasSize = CGSize(width: (kMaximumCanvasWidthRatio * self.frame.size.width),
                                         height: (kMaximumCanvasHeightRatio * self.frame.size.height - self.canvasHeaderHeigth()))
@@ -188,6 +181,23 @@ public class IGRPhotoTweakView: UIView {
                             height: (self.image.size.height / scale))
         
         return bounds
+    }
+    
+    internal func updateImage() {
+        self.scrollView.center = CGPoint(x: self.frame.width.half, y: self.centerY)
+        self.scrollView.bounds = CGRect(x: CGFloat.zero,
+                                        y: CGFloat.zero,
+                                        width: self.originalSize.width,
+                                        height: self.originalSize.height)
+        
+        self.cropView.frame = self.scrollView.frame
+        self.cropView.center = self.scrollView.center
+        
+        // Update 'photoContent' frame and set the image.
+        self.scrollView.photoContentView.frame = .init(x: .zero, y: .zero, width: self.cropView.frame.width, height: self.cropView.frame.height)
+        self.scrollView.photoContentView.image = self.image
+        
+        updatePosition()
     }
     
     internal func updatePosition() {

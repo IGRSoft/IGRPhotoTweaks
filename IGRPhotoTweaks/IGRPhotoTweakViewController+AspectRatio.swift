@@ -10,15 +10,15 @@ import Foundation
 
 extension IGRPhotoTweakViewController {
     public func resetAspectRect() {
-        self.photoView.resetAspectRect()
+        self.photoView?.resetAspectRect()
     }
     
     public func setCropAspectRect(aspect: String) {
-        self.photoView.setCropAspectRect(aspect: aspect)
+        self.photoView?.setCropAspectRect(aspect: aspect)
     }
     
     public func lockAspectRatio(_ lock: Bool) {
-        self.photoView.lockAspectRatio(lock)
+        self.photoView?.lockAspectRatio(lock)
     }
     
 }

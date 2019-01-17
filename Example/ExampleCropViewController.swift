@@ -21,6 +21,8 @@ class ExampleCropViewController: IGRPhotoTweakViewController {
     @IBOutlet weak fileprivate var horizontalDial: HorizontalDial? {
         didSet {
             self.horizontalDial?.migneticOption = .none
+            self.horizontalDial?.minimumValue = -45
+            self.horizontalDial?.maximumValue = 45
         }
     }
     
@@ -49,8 +51,8 @@ class ExampleCropViewController: IGRPhotoTweakViewController {
 //    }
     
     fileprivate func setupSlider() {
-        self.angleSlider?.minimumValue = -Float(IGRRadianAngle.toRadians(90))
-        self.angleSlider?.maximumValue = Float(IGRRadianAngle.toRadians(90))
+        self.angleSlider?.minimumValue = -Float(IGRRadianAngle.toRadians(45))
+        self.angleSlider?.maximumValue = Float(IGRRadianAngle.toRadians(45))
         self.angleSlider?.value = 0.0
         
         setupAngleLabelValue(radians: CGFloat((self.angleSlider?.value)!))
@@ -78,11 +80,11 @@ class ExampleCropViewController: IGRPhotoTweakViewController {
     @IBAction func onChandeAngleSliderValue(_ sender: UISlider) {
         let radians: CGFloat = CGFloat(sender.value)
         setupAngleLabelValue(radians: radians)
-        self.changeAngle(radians: radians)
+        self.photoView?.changeAngle(radians: radians)
     }
     
     @IBAction func onEndTouchAngleControl(_ sender: UIControl) {
-        self.stopChangeAngle()
+        self.photoView?.stopChangeAngle()
     }
     
     @IBAction func onTouchResetButton(_ sender: UIButton) {
@@ -144,6 +146,14 @@ class ExampleCropViewController: IGRPhotoTweakViewController {
         self.lockAspectRatio(sender.isOn)
     }
     
+    @IBAction func onTouchRotateLeftButton(_ sender: UIButton) {
+        self.rotateImageLeft()
+    }
+    
+    @IBAction func onTouchRotateRightButton(_ sender: UIButton) {
+        self.rotateImageRight()
+    }
+    
     //FIXME: Themes Preview
 //    override open func customBorderColor() -> UIColor {
 //        return UIColor.red
@@ -196,10 +206,10 @@ extension ExampleCropViewController: HorizontalDialDelegate {
         let radians = IGRRadianAngle.toRadians(CGFloat(degrees))
         
         self.setupAngleLabelValue(radians: radians)
-        self.changeAngle(radians: radians)
+        self.photoView?.changeAngle(radians: radians)
     }
     
     func horizontalDialDidEndScroll(_ horizontalDial: HorizontalDial) {
-        self.stopChangeAngle()
+        self.photoView?.stopChangeAngle()
     }
 }

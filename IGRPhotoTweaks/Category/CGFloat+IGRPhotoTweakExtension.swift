@@ -11,7 +11,7 @@ import CoreGraphics
 extension CGFloat {
     
     var half: CGFloat {
-        return self / 2.0
+        return self * 0.5
     }
     
     static var zero: CGFloat {

@@ -11,7 +11,7 @@ import CoreGraphics
 
 extension CGImage {
     
-    func transformedImage(_ transform: CGAffineTransform, zoomScale: CGFloat, sourceSize: CGSize, cropSize: CGSize, imageViewSize: CGSize) -> CGImage {
+    func transformedImage(_ transform: CGAffineTransform, zoomScale: CGFloat, sourceSize: CGSize, cropSize: CGSize, imageViewSize: CGSize) -> CGImage? {
         let expectedWidth = floor(sourceSize.width / imageViewSize.width * cropSize.width) / zoomScale
         let expectedHeight = floor(sourceSize.height / imageViewSize.height * cropSize.height) / zoomScale
         let outputSize = CGSize(width: expectedWidth, height: expectedHeight)
@@ -22,7 +22,7 @@ extension CGImage {
                                 height: Int(outputSize.height),
                                 bitsPerComponent: self.bitsPerComponent,
                                 bytesPerRow: bitmapBytesPerRow,
-                                space: self.colorSpace!,
+                                space: self.colorSpace ?? CGColorSpaceCreateDeviceRGB(),
                                 bitmapInfo: CGImageAlphaInfo.premultipliedLast.rawValue)
         context?.setFillColor(UIColor.clear.cgColor)
         context?.fill(CGRect(x: CGFloat.zero,
@@ -43,7 +43,7 @@ extension CGImage {
                                        width: imageViewSize.width,
                                        height: imageViewSize.height))
         
-        let result = context!.makeImage()!
+        let result = context?.makeImage()
         
         return result
     }

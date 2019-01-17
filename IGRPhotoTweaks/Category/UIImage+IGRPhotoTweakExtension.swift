@@ -12,11 +12,12 @@ extension UIImage {
     
     func cgImageWithFixedOrientation() -> CGImage? {
         
-        guard let cgImage = self.cgImage, let colorSpace = cgImage.colorSpace else {
+        guard let cgImage = self.cgImage,
+            let colorSpace = cgImage.colorSpace else {
             return nil
         }
         
-        if self.imageOrientation == UIImage.Orientation.up {
+        if self.imageOrientation == .up {
             return self.cgImage
         }
         
@@ -28,15 +29,15 @@ extension UIImage {
         switch self.imageOrientation {
         case .down, .downMirrored:
             transform = transform.translatedBy(x: width, y: height)
-            transform = transform.rotated(by: CGFloat.pi)
+            transform = transform.rotated(by: .pi)
             
         case .left, .leftMirrored:
             transform = transform.translatedBy(x: width, y: 0)
-            transform = transform.rotated(by: 0.5 * CGFloat.pi)
+            transform = transform.rotated(by: 0.5 * .pi)
             
         case .right, .rightMirrored:
             transform = transform.translatedBy(x: 0, y: height)
-            transform = transform.rotated(by: -0.5 * CGFloat.pi)
+            transform = transform.rotated(by: -0.5 * .pi)
             
         case .up, .upMirrored:
             break
@@ -83,5 +84,26 @@ extension UIImage {
         }
         
         return newCGImg
+    }
+    
+    func rotate(_ radians: CGFloat) -> UIImage {
+        //Calculate the size of the rotated view's containing box for our drawing space
+        let rotatedViewBox: UIView = UIView(frame: CGRect(x: 0, y: 0, width: self.size.width, height: self.size.height))
+        let t: CGAffineTransform = CGAffineTransform(rotationAngle: radians)
+        rotatedViewBox.transform = t
+        let rotatedSize: CGSize = rotatedViewBox.frame.size
+        //Create the bitmap context
+        UIGraphicsBeginImageContext(rotatedSize)
+        let bitmap: CGContext = UIGraphicsGetCurrentContext()!
+        //Move the origin to the middle of the image so we will rotate and scale around the center.
+        bitmap.translateBy(x: rotatedSize.width / 2, y: rotatedSize.height / 2)
+        //Rotate the image context
+        bitmap.rotate(by: radians)
+        //Now, draw the rotated/scaled image into the context
+        bitmap.scaleBy(x: 1.0, y: -1.0)
+        bitmap.draw(self.cgImage!, in: CGRect(x: -self.size.width / 2, y: -self.size.height / 2, width: self.size.width, height: self.size.height))
+        let newImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
+        return newImage
     }
 }
