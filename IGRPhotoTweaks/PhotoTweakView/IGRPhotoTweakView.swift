@@ -51,6 +51,24 @@ public class IGRPhotoTweakView: UIView {
         }
     }
     
+    public var maximumZoomScale: CGFloat {
+        set {
+            self.scrollView.maximumZoomScale = newValue
+        }
+        get {
+            return self.scrollView.maximumZoomScale
+        }
+    }
+    
+    public var minimumZoomScale: CGFloat {
+        set {
+            self.scrollView.minimumZoomScale = newValue
+        }
+        get {
+            return self.scrollView.minimumZoomScale
+        }
+    }
+    
     //MARK: - Private VARs
     
     internal var radians: CGFloat       = CGFloat.zero
@@ -124,8 +142,8 @@ public class IGRPhotoTweakView: UIView {
                                             y: CGFloat.zero,
                                             width: self.originalSize.width,
                                             height: self.originalSize.height)
-            self.scrollView.minimumZoomScale = 1
-            self.scrollView.setZoomScale(1, animated: false)
+            self.scrollView.minimumZoomScale = 1.0
+            self.scrollView.setZoomScale(1.0, animated: false)
             
             self.cropView.frame = self.scrollView.frame
             self.cropView.center = self.scrollView.center

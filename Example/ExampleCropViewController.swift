@@ -30,6 +30,10 @@ class ExampleCropViewController: IGRPhotoTweakViewController {
         super.viewDidLoad()
         
         self.setupSlider()
+        
+        //FIXME: Zoom setup
+        //self.photoView.minimumZoomScale = 1.0;
+        //self.photoView.maximumZoomScale = 10.0;
     }
     
     //FIXME: Themes Preview
