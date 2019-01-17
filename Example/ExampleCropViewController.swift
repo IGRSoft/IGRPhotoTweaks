@@ -32,11 +32,6 @@ class ExampleCropViewController: IGRPhotoTweakViewController {
         self.setupSlider()
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
     //FIXME: Themes Preview
 //    override open func setupThemes() {
 //
@@ -50,8 +45,8 @@ class ExampleCropViewController: IGRPhotoTweakViewController {
 //    }
     
     fileprivate func setupSlider() {
-        self.angleSlider?.minimumValue = -Float(IGRRadianAngle.toRadians(45))
-        self.angleSlider?.maximumValue = Float(IGRRadianAngle.toRadians(45))
+        self.angleSlider?.minimumValue = -Float(IGRRadianAngle.toRadians(90))
+        self.angleSlider?.maximumValue = Float(IGRRadianAngle.toRadians(90))
         self.angleSlider?.value = 0.0
         
         setupAngleLabelValue(radians: CGFloat((self.angleSlider?.value)!))

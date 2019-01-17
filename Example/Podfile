@@ -2,13 +2,10 @@
 platform :ios, '10.3'
 use_frameworks!
 
-source "https://github.com/CocoaPods/Specs.git"
+target 'Example' do
 
 pod 'IGRPhotoTweaks', :path => '../'
 pod 'HorizontalDial', :git => 'https://github.com/iKorich/HorizontalDial.git'
 
-target 'Example' do
 end
 
-target 'ExampleObjC' do
-end

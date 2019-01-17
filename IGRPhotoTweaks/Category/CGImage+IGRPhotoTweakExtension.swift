@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreGraphics
 
 extension CGImage {
     
@@ -22,7 +23,7 @@ extension CGImage {
                                 bitsPerComponent: self.bitsPerComponent,
                                 bytesPerRow: bitmapBytesPerRow,
                                 space: self.colorSpace!,
-                                bitmapInfo: self.bitmapInfo.rawValue)
+                                bitmapInfo: CGImageAlphaInfo.premultipliedLast.rawValue)
         context?.setFillColor(UIColor.clear.cgColor)
         context?.fill(CGRect(x: CGFloat.zero,
                              y: CGFloat.zero,
