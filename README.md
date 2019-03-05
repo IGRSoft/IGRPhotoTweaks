@@ -10,6 +10,16 @@ IGRPhotoTweaks is a swift 4.2 library allow to expand an interface to crop photo
 [![Platform](http://img.shields.io/cocoapods/p/IGRPhotoTweaks.svg?style=flat)](http://cocoapods.org/?q=IGRPhotoTweaks)
 [![License](http://img.shields.io/cocoapods/l/IGRPhotoTweaks.svg?style=flat)](https://github.com/IGRSoft/IGRPhotoTweaks/blob/master/LICENSE)
 
+ ___
+### Contribute to Development Goals Here: 
+
+BTC: 16tGJzt4gJJBhBetpV6BuaWuNfxvkdkbt4
+
+BCH: bitcoincash:qpcwefpxddjqzdpcrx6tek3uh6x9v7t8tugu30jvks
+
+LTC: litecoin:MLZxuAdJCaW7LdM4sQuRazgdNvd8G2bdyt
+
+ ___
 ## Usage
 
 IGRPhotoTweaksViewController is a base interface for YourPhotoTweaksViewController.
@@ -127,11 +137,12 @@ override open func customHighlightMaskAlphaValue() -> CGFloat {
 }
 
 ```
-
+ ___
 ## Example
 IGRPhotoTweaks.xcodeproj -> IGRPhotoTweaks target
 /Example
 
+ ___
 ## Installation
 IGRPhotoTweaks is available on [CocoaPods](http://cocoapods.org). Add the follwing to your Podfile:
 ```ruby
@@ -139,8 +150,10 @@ pod 'IGRPhotoTweaks', '~> 1.0.0'
 ```
 Alternatively, you can manually drag the ```IGRPhotoTweaks``` folder into your Xcode project.
 
+ ___
 ## Issues
 Not works in Objective-C
 
+ ___
 ## Protip
 If using with an existing UIImagePickerController, be sure to set ```allowsEditing = NO``` otherwise you may force the user to crop with the native editing tool before showing IGRPhotoTweaksViewController.
