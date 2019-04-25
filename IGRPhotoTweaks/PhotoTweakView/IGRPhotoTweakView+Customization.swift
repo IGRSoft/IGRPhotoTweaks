@@ -38,9 +38,9 @@ public protocol IGRPhotoTweakViewCustomizationDelegate : class {
     func highlightMaskAlphaValue() -> CGFloat
     
     /*
-     Top offset for crop view
+     Insets for crop view
      */
-    func canvasHeaderHeigth() -> CGFloat
+    func canvasInsets() -> UIEdgeInsets
 }
 
 extension IGRPhotoTweakView {
@@ -77,7 +77,7 @@ extension IGRPhotoTweakView {
         return (self.customizationDelegate?.highlightMaskAlphaValue())!
     }
     
-    func canvasHeaderHeigth() -> CGFloat {
-        return (self.customizationDelegate?.canvasHeaderHeigth())!
+    func canvasInsets() -> UIEdgeInsets {
+        return (self.customizationDelegate?.canvasInsets())!
     }
 }

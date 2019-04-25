@@ -177,16 +177,11 @@ class ExampleCropViewController: IGRPhotoTweakViewController {
 //        return 0.3
 //    }
     
-    override open func customCanvasHeaderHeigth() -> CGFloat {
-        var heigth: CGFloat = 0.0
-        
-        if UIDevice.current.orientation.isLandscape {
-            heigth = 40.0
-        } else {
-            heigth = 100.0
-        }
-        
-        return heigth
+    override open func customCanvasInsets() -> UIEdgeInsets {
+        return UIEdgeInsets(top: UIDevice.current.orientation.isLandscape ? 40.0 : 100.0,
+                            left: 0,
+                            bottom: 0,
+                            right: 0)
     }
 }
 
