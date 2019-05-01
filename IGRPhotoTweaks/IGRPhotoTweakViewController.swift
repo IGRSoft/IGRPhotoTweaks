@@ -181,7 +181,7 @@ open class IGRPhotoTweakViewController: UIViewController {
         return 0.3
     }
     
-    open func customCanvasHeaderHeigth() -> CGFloat {
-        return kCanvasHeaderHeigth
+    open func customCanvasInsets() -> UIEdgeInsets {
+        return UIEdgeInsets(top: kCanvasHeaderHeigth, left: 0, bottom: 0, right: 0)
     }
 }

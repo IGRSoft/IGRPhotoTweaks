@@ -43,7 +43,7 @@ extension IGRPhotoTweakViewController : IGRPhotoTweakViewCustomizationDelegate {
         return self.customHighlightMaskAlphaValue()
     }
     
-    public func canvasHeaderHeigth() -> CGFloat {
-        return self.customCanvasHeaderHeigth()
+    public func canvasInsets() -> UIEdgeInsets {
+        return self.customCanvasInsets()
     }
 }
