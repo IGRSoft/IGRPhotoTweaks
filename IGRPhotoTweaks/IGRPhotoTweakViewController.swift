@@ -18,8 +18,11 @@ public protocol IGRPhotoTweakViewControllerDelegate : class {
     /**
      Called on cropping image canceled
      */
-    
     func photoTweaksControllerDidCancel(_ controller: IGRPhotoTweakViewController)
+    /**
+     Called by cropping change
+     */
+    func photoTweaksControllerDidChange(_ controller: IGRPhotoTweakViewController)
 }
 
 open class IGRPhotoTweakViewController: UIViewController {
@@ -52,6 +55,10 @@ open class IGRPhotoTweakViewController: UIViewController {
                                           customizationDelegate: self)
         photoView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         self.view.addSubview(photoView)
+        photoView.transformChangedAction = { [weak self] in
+            guard let strongSelf = self else { return }
+            strongSelf.delegate?.photoTweaksControllerDidChange(strongSelf)
+        }
         
         return photoView
         }(())
@@ -105,6 +112,25 @@ open class IGRPhotoTweakViewController: UIViewController {
     
     public func dismissAction() {
         self.delegate?.photoTweaksControllerDidCancel(self)
+    }
+
+    public var hasChanges: Bool {
+        let zoomScale = photoView.scrollView.zoomScale
+        guard zoomScale != 0 else {
+            return false
+        }
+        let sourceSize = image.size
+        let cropSize = photoView.cropView.frame.size
+        let imageViewSize = photoView.photoContentView.bounds.size
+        let expectedWidth = floor(sourceSize.width / imageViewSize.width * cropSize.width) / zoomScale
+        let expectedHeight = floor(sourceSize.height / imageViewSize.height * cropSize.height) / zoomScale
+        guard expectedWidth > 0 && expectedHeight > 0 else {
+            return false
+        }
+        let noChanges = abs(photoView.photoTranslation.x) < 2 && abs(photoView.photoTranslation.y) < 2
+            && abs(photoView.radians) < 0.0002
+            && abs(1 - sourceSize.width / expectedWidth) < 0.002 && abs(1 - sourceSize.height / expectedHeight) < 0.002
+        return noChanges == false
     }
     
     public func cropAction() {

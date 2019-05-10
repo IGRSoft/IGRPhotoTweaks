@@ -90,4 +90,8 @@ extension ViewController: IGRPhotoTweakViewControllerDelegate {
     func photoTweaksControllerDidCancel(_ controller: IGRPhotoTweakViewController) {
         _ = controller.navigationController?.popViewController(animated: true)
     }
+
+    func photoTweaksControllerDidChange(_ controller: IGRPhotoTweakViewController) {
+        (controller as? ExampleCropViewController)?.updateResetButton()
+    }
 }
