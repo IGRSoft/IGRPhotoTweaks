@@ -13,6 +13,8 @@ public class IGRPhotoTweakView: UIView {
     //MARK: - Public VARs
     
     public weak var customizationDelegate: IGRPhotoTweakViewCustomizationDelegate?
+
+    var transformChangedAction: (() -> Void)?
     
     private(set) lazy var cropView: IGRCropView! = { [unowned self] by in
         
@@ -97,8 +99,12 @@ public class IGRPhotoTweakView: UIView {
     internal weak var image: UIImage!
     internal var originalSize = CGSize.zero
     
-    internal var manualZoomed = false
-    internal var manualMove   = false
+    internal var manualZoomed = false {
+        didSet { transformChangedAction?() }
+    }
+    internal var manualMove   = false {
+        didSet { transformChangedAction?() }
+    }
     
     // masks
     internal var topMask:    IGRCropMaskView!

@@ -66,3 +66,6 @@ fastlane/screenshots
 fastlane/test_output
 WorkspaceSettings.xcsettings
 *.xcworkspace
+
+# Mac OS X
+.DS_Store

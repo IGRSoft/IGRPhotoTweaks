@@ -228,6 +228,7 @@
                     </view>
                     <connections>
                         <outlet property="angleLabel" destination="igC-xc-RTc" id="8vB-2O-5yT"/>
+                        <outlet property="resetButton" destination="3GT-aa-ka7" id="9vx-52-5fe"/>
                         <outlet property="angleSlider" destination="XeR-6H-PO5" id="7Pw-5n-1Ke"/>
                         <outlet property="bottomView" destination="uyK-an-Z9q" id="VZm-rV-lxb"/>
                         <outlet property="horizontalDial" destination="IAH-oa-CkI" id="X8M-WO-7pX"/>

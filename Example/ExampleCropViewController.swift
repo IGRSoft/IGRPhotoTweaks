@@ -19,9 +19,8 @@ class ExampleCropViewController: IGRPhotoTweakViewController {
     @IBOutlet weak fileprivate var topView: UIView?
     @IBOutlet weak fileprivate var angleSlider: UISlider?
     @IBOutlet weak fileprivate var angleLabel: UILabel?
-    
-    
     @IBOutlet weak fileprivate var bottomView: UIView?
+    @IBOutlet weak fileprivate var resetButton: UIBarButtonItem!
     @IBOutlet weak fileprivate var horizontalDial: HorizontalDial? {
         didSet {
             self.horizontalDial?.migneticOption = .none
@@ -36,6 +35,7 @@ class ExampleCropViewController: IGRPhotoTweakViewController {
         super.viewDidLoad()
         
         self.setupSlider()
+        updateResetButton()
         
         //FIXME: Zoom setup
 //        self.photoView.minimumZoomScale = 1.0;
@@ -74,8 +74,8 @@ class ExampleCropViewController: IGRPhotoTweakViewController {
         
         coordinator.animate(alongsideTransition: { (context) in
             self.view.layoutIfNeeded()
-        }) { (context) in
-            //
+        }) { [weak self] _ in
+            self?.updateResetButton()
         }
     }
     
@@ -97,6 +97,7 @@ class ExampleCropViewController: IGRPhotoTweakViewController {
         setupAngleLabelValue(radians: 0.0)
         
         self.resetView()
+        updateResetButton()
     }
     
     @IBAction func onTouchCancelButton(_ sender: UIButton) {
@@ -148,6 +149,10 @@ class ExampleCropViewController: IGRPhotoTweakViewController {
     
     @IBAction func onTouchLockAspectRatioButton(_ sender: UISwitch) {
         self.lockAspectRatio(sender.isOn)
+    }
+
+    func updateResetButton() {
+        resetButton.isEnabled = hasChanges
     }
     
     @IBAction func onTouchRotateLeftButton(_ sender: UIButton) {
@@ -207,11 +212,14 @@ extension ExampleCropViewController: HorizontalDialDelegate {
         let degrees = horizontalDial.value
         let radians = IGRRadianAngle.toRadians(CGFloat(degrees))
         
-        self.setupAngleLabelValue(radians: radians)
+        setupAngleLabelValue(radians: radians)
+
         self.photoView?.changeAngle(radians: radians)
+        updateResetButton()
     }
     
     func horizontalDialDidEndScroll(_ horizontalDial: HorizontalDial) {
         self.photoView?.stopChangeAngle()
+        updateResetButton()
     }
 }
