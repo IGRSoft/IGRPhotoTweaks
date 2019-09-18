@@ -27,8 +27,8 @@ extension CGImage {
                                 height: Int(outputSize.height),
                                 bitsPerComponent: self.bitsPerComponent,
                                 bytesPerRow: bitmapBytesPerRow,
-                                space: self.colorSpace ?? CGColorSpaceCreateDeviceRGB(),
-                                bitmapInfo: CGImageAlphaInfo.premultipliedLast.rawValue)
+                                space: self.availableColorSpace,
+                                bitmapInfo: self.availableBitmapInfo.rawValue)
         context?.setFillColor(UIColor.clear.cgColor)
         context?.fill(CGRect(x: CGFloat.zero,
                              y: CGFloat.zero,
@@ -51,5 +51,39 @@ extension CGImage {
         let result = context?.makeImage()
         
         return result
+    }
+    
+    var availableColorSpace: CGColorSpace {
+        guard let colorSpace = self.colorSpace else {
+            print("Could not find color space")
+            return CGColorSpaceCreateDeviceRGB()
+        }
+        
+        let colorSpaceModel = colorSpace.model
+        
+        let unsupportedColorSapce = (colorSpaceModel == CGColorSpaceModel.unknown
+            || colorSpaceModel == .monochrome
+            || colorSpaceModel == .cmyk
+            || colorSpaceModel == .indexed
+        )
+        
+        return unsupportedColorSapce ? CGColorSpaceCreateDeviceRGB() : colorSpace
+    }
+    
+    var availableBitmapInfo: CGBitmapInfo {
+        var bitmapInfo = self.bitmapInfo
+        
+        if self.alphaInfo == CGImageAlphaInfo.last {
+            // WARNING - only do this if you expect a fully opaque image
+            // try again with pre-multiply alpha
+            bitmapInfo = CGBitmapInfo(rawValue: CGImageAlphaInfo.premultipliedLast.rawValue)
+        } else if self.alphaInfo == CGImageAlphaInfo.none {
+            // kCGImageAlphaNone is not supported in CGBitmapContextCreate.
+            // Since the original image here has no alpha info, use kCGImageAlphaNoneSkipLast
+            // to create bitmap graphics contexts without alpha info.
+            bitmapInfo = CGBitmapInfo(rawValue: CGImageAlphaInfo.noneSkipLast.rawValue)
+        }
+        
+        return bitmapInfo
     }
 }
