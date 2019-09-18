@@ -1,7 +1,7 @@
 Pod::Spec.new do |spec|
   spec.name                = 'IGRPhotoTweaks'
-  spec.version             = '1.0.8'
-  spec.platform            = :ios, '10.3'
+  spec.version             = '1.1.0'
+  spec.platform            = :ios, '11.4'
   
   spec.license             = { :type => "MIT", :file => "LICENSE" }
   spec.homepage            = 'https://github.com/IGRSoft/IGRPhotoTweaks'
@@ -15,5 +15,5 @@ Pod::Spec.new do |spec|
   spec.framework           = 'Foundation', 'CoreGraphics', 'UIKit', 'Photos'
   spec.requires_arc        = true
 
-  spec.pod_target_xcconfig = { 'SWIFT_VERSION' => '4.2' }
+  spec.pod_target_xcconfig = { 'SWIFT_VERSION' => '5.0' }
 end

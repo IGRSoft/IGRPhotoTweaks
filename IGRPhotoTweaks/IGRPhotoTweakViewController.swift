@@ -61,7 +61,6 @@ open class IGRPhotoTweakViewController: UIViewController {
     override open func viewDidLoad() {
         super.viewDidLoad()
         
-        self.automaticallyAdjustsScrollViewInsets = false
         self.view.clipsToBounds = true
         
         self.setupThemes()

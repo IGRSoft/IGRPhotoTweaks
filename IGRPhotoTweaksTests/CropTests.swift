@@ -39,10 +39,10 @@ class CropTests: XCTestCase {
         
         if let fixedImage = image?.cgImageWithFixedOrientation() {
             let imageRef = fixedImage.transformedImage(CGAffineTransform.identity,
+                                                       zoomScale: 1,
                                                        sourceSize: originalImageSize,
-                                                       outputWidth: originalImageSize.width,
                                                        cropSize: cropImageSize,
-                                                       imageViewSize: originalImageSize)
+                                                       imageViewSize: originalImageSize)!
             
             let resultImage = UIImage(cgImage: imageRef, scale: 2.0, orientation: .up)
             

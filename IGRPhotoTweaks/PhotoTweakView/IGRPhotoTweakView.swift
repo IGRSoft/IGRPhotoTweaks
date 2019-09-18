@@ -196,7 +196,7 @@ public class IGRPhotoTweakView: UIView {
     }
     
     internal func updateImage() {
-        self.scrollView.center = CGPoint(x: self.frame.width.half, y: self.centerY)
+        self.scrollView.center = CGPoint(x: self.frame.width.half, y: self.frame.height.half)
         self.scrollView.bounds = CGRect(x: CGFloat.zero,
                                         y: CGFloat.zero,
                                         width: self.originalSize.width,

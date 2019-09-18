@@ -12,7 +12,7 @@ import Photos
 extension IGRPhotoTweakViewController {
     
     internal func saveToLibrary(image: UIImage) {
-        let writePhotoToLibraryBlock: (() -> Void)? = {
+        let writePhotoToLibraryBlock: (() -> Void)? = { [unowned self] in
             UIImageWriteToSavedPhotosAlbum(image, self, #selector(self.image(image:didFinishSavingWithError:contextInfo:)), nil)
         }
         
@@ -27,7 +27,7 @@ extension IGRPhotoTweakViewController {
                     }
                 }
                 else {
-                    DispatchQueue.main.async{
+                    DispatchQueue.main.async { [unowned self] in
                         let ac = UIAlertController(title: "Authorization error",
                                                    message: "App don't granted to access to Photo Library",
                                                    preferredStyle: .alert)
@@ -38,11 +38,7 @@ extension IGRPhotoTweakViewController {
                             }
                             
                             if UIApplication.shared.canOpenURL(settingsUrl) {
-                                if #available(iOS 10.0, *) {
-                                    UIApplication.shared.open(settingsUrl)
-                                } else {
-                                    UIApplication.shared.openURL(settingsUrl)
-                                }
+                                UIApplication.shared.open(settingsUrl)
                             }
                         }))
                         self.present(ac, animated: true, completion: nil)

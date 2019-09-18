@@ -16,8 +16,12 @@ class ExampleCropViewController: IGRPhotoTweakViewController {
     /**
      Slider to change angle.
      */
+    @IBOutlet weak fileprivate var topView: UIView?
     @IBOutlet weak fileprivate var angleSlider: UISlider?
     @IBOutlet weak fileprivate var angleLabel: UILabel?
+    
+    
+    @IBOutlet weak fileprivate var bottomView: UIView?
     @IBOutlet weak fileprivate var horizontalDial: HorizontalDial? {
         didSet {
             self.horizontalDial?.migneticOption = .none
@@ -34,8 +38,8 @@ class ExampleCropViewController: IGRPhotoTweakViewController {
         self.setupSlider()
         
         //FIXME: Zoom setup
-        //self.photoView.minimumZoomScale = 1.0;
-        //self.photoView.maximumZoomScale = 10.0;
+//        self.photoView.minimumZoomScale = 1.0;
+//        self.photoView.maximumZoomScale = 10.0;
     }
     
     //FIXME: Themes Preview
@@ -188,10 +192,13 @@ class ExampleCropViewController: IGRPhotoTweakViewController {
 //    }
     
     override open func customCanvasInsets() -> UIEdgeInsets {
-        return UIEdgeInsets(top: UIDevice.current.orientation.isLandscape ? 40.0 : 100.0,
-                            left: 0,
-                            bottom: 0,
-                            right: 0)
+        let borderOffset: CGFloat = 10.0
+        
+        return UIEdgeInsets(top: (self.navigationController?.navigationBar.frame.origin.y)! + (self.navigationController?.navigationBar.frame.size.height)! +
+            (self.topView?.frame.size.height)! + borderOffset,
+                            left: borderOffset,
+                            bottom: self.view.frame.size.height - (bottomView?.frame.origin.y)! - borderOffset,
+                            right: borderOffset)
     }
 }
 

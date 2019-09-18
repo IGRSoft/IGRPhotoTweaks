@@ -8,10 +8,15 @@
 
 import Foundation
 import CoreGraphics
+import UIKit
 
 extension CGImage {
     
-    func transformedImage(_ transform: CGAffineTransform, zoomScale: CGFloat, sourceSize: CGSize, cropSize: CGSize, imageViewSize: CGSize) -> CGImage? {
+    func transformedImage(_ transform: CGAffineTransform,
+                          zoomScale: CGFloat,
+                          sourceSize: CGSize,
+                          cropSize: CGSize,
+                          imageViewSize: CGSize) -> CGImage? {
         let expectedWidth = floor(sourceSize.width / imageViewSize.width * cropSize.width) / zoomScale
         let expectedHeight = floor(sourceSize.height / imageViewSize.height * cropSize.height) / zoomScale
         let outputSize = CGSize(width: expectedWidth, height: expectedHeight)
