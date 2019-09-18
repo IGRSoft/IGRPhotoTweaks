@@ -55,8 +55,9 @@ class ExampleCropViewController: IGRPhotoTweakViewController {
 //    }
     
     fileprivate func setupSlider() {
-        self.angleSlider?.minimumValue = -Float(IGRRadianAngle.toRadians(45))
-        self.angleSlider?.maximumValue = Float(IGRRadianAngle.toRadians(45))
+        let roundedAngle = Float(IGRRadianAngle.toRadians(45) * 1000).rounded() / 1000 //UISlider make wrong round
+        self.angleSlider?.minimumValue = -roundedAngle
+        self.angleSlider?.maximumValue = roundedAngle
         self.angleSlider?.value = 0.0
         
         setupAngleLabelValue(radians: CGFloat((self.angleSlider?.value)!))
